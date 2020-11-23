@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Benchmarking - The Rust Performance Book</title>
+        <title>一般提示 - The Rust Performance Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="benchmarking.html" class="active"><strong aria-hidden="true">2.</strong> Benchmarking</a></li><li class="chapter-item expanded "><a href="build-configuration.html"><strong aria-hidden="true">3.</strong> Build Configuration</a></li><li class="chapter-item expanded "><a href="linting.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining.html"><strong aria-hidden="true">6.</strong> Inlining</a></li><li class="chapter-item expanded "><a href="hashing.html"><strong aria-hidden="true">7.</strong> Hashing</a></li><li class="chapter-item expanded "><a href="heap-allocations.html"><strong aria-hidden="true">8.</strong> Heap Allocations</a></li><li class="chapter-item expanded "><a href="type-sizes.html"><strong aria-hidden="true">9.</strong> Type Sizes</a></li><li class="chapter-item expanded "><a href="standard-library-types.html"><strong aria-hidden="true">10.</strong> Standard Library Types</a></li><li class="chapter-item expanded "><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li class="chapter-item expanded "><a href="io.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging.html"><strong aria-hidden="true">13.</strong> Logging and Debugging</a></li><li class="chapter-item expanded "><a href="wrapper-types.html"><strong aria-hidden="true">14.</strong> Wrapper Types</a></li><li class="chapter-item expanded "><a href="machine-code.html"><strong aria-hidden="true">15.</strong> Machine Code</a></li><li class="chapter-item expanded "><a href="parallelism.html"><strong aria-hidden="true">16.</strong> Parallelism</a></li><li class="chapter-item expanded "><a href="general-tips.html"><strong aria-hidden="true">17.</strong> General Tips</a></li><li class="chapter-item expanded "><a href="compile-times.html"><strong aria-hidden="true">18.</strong> Compile Times</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction_zh.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="benchmarking_zh.html"><strong aria-hidden="true">2.</strong> 基准分析</a></li><li class="chapter-item expanded "><a href="build-configuration_zh.html"><strong aria-hidden="true">3.</strong> 构建配置</a></li><li class="chapter-item expanded "><a href="linting_zh.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling_zh.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining_zh.html"><strong aria-hidden="true">6.</strong> 初始化</a></li><li class="chapter-item expanded "><a href="hashing_zh.html"><strong aria-hidden="true">7.</strong> 哈希</a></li><li class="chapter-item expanded "><a href="heap-allocations_zh.html"><strong aria-hidden="true">8.</strong> 堆分配</a></li><li class="chapter-item expanded "><a href="type-sizes_zh.html"><strong aria-hidden="true">9.</strong> 类型大小</a></li><li class="chapter-item expanded "><a href="standard-library-types_zh.html"><strong aria-hidden="true">10.</strong> 标准库类型</a></li><li class="chapter-item expanded "><a href="iterators_zh.html"><strong aria-hidden="true">11.</strong> 迭代器</a></li><li class="chapter-item expanded "><a href="io_zh.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging_zh.html"><strong aria-hidden="true">13.</strong> 日志和调试</a></li><li class="chapter-item expanded "><a href="wrapper-types_zh.html"><strong aria-hidden="true">14.</strong> 封装类型</a></li><li class="chapter-item expanded "><a href="machine-code_zh.html"><strong aria-hidden="true">15.</strong> 机器码</a></li><li class="chapter-item expanded "><a href="parallelism_zh.html"><strong aria-hidden="true">16.</strong> 并行</a></li><li class="chapter-item expanded "><a href="general-tips_zh.html" class="active"><strong aria-hidden="true">17.</strong> 一般提示</a></li><li class="chapter-item expanded "><a href="compile-times_zh.html"><strong aria-hidden="true">18.</strong> 编译时间</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,48 +167,54 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#benchmarking" id="benchmarking">Benchmarking</a></h1>
-<p>When optimizing a program, you need a way to reliably answer the question “did
-this change speed things up?” This process is sometimes called benchmarking.
-Benchmarking is a complex topic and a thorough coverage is beyond the scope of
-this book, but here are the basics.</p>
-<p>First, you need workloads to measure. Ideally, you would have a variety of
-workloads that represent realistic usage of your program. Workloads using
-real-world inputs are best, but <a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">microbenchmarks</a> and <a href="https://en.wikipedia.org/wiki/Stress_testing_(software)">stress tests</a> can be
-useful in moderation.</p>
-<p>Second, you need a way to run the workloads, which will also dictate the
-metrics used. Rust’s built-in <a href="https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html">benchmark tests</a> are a simple starting point.
-<a href="https://github.com/bheisler/criterion.rs">Criterion</a> is a more sophisticated alternative. Custom benchmarking harnesses
-are also possible. For example, <a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a> is the harness used to benchmark
-the Rust compiler.</p>
-<p>When it comes to metrics, there are many choices, and the right one(s) will
-depend on the nature of the program being benchmarked. For example, metrics
-that make sense for a batch program might not make sense for an interactive
-program. Wall-time is an obvious choice in many cases because it corresponds to
-what users perceive. However, it can suffer from high variance. In particular,
-tiny changes in memory layout can cause significant but ephemeral performance
-fluctuations. Therefore, other metrics with lower variance (such as cycles or
-instruction counts) may be a reasonable alternative.</p>
-<p>Summarizing measurements from multiple workloads is also a challenge, and there
-are a variety of ways to do it, with no single method being obviously best.</p>
-<p>Good benchmarking is hard. Having said that, do not stress too much about
-having a perfect benchmarking setup, particularly when you start optimizing a
-program. A mediocre setup is far better than no setup. Keep an open mind about
-what you are measuring, and over time you can make benchmarking improvements as
-you learn about the performance characteristics of your program.</p>
+                        <h1><a class="header" href="#general-tips" id="general-tips">General Tips</a></h1>
+<p>本书的前几节已经讨论了Rust特有的技术。
+本节将简要介绍一些一般的性能原则。</p>
+<p>只要避免了明显的陷阱（例如<a href="build-configuration.html">使用非发布的构建</a>）。
+铁锈一般都有不错的表现。尤其是当你习惯了Python和Ruby等动态类型的语言时。</p>
+<p>优化后的代码往往比未优化的代码更复杂，写起来更费劲。出于这个原因，只有优化热代码才是值得的。</p>
+<p>最大的性能提升往往来自于算法或数据结构的改变，而不是低级别的优化。
+<a href="https://github.com/rust-lang/rust/pull/53383/commits/5745597e6195fe0591737f242d02350001b6c590"><strong>Example 1</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/54318/commits/154be2c98cf348de080ce951df3f73649e8bb1a6"><strong>Example 2</strong></a>.</p>
+<p>编写与现代硬件良好配合的代码并不总是容易的，但值得努力。例如，在可能的情况下，尽量减少缓存遗漏和分支误判。</p>
+<p>大多数优化都会带来小幅提速。虽然没有一个小的提速是明显的，但如果你能做足够多的提速，它们真的会加起来。</p>
+<p>不同的剖析器有不同的优势。使用多个剖析器是件好事。</p>
+<p>当剖析表明一个函数很热的时候，有两种常见的方法来加速。
+· 让函数更快
+· 避免调用它。</p>
+<p>避免愚蠢的减速通常比引入巧妙的加速更容易，而且通常也同样有效。</p>
+<p>除非必要，否则避免全部计算。懒惰/按需计算往往是一种好办法。
+<a href="https://github.com/rust-lang/rust/pull/36592/commits/80a44779f7a211e075da9ed0ff2763afa00f43dc"><strong>Example 1</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/50339/commits/989815d5670826078d9984a3515eeb68235a4687"><strong>Example 2</strong></a>.</p>
+<p>一般复杂的情况往往可以通过乐观地检查比较简单的常见特殊情况来避免。
+<a href="https://github.com/rust-lang/rust/pull/68790/commits/d62b6f204733d255a3e943388ba99f14b053bf4a"><strong>Example 1</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/53733/commits/130e55665f8c9f078dec67a3e92467853f400250"><strong>Example 2</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/65260/commits/59e41edcc15ed07de604c61876ea091900f73649"><strong>Example 3</strong></a>.
+尤其是在小尺寸占主导地位的情况下，特别处理0、1或2个元素的集合往往是一种好办法。
+<a href="https://github.com/rust-lang/rust/pull/50932/commits/2ff632484cd8c2e3b123fbf52d9dd39b54a94505"><strong>Example 1</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/64627/commits/acf7d4dcdba4046917c61aab141c1dec25669ce9"><strong>Example 2</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/64949/commits/14192607d38f5501c75abea7a4a0e46349df5b5f"><strong>Example 3</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/64949/commits/d1a7bb36ad0a5932384eac03d3fb834efc0317e5"><strong>Example 4</strong></a>.</p>
+<p>同样，在处理重复性数据时，通常可以使用一种简单的数据压缩形式，对常见的值使用紧凑的表示方式，然后对不常见的值进行回退到二级表。
+<a href="https://github.com/rust-lang/rust/pull/54420/commits/b2f25e3c38ff29eebe6c8ce69b8c69243faa440d"><strong>Example 1</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/59693/commits/fd7f605365b27bfdd3cd6763124e81bddd61dd28"><strong>Example 2</strong></a>,
+<a href="https://github.com/rust-lang/rust/pull/65750/commits/eea6f23a0ed67fd8c6b8e1b02cda3628fee56b2f"><strong>Example 3</strong></a>.</p>
+<p>当代码处理多种情况时，要衡量情况频率，先处理最常见的情况。</p>
+<p>当处理涉及高局部性的查找时，在数据结构前面放一个小的缓存是一种胜利。</p>
+<p>优化后的代码往往具有不明显的结构，这意味着解释性注释是有价值的，特别是那些参考剖析测量的注释。像 “99%的时候这个向量都是0或1个元素，所以要先处理这些情况 “这样的评论可以起到启发作用。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="parallelism_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="build-configuration.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="compile-times_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -220,13 +226,13 @@ you learn about the performance characteristics of your program.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="parallelism_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="build-configuration.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="compile-times_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

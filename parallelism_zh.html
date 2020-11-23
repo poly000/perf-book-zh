@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Hashing - The Rust Performance Book</title>
+        <title>并行 - The Rust Performance Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="benchmarking.html"><strong aria-hidden="true">2.</strong> Benchmarking</a></li><li class="chapter-item expanded "><a href="build-configuration.html"><strong aria-hidden="true">3.</strong> Build Configuration</a></li><li class="chapter-item expanded "><a href="linting.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining.html"><strong aria-hidden="true">6.</strong> Inlining</a></li><li class="chapter-item expanded "><a href="hashing.html" class="active"><strong aria-hidden="true">7.</strong> Hashing</a></li><li class="chapter-item expanded "><a href="heap-allocations.html"><strong aria-hidden="true">8.</strong> Heap Allocations</a></li><li class="chapter-item expanded "><a href="type-sizes.html"><strong aria-hidden="true">9.</strong> Type Sizes</a></li><li class="chapter-item expanded "><a href="standard-library-types.html"><strong aria-hidden="true">10.</strong> Standard Library Types</a></li><li class="chapter-item expanded "><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li class="chapter-item expanded "><a href="io.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging.html"><strong aria-hidden="true">13.</strong> Logging and Debugging</a></li><li class="chapter-item expanded "><a href="wrapper-types.html"><strong aria-hidden="true">14.</strong> Wrapper Types</a></li><li class="chapter-item expanded "><a href="machine-code.html"><strong aria-hidden="true">15.</strong> Machine Code</a></li><li class="chapter-item expanded "><a href="parallelism.html"><strong aria-hidden="true">16.</strong> Parallelism</a></li><li class="chapter-item expanded "><a href="general-tips.html"><strong aria-hidden="true">17.</strong> General Tips</a></li><li class="chapter-item expanded "><a href="compile-times.html"><strong aria-hidden="true">18.</strong> Compile Times</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction_zh.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="benchmarking_zh.html"><strong aria-hidden="true">2.</strong> 基准分析</a></li><li class="chapter-item expanded "><a href="build-configuration_zh.html"><strong aria-hidden="true">3.</strong> 构建配置</a></li><li class="chapter-item expanded "><a href="linting_zh.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling_zh.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining_zh.html"><strong aria-hidden="true">6.</strong> 初始化</a></li><li class="chapter-item expanded "><a href="hashing_zh.html"><strong aria-hidden="true">7.</strong> 哈希</a></li><li class="chapter-item expanded "><a href="heap-allocations_zh.html"><strong aria-hidden="true">8.</strong> 堆分配</a></li><li class="chapter-item expanded "><a href="type-sizes_zh.html"><strong aria-hidden="true">9.</strong> 类型大小</a></li><li class="chapter-item expanded "><a href="standard-library-types_zh.html"><strong aria-hidden="true">10.</strong> 标准库类型</a></li><li class="chapter-item expanded "><a href="iterators_zh.html"><strong aria-hidden="true">11.</strong> 迭代器</a></li><li class="chapter-item expanded "><a href="io_zh.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging_zh.html"><strong aria-hidden="true">13.</strong> 日志和调试</a></li><li class="chapter-item expanded "><a href="wrapper-types_zh.html"><strong aria-hidden="true">14.</strong> 封装类型</a></li><li class="chapter-item expanded "><a href="machine-code_zh.html"><strong aria-hidden="true">15.</strong> 机器码</a></li><li class="chapter-item expanded "><a href="parallelism_zh.html" class="active"><strong aria-hidden="true">16.</strong> 并行</a></li><li class="chapter-item expanded "><a href="general-tips_zh.html"><strong aria-hidden="true">17.</strong> 一般提示</a></li><li class="chapter-item expanded "><a href="compile-times_zh.html"><strong aria-hidden="true">18.</strong> 编译时间</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,54 +167,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#hashing" id="hashing">Hashing</a></h1>
-<p><code>HashSet</code> and <code>HashMap</code> are two widely-used types. The default hashing
-algorithm is not specified, but at the time of writing the default is an
-algorithm called <a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a>. This algorithm is high quality—it provides high
-protection against collisions—but is relatively slow, particular for short keys
-such as integers.</p>
-<p>If profiling shows that hashing is hot, and <a href="https://en.wikipedia.org/wiki/Collision_attack">HashDoS attacks</a> are not a concern
-for your application, the use of hash tables with faster hash algorithms can
-provide large speed wins.</p>
-<ul>
-<li><a href="https://crates.io/crates/fxhash"><code>fxhash</code></a> provides <code>FxHashSet</code> and <code>FxHashMap</code> types that are drop-in
-replacements for <code>HashSet</code> and <code>HashMap</code>. Its hashing algorithm is
-low-quality but very fast, especially for integer keys, and has been found to
-out-perform all other hash algorithms within rustc.</li>
-<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a> provides <code>FnvHashSet</code> and <code>FnvHashMap</code> types. Its hashing algorithm
-is higher quality than <code>fxhash</code>‘s but a little slower.</li>
-<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a> provides <code>AHashSet</code> and <code>AHashMap</code>. Its hashing algorithm can take
-advantage of AES instruction support that is available on some processors.</li>
-</ul>
-<p>If hashing performance is important in your program, it is worth trying more
-than one of these alternatives. For example, the following results were seen in
-rustc.</p>
-<ul>
-<li>The switch from <code>fnv</code> to <code>fxhash</code> gave <a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">speedups of up to 6%</a>.</li>
-<li>An attempt to switch from <code>fxhash</code> to <code>ahash</code> resulted in <a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">slowdowns of
-1-4%</a>.</li>
-<li>An attempt to switch from <code>fxhash</code> back to the default hasher resulted in
-<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">slowdowns ranging from 4-84%</a>!</li>
-</ul>
-<p>If you decide to universally use one of the alternatives, such as
-<code>FxHashSet</code>/<code>FxHashMap</code>, it is easy to accidentally use <code>HashSet</code>/<code>HashMap</code> in
-some places. The presence of <code>SipHasher13</code> code in profiles is a tell-tale
-indicator of this.</p>
-<p>Hash function design is a complex topic and is beyond the scope of this book.
-The <a href="https://github.com/tkaitchuck/aHash/blob/master/compare/readme.md"><code>ahash</code> documentation</a> has a good discussion. </p>
+                        <h1><a class="header" href="#parallelism" id="parallelism">Parallelism</a></h1>
+<p>Rust为安全的并行编程提供了很好的支持，这可以带来很大的性能提升。有多种方法可以将并行性引入到程序中，对于任何程序来说，最好的方式在很大程度上取决于其设计。</p>
+<p>对并行性的深入研究超出了本书的范围。如果你对这一主题感兴趣，[rayon]和[crossbeam]板条箱的文档是一个很好的开始。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="inlining.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="machine-code_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="heap-allocations.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="general-tips_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -226,13 +194,13 @@ The <a href="https://github.com/tkaitchuck/aHash/blob/master/compare/readme.md">
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="inlining.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="machine-code_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="heap-allocations.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="general-tips_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

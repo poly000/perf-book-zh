@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Type Sizes - The Rust Performance Book</title>
+        <title>类型大小 - The Rust Performance Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="benchmarking.html"><strong aria-hidden="true">2.</strong> Benchmarking</a></li><li class="chapter-item expanded "><a href="build-configuration.html"><strong aria-hidden="true">3.</strong> Build Configuration</a></li><li class="chapter-item expanded "><a href="linting.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining.html"><strong aria-hidden="true">6.</strong> Inlining</a></li><li class="chapter-item expanded "><a href="hashing.html"><strong aria-hidden="true">7.</strong> Hashing</a></li><li class="chapter-item expanded "><a href="heap-allocations.html"><strong aria-hidden="true">8.</strong> Heap Allocations</a></li><li class="chapter-item expanded "><a href="type-sizes.html" class="active"><strong aria-hidden="true">9.</strong> Type Sizes</a></li><li class="chapter-item expanded "><a href="standard-library-types.html"><strong aria-hidden="true">10.</strong> Standard Library Types</a></li><li class="chapter-item expanded "><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li class="chapter-item expanded "><a href="io.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging.html"><strong aria-hidden="true">13.</strong> Logging and Debugging</a></li><li class="chapter-item expanded "><a href="wrapper-types.html"><strong aria-hidden="true">14.</strong> Wrapper Types</a></li><li class="chapter-item expanded "><a href="machine-code.html"><strong aria-hidden="true">15.</strong> Machine Code</a></li><li class="chapter-item expanded "><a href="parallelism.html"><strong aria-hidden="true">16.</strong> Parallelism</a></li><li class="chapter-item expanded "><a href="general-tips.html"><strong aria-hidden="true">17.</strong> General Tips</a></li><li class="chapter-item expanded "><a href="compile-times.html"><strong aria-hidden="true">18.</strong> Compile Times</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction_zh.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="benchmarking_zh.html"><strong aria-hidden="true">2.</strong> 基准分析</a></li><li class="chapter-item expanded "><a href="build-configuration_zh.html"><strong aria-hidden="true">3.</strong> 构建配置</a></li><li class="chapter-item expanded "><a href="linting_zh.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling_zh.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining_zh.html"><strong aria-hidden="true">6.</strong> 初始化</a></li><li class="chapter-item expanded "><a href="hashing_zh.html"><strong aria-hidden="true">7.</strong> 哈希</a></li><li class="chapter-item expanded "><a href="heap-allocations_zh.html"><strong aria-hidden="true">8.</strong> 堆分配</a></li><li class="chapter-item expanded "><a href="type-sizes_zh.html" class="active"><strong aria-hidden="true">9.</strong> 类型大小</a></li><li class="chapter-item expanded "><a href="standard-library-types_zh.html"><strong aria-hidden="true">10.</strong> 标准库类型</a></li><li class="chapter-item expanded "><a href="iterators_zh.html"><strong aria-hidden="true">11.</strong> 迭代器</a></li><li class="chapter-item expanded "><a href="io_zh.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging_zh.html"><strong aria-hidden="true">13.</strong> 日志和调试</a></li><li class="chapter-item expanded "><a href="wrapper-types_zh.html"><strong aria-hidden="true">14.</strong> 封装类型</a></li><li class="chapter-item expanded "><a href="machine-code_zh.html"><strong aria-hidden="true">15.</strong> 机器码</a></li><li class="chapter-item expanded "><a href="parallelism_zh.html"><strong aria-hidden="true">16.</strong> 并行</a></li><li class="chapter-item expanded "><a href="general-tips_zh.html"><strong aria-hidden="true">17.</strong> 一般提示</a></li><li class="chapter-item expanded "><a href="compile-times_zh.html"><strong aria-hidden="true">18.</strong> 编译时间</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -168,28 +168,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#type-sizes" id="type-sizes">Type Sizes</a></h1>
-<p>Shrinking oft-instantiated types can reduce peak memory usage, and also
-improve performance by reducing memory traffic and cache pressure. (In
-particular, note that types that are larger than 128 bytes are copied with
-<code>memcpy</code> rather than inline code.)</p>
-<p>The Rust compiler automatically sorts the fields in struct and enums to
-minimize their sizes (unless the <code>#[repr(C)]</code> attribute is specified), so you
-do not have to worry about field ordering. But there are still other ways to
-minimize the size of hot types.</p>
+<p>缩小常实例类型可以减少峰值内存使用量，还可以通过减少内存流量和缓存压力来提高性能。(特别要注意的是，大于128字节的类型会用 <code>memcpy</code>而不是内联代码)</p>
+<p>Rust编译器会自动对struct和enums中的字段进行排序，以最小化它们的大小（除非指定了<code>#[repr(C)]</code>属性），所以你不必担心字段的排序。但是仍然有其他方法可以使热类型的大小最小化。</p>
 <h2><a class="header" href="#measuring-type-sizes" id="measuring-type-sizes">Measuring Type Sizes</a></h2>
-<p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html"><code>std::mem::size_of</code></a> gives the size of a type, in bytes, but often you want to
-know the exact layout as well. For example, an enum might be surprisingly big,
-which might be caused by one outsized variant.</p>
-<p>The <code>-Zprint-type-sizes</code> option does exactly this. It isn’t enabled on release
-versions of rustc, so you’ll need to use a nightly version of rustc. Here is
-one possible invocation via Cargo:</p>
+<p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html"><code>std::mem::size_of</code></a>给出了一个类型的大小，以字节为单位，但通常你也想知道确切的布局。例如，一个枚举可能会出乎意料的大，这可能是由一个超大的变体造成的。</p>
+<p>`-Zprint-type-sizes’选项正是这样做的，它在rustc的发行版上没有被启用，所以你需要使用rustc的夜间版本。 下面是一个通过Cargo的可能调用</p>
 <pre><code class="language-text">RUSTFLAGS=-Zprint-type-sizes cargo +nightly build --release
 </code></pre>
-<p>And here is a possible invocation of rustc:</p>
+<p>而这里是一个rustc的可能调用</p>
 <pre><code class="language-text">rustc +nightly -Zprint-type-sizes input.rs
 </code></pre>
-<p>It will print out details of the size, layout, and alignment of all types in
-use. For example, for this type:</p>
+<p>它将打印出所有使用中的类型的尺寸、布局和对齐方式的详细信息。例如，对于这种类型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -201,7 +190,7 @@ use. For example, for this type:</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>it prints the following, plus information about a few built-in types.</p>
+<p>它打印以下信息，以及一些内置类型的信息。</p>
 <pre><code class="language-text">print-type-size type: `E`: 32 bytes, alignment: 8 bytes
 print-type-size     discriminant: 1 bytes
 print-type-size     variant `D`: 31 bytes
@@ -218,19 +207,17 @@ print-type-size         padding: 3 bytes
 print-type-size         field `.0`: 4 bytes, alignment: 4 bytes
 print-type-size     variant `A`: 0 bytes
 </code></pre>
-<p>The output shows the following.</p>
+<p>输出显示以下内容。</p>
 <ul>
-<li>The size and alignment of the type.</li>
-<li>For enums, the size of the discriminant.</li>
-<li>For enums, the size of each variant (sorted from largest to smallest).</li>
-<li>The size, alignment, and ordering of all fields. (Note that the compiler has
-reordered variant <code>C</code>‘s fields to minimize the size of <code>E</code>.)</li>
-<li>The size and location of all padding.</li>
+<li>类型的大小和排列。</li>
+<li>对于enums，判别子的大小。</li>
+<li>对于enums，每个变量的大小（从最大到最小排序）。</li>
+<li>所有字段的大小、对齐和排序。(请注意，编译器对变体<code>C</code>的字段进行了重新排序，以最小化<code>E</code>的大小。)</li>
+<li>所有padding的大小和位置。</li>
 </ul>
-<p>Once you know the layout of a hot type, there are multiple ways to shrink it.</p>
+<p>一旦你知道了热型的布局，就有多种方法来收缩它。</p>
 <h2><a class="header" href="#smaller-enums" id="smaller-enums">Smaller Enums</a></h2>
-<p>If an enum has an outsized variant, consider boxing one or more fields. For
-example, you could change this type:</p>
+<p>如果一个枚举有一个超大的变体，可以考虑将一个或多个字段装箱。例如，你可以改变这个类型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -242,7 +229,7 @@ enum A {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>to this:</p>
+<p>修改为：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -254,10 +241,7 @@ enum A {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>This reduces the type size at the cost of requiring an extra heap allocation
-for the <code>A::Z</code> variant. This is more likely to be a net performance win if the
-<code>A::Z</code> variant is relatively rare. The <code>Box</code> will also make <code>A::Z</code> slightly
-less ergonomic to use, especially in <code>match</code> patterns.
+<p>这减少了类型大小，但代价是需要为<code>A::Z</code>变体分配一个额外的堆。如果<code>A::Z</code>变体比较少见，这更有可能成为提高性能的好方法。<code>Box</code>也会使<code>A::Z</code>的使用略微不符合人的直觉，特别是在<code>匹配</code>模式中。
 <a href="https://github.com/rust-lang/rust/pull/37445/commits/a920e355ea837a950b484b5791051337cd371f5d"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/55346/commits/38d9277a77e982e49df07725b62b21c423b6428e"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64302/commits/b972ac818c98373b6d045956b049dc34932c41be"><strong>Example 3</strong></a>,
@@ -265,18 +249,11 @@ less ergonomic to use, especially in <code>match</code> patterns.
 <a href="https://github.com/rust-lang/rust/pull/64394/commits/7f0637da5144c7435e88ea3805021882f077d50c"><strong>Example 5</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/71942/commits/27ae2f0d60d9201133e1f9ec7a04c05c8e55e665"><strong>Example 6</strong></a>.</p>
 <h2><a class="header" href="#smaller-integers" id="smaller-integers">Smaller Integers</a></h2>
-<p>It is often possible to shrink types by using smaller integer types. For
-example, while it is most natural to use <code>usize</code> for indices, it is often
-reasonable to stores indices as <code>u32</code>, <code>u16</code>, or even <code>u8</code>, and then coerce to
-<code>usize</code> at use points.
+<p>通常可以通过使用较小的整数类型来缩小类型。例如，虽然对索引使用 “usize “是最自然的，但将索引存储为 “u32”、”u16”、甚至 “u8”，然后在使用点强制使用 “usize”，往往是合理的。
 <a href="https://github.com/rust-lang/rust/pull/49993/commits/4d34bfd00a57f8a8bdb60ec3f908c5d4256f8a9a"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50981/commits/8d0fad5d3832c6c1f14542ea0be038274e454524"><strong>Example 2</strong></a>.</p>
 <h2><a class="header" href="#boxed-slices" id="boxed-slices">Boxed Slices</a></h2>
-<p>Rust vectors contain three words: a length, a capacity, and a pointer. If you
-have a vector that is unlikely to be changed in the future, you can convert it
-to a <em>boxed slice</em> with <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice"><code>Vec::into_boxed_slice</code></a>. A boxed slice contains only
-two words, a length and a pointer. Any excess element capacity is dropped,
-which may cause a reallocation.</p>
+<p>Rust向量包含三个词：一个长度、一个容量和一个指针。如果你有一个将来不太可能被改变的向量，你可以用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice"><code>Vec::into_boxed_slice</code></a>把它转换为一个<em>boxed slice</em>。一个boxed slice只包含两个词，一个长度和一个指针。任何多余的元素容量都会被丢弃，这可能会导致重新分配。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -288,33 +265,27 @@ let bs: Box&lt;[u32]&gt; = v.into_boxed_slice();
 assert_eq!(size_of_val(&amp;bs), 2 * size_of::&lt;usize&gt;());
 <span class="boring">}
 </span></code></pre></pre>
-<p>The boxed slice can be converted back to a vector with <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec"><code>slice::into_vec</code></a>
-without any cloning or a reallocation.</p>
+<p>盒状切片可以用<a href="https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec"><code>slice::into_vec</code></a>转换回一个矢量，而无需任何克隆或重新分配。</p>
 <h2><a class="header" href="#avoiding-regressions" id="avoiding-regressions">Avoiding Regressions</a></h2>
-<p>If a type is hot enough that its size can affect performance, it is a good idea
-to use a static assertion to ensure that it does not accidentally regress. The
-following example uses a macro from the <a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a> crate.</p>
+<p>如果一个类型足够热，它的大小会影响性能，那么最好使用静态断言来确保它不会意外地回归。下面的例子使用了<a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a>中的一个宏。</p>
 <pre><code class="language-rust ignore">  // This type is used a lot. Make sure it doesn't unintentionally get bigger.
   #[cfg(target_arch = &quot;x86_64&quot;)]
   static_assertions::assert_eq_size!(HotType, [u8; 64]);
 </code></pre>
-<p>The <code>cfg</code> attribute is important, because type sizes can vary on different
-platforms. Restricting the assertion to <code>x86_64</code> (which is typically the most
-widely-used platform) is likely to be good enough to prevent regressions in
-practice.</p>
+<p><code>cfg</code>属性很重要，因为类型大小在不同的平台上会有所不同。将断言限制在 “x86_64”(通常是最广泛使用的平台)可能足以防止实际中的回落。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="heap-allocations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="heap-allocations_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="standard-library-types.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="standard-library-types_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -326,13 +297,13 @@ practice.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="heap-allocations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="heap-allocations_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="standard-library-types.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="standard-library-types_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

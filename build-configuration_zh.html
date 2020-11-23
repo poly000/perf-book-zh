@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Inlining - The Rust Performance Book</title>
+        <title>构建配置 - The Rust Performance Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="benchmarking.html"><strong aria-hidden="true">2.</strong> Benchmarking</a></li><li class="chapter-item expanded "><a href="build-configuration.html"><strong aria-hidden="true">3.</strong> Build Configuration</a></li><li class="chapter-item expanded "><a href="linting.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining.html" class="active"><strong aria-hidden="true">6.</strong> Inlining</a></li><li class="chapter-item expanded "><a href="hashing.html"><strong aria-hidden="true">7.</strong> Hashing</a></li><li class="chapter-item expanded "><a href="heap-allocations.html"><strong aria-hidden="true">8.</strong> Heap Allocations</a></li><li class="chapter-item expanded "><a href="type-sizes.html"><strong aria-hidden="true">9.</strong> Type Sizes</a></li><li class="chapter-item expanded "><a href="standard-library-types.html"><strong aria-hidden="true">10.</strong> Standard Library Types</a></li><li class="chapter-item expanded "><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li class="chapter-item expanded "><a href="io.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging.html"><strong aria-hidden="true">13.</strong> Logging and Debugging</a></li><li class="chapter-item expanded "><a href="wrapper-types.html"><strong aria-hidden="true">14.</strong> Wrapper Types</a></li><li class="chapter-item expanded "><a href="machine-code.html"><strong aria-hidden="true">15.</strong> Machine Code</a></li><li class="chapter-item expanded "><a href="parallelism.html"><strong aria-hidden="true">16.</strong> Parallelism</a></li><li class="chapter-item expanded "><a href="general-tips.html"><strong aria-hidden="true">17.</strong> General Tips</a></li><li class="chapter-item expanded "><a href="compile-times.html"><strong aria-hidden="true">18.</strong> Compile Times</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction_zh.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="benchmarking_zh.html"><strong aria-hidden="true">2.</strong> 基准分析</a></li><li class="chapter-item expanded "><a href="build-configuration_zh.html" class="active"><strong aria-hidden="true">3.</strong> 构建配置</a></li><li class="chapter-item expanded "><a href="linting_zh.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling_zh.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining_zh.html"><strong aria-hidden="true">6.</strong> 初始化</a></li><li class="chapter-item expanded "><a href="hashing_zh.html"><strong aria-hidden="true">7.</strong> 哈希</a></li><li class="chapter-item expanded "><a href="heap-allocations_zh.html"><strong aria-hidden="true">8.</strong> 堆分配</a></li><li class="chapter-item expanded "><a href="type-sizes_zh.html"><strong aria-hidden="true">9.</strong> 类型大小</a></li><li class="chapter-item expanded "><a href="standard-library-types_zh.html"><strong aria-hidden="true">10.</strong> 标准库类型</a></li><li class="chapter-item expanded "><a href="iterators_zh.html"><strong aria-hidden="true">11.</strong> 迭代器</a></li><li class="chapter-item expanded "><a href="io_zh.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging_zh.html"><strong aria-hidden="true">13.</strong> 日志和调试</a></li><li class="chapter-item expanded "><a href="wrapper-types_zh.html"><strong aria-hidden="true">14.</strong> 封装类型</a></li><li class="chapter-item expanded "><a href="machine-code_zh.html"><strong aria-hidden="true">15.</strong> 机器码</a></li><li class="chapter-item expanded "><a href="parallelism_zh.html"><strong aria-hidden="true">16.</strong> 并行</a></li><li class="chapter-item expanded "><a href="general-tips_zh.html"><strong aria-hidden="true">17.</strong> 一般提示</a></li><li class="chapter-item expanded "><a href="compile-times_zh.html"><strong aria-hidden="true">18.</strong> 编译时间</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,114 +167,67 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#inlining" id="inlining">Inlining</a></h1>
-<p>Entry to and exit from hot, uninlined functions often accounts for a
-non-trivial fraction of execution time. Inlining these functions can provide
-small but easy speed wins. </p>
-<p>There are four inline attributes that can be used on Rust functions.</p>
-<ul>
-<li><strong>None</strong>. The compiler will decide itself if the function should be inlined.
-This will depend on the optimization level, the size of the function, etc. If
-you are not using link-time optimization, functions will never be inlined
-across crates.</li>
-<li><strong><code>#[inline]</code></strong>. This suggests that the function should be inlined, including
-across crate boundaries.</li>
-<li><strong><code>#[inline(always)]</code></strong>. This strongly suggests that the function should be
-inlined, including across crate boundaries.</li>
-<li><strong><code>#[inline(never)]</code></strong>. This strongly suggests that the function should not
-be inlined.</li>
-</ul>
-<p>Inline attributes do not guarantee that a function is inlined or not inlined,
-but in practice, <code>#[inline(always)]</code> will cause inlining in all but the most
-exceptional cases.</p>
-<h2><a class="header" href="#simple-cases" id="simple-cases">Simple Cases</a></h2>
-<p>The best candidates for inlining are (a) functions that are very small, or (b)
-functions that have a single call site. The compiler will often inline these
-functions itself even without an inline attribute. But the compiler cannot
-always make the best choices, so attributes are sometimes needed.
-<a href="https://github.com/rust-lang/rust/pull/37083/commits/6a4bb35b70862f33ac2491ffe6c55fb210c8490d"><strong>Example 1</strong></a>,
-<a href="https://github.com/rust-lang/rust/pull/50407/commits/e740b97be699c9445b8a1a7af6348ca2d4c460ce"><strong>Example 2</strong></a>,
-<a href="https://github.com/rust-lang/rust/pull/50564/commits/77c40f8c6f8cc472f6438f7724d60bf3b7718a0c"><strong>Example 3</strong></a>,
-<a href="https://github.com/rust-lang/rust/pull/57719/commits/92fd6f9d30d0b6b4ecbcf01534809fb66393f139"><strong>Example 4</strong></a>,
-<a href="https://github.com/rust-lang/rust/pull/69256/commits/e761f3af904b3c275bdebc73bb29ffc45384945d"><strong>Example 5</strong></a>.</p>
-<p>Cachegrind is a good profiler for determining if a function is inlined. When
-looking at Cachegrind’s output, you can tell that a function has been inlined
-if (and only if) its first and last lines are <em>not</em> marked with event counts.
-For example:</p>
-<pre><code class="language-text">      .  #[inline(always)]
-      .  fn inlined(x: u32, y: u32) -&gt; u32 {
-700,000      eprintln!(&quot;inlined: {} + {}&quot;, x, y);
-200,000      x + y
-      .  }
-      .  
-      .  #[inline(never)]
-400,000  fn not_inlined(x: u32, y: u32) -&gt; u32 {
-700,000      eprintln!(&quot;not_inlined: {} + {}&quot;, x, y);
-200,000      x + y
-200,000  }
+                        <h1><a class="header" href="#构建配置" id="构建配置">构建配置</a></h1>
+<p>正确的构建配置将最大限度地提高Rust程序的性能，而无需对其代码进行任何修改。</p>
+<h2><a class="header" href="#发布构建" id="发布构建">发布构建</a></h2>
+<p>最重要的一个Rust性能提示很简单，但<a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">很容易被忽视</a>：当你想要高性能时，确保你使用的是release构建而不是debug构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
+<p>发行版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
+<p>调试构建是默认的。如果你运行 “cargo build”、”cargo run “或 “rustc “而不需要任何额外的选项，它们就会产生。调试构建对调试很有帮助，但不是优化的。</p>
+<p>考虑以下是运行<code>cargo build</code>的最后一行输出。</p>
+<pre><code class="language-text">Finished dev [unoptimized + debuginfo] target(s) in 29.80s
 </code></pre>
-<p>You should measure again after adding inline attributes, because the effects
-can be unpredictable. Sometimes it has no effect because a nearby function that
-was previously inlined no longer is. Sometimes it slows the code down. Inlining
-can also affect compile times, especially cross-crate inlining which involves
-duplicating internal representations of the functions.</p>
-<h2><a class="header" href="#harder-cases" id="harder-cases">Harder Cases</a></h2>
-<p>Sometimes you have a function that is large and has multiple call sites, but
-only one call site is hot. You would like to inline the hot call site for
-speed, but not inline the cold call sites to avoid unnecessary code bloat. The
-way to handle this is to split the function always-inlined and never-inlined
-variants, with the latter calling the former.</p>
-<p>For example, this function:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span><span class="boring">fn one() {};
-</span><span class="boring">fn two() {};
-</span><span class="boring">fn three() {};
-</span>fn my_function() {
-    one();
-    two();
-    three();
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p>Would become these two functions:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span><span class="boring">fn one() {};
-</span><span class="boring">fn two() {};
-</span><span class="boring">fn three() {};
-</span>// Use this at the hot call site.
-#[inline(always)]
-fn inlined_my_function() {
-    one();
-    two();
-    three();
-}
-
-// Use this at the cold call sites.
-#[inline(never)]
-fn uninlined_my_function() {
-    inlined_my_function();
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p><a href="https://github.com/rust-lang/rust/pull/53513/commits/b73843f9422fb487b2d26ac2d65f79f73a4c9ae3"><strong>Example 1</strong></a>,
-<a href="https://github.com/rust-lang/rust/pull/64420/commits/a2261ad66400c3145f96ebff0d9b75e910fa89dd"><strong>Example 2</strong></a>.</p>
+<p><code>[unoptimized + debuginfo]</code>表示已经生成了一个<code>debug build</code>，编译后的代码将放置在<code>target/debug/</code>目录下,<code>cargo run</code>将运行调试编译的代码。</p>
+<p><code>Release build</code>比<code>debug build</code>更优化。它们也省略了一些检查，比如调试断言和整数溢出检查。用 <code>cargo build --release</code>, <code>cargo run --release</code>, 或 <code>rustc -O</code>编译。(并且，<code>rustc</code>有多个其他优化构建的选项，比如<code>-C opt-level</code>)。由于额外的优化，这通常会比调试编译花费更多时间。</p>
+<p>请看下面的<code>&quot;cargo build --release&quot;</code>运行的最后一行输出。</p>
+<pre><code class="language-text">Finished release [optimized] target(s) in 1m 01s
+</code></pre>
+<p><code>[optimed]</code>表示已经生成了一个版本构建。编译后的代码将被放置在<code>target/release/</code>目录下。<code>cargo run --release</code>将运行发行版。</p>
+<p>参见 [Cargo 配置文件]，以了解更多关于调试构建(使用<code>dev</code>配置文件)和发布构建(使用<code>release</code>配置文件)之间的区别。</p>
+<p>[[Cargo 配置文件]: https://doc.rust-lang.org/cargo/reference/profiles.html</p>
+<h2><a class="header" href="#链接时优化" id="链接时优化">链接时优化</a></h2>
+<p>链接时间优化(LTO)是一种整体程序优化技术，可以将运行时性能提高10-20%甚至更多，但代价是增加构建时间。对于任何一个单独的Rust程序，很容易看出运行时间与编译时间的权衡是否值得。</p>
+<p>尝试LTO最简单的方法是在<code>Cargo.toml</code>文件中添加以下几行，然后进行发布构建。</p>
+<pre><code class="language-toml">[profile.release]
+lto = true
+</code></pre>
+<p>这将导致 “fat” LTO，它对依赖图中的所有crate进行优化。</p>
+<p>或者，在<code>Cargo.toml</code>中使用<code>lto = &quot;thin&quot;</code>来使用 “thin”LTO，这是一种不那么激进的LTO形式，通常和 “fat”LTO一样好用，而不会增加那么多的构建时间。</p>
+<p>请参阅<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#lto">Cargo LTO文档</a>了解更多关于<code>lto</code>设置的细节，以及关于为不同配置文件启用特定设置的细节。</p>
+<h2><a class="header" href="#codegen-units" id="codegen-units">Codegen Units</a></h2>
+<p>Rust 编译器会将你的 crate 分割成多个 <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units">codegen units</a>，以实现并行化（从而加快）编译。然而，这可能会导致它错过一些潜在的优化。如果你想以更大的编译时间为代价来潜在地提高运行时性能，你可以将单元数设置为一个。</p>
+<pre><code class="language-toml">[profile.release]
+codegen-units = 1
+</code></pre>
+<p><a href="https://likebike.com/posts/How_To_Write_Fast_Rust_Code.html#emit-asm"><strong>Example</strong></a>.</p>
+<p>要注意的是，codegen单位数是一个启发式的，因此较小的单位数实际上会导致程序较慢。</p>
+<h2><a class="header" href="#使用cpu专用指令" id="使用cpu专用指令">使用CPU专用指令</a></h2>
+<p>如果你不太关心你的二进制文件在旧的（或其他类型的）处理器上的兼容性，你可以告诉编译器生成特定于<a href="https://doc.rust-lang.org/1.41.1/rustc/codegen-options/index.html#target-cpu">特定CPU架构</a>的最新（可能是最快的）指令。</p>
+<p>例如，如果你把<code>-C target-cpu=native</code>传给rustc，它将使用当前CPU的最佳指令。</p>
+<pre><code class="language-bash">$ RUSTFLAGS=&quot;-C target-cpu=native&quot; cargo build --release
+</code></pre>
+<p>这可能会产生很大的影响，特别是当编译器在你的代码中发现矢量化的机会时。</p>
+<h2><a class="header" href="#在panic时中止" id="在panic时中止">在<code>panic!</code>时中止</a></h2>
+<p>如果你不需要捕捉或解除恐慌，你可以告诉编译器在恐慌时简单地中止。这可能会减少二进制大小，并略微提高性能。</p>
+<pre><code class="language-toml">[profile.release]
+panic = &quot;abort&quot;
+</code></pre>
+<h2><a class="header" href="#profile-guided-optimization" id="profile-guided-optimization">Profile-guided Optimization</a></h2>
+<p>Profile-guided optimization(PGO)是一种编译模式，即编译程序后，在收集样本数据的同时在样本数据上运行，然后用样本数据引导程序的第二次编译。
+<a href="https://blog.rust-lang.org/inside-rust/2020/11/11/exploring-pgo-for-the-rust-compiler.html"><strong>Example</strong></a>.</p>
+<p>这是一种先进的技术，需要花费一些精力来设置，但在某些情况下是值得的。详情请看<a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">rustc PGO documentation</a>。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="profiling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="benchmarking_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="hashing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="linting_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -286,13 +239,13 @@ fn uninlined_my_function() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="profiling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="benchmarking_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="hashing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="linting_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

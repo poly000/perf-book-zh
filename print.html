@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="benchmarking.html"><strong aria-hidden="true">2.</strong> Benchmarking</a></li><li class="chapter-item expanded "><a href="build-configuration.html"><strong aria-hidden="true">3.</strong> Build Configuration</a></li><li class="chapter-item expanded "><a href="linting.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining.html"><strong aria-hidden="true">6.</strong> Inlining</a></li><li class="chapter-item expanded "><a href="hashing.html"><strong aria-hidden="true">7.</strong> Hashing</a></li><li class="chapter-item expanded "><a href="heap-allocations.html"><strong aria-hidden="true">8.</strong> Heap Allocations</a></li><li class="chapter-item expanded "><a href="type-sizes.html"><strong aria-hidden="true">9.</strong> Type Sizes</a></li><li class="chapter-item expanded "><a href="standard-library-types.html"><strong aria-hidden="true">10.</strong> Standard Library Types</a></li><li class="chapter-item expanded "><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li class="chapter-item expanded "><a href="io.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging.html"><strong aria-hidden="true">13.</strong> Logging and Debugging</a></li><li class="chapter-item expanded "><a href="wrapper-types.html"><strong aria-hidden="true">14.</strong> Wrapper Types</a></li><li class="chapter-item expanded "><a href="machine-code.html"><strong aria-hidden="true">15.</strong> Machine Code</a></li><li class="chapter-item expanded "><a href="parallelism.html"><strong aria-hidden="true">16.</strong> Parallelism</a></li><li class="chapter-item expanded "><a href="general-tips.html"><strong aria-hidden="true">17.</strong> General Tips</a></li><li class="chapter-item expanded "><a href="compile-times.html"><strong aria-hidden="true">18.</strong> Compile Times</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction_zh.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="benchmarking_zh.html"><strong aria-hidden="true">2.</strong> 基准分析</a></li><li class="chapter-item expanded "><a href="build-configuration_zh.html"><strong aria-hidden="true">3.</strong> 构建配置</a></li><li class="chapter-item expanded "><a href="linting_zh.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling_zh.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining_zh.html"><strong aria-hidden="true">6.</strong> 初始化</a></li><li class="chapter-item expanded "><a href="hashing_zh.html"><strong aria-hidden="true">7.</strong> 哈希</a></li><li class="chapter-item expanded "><a href="heap-allocations_zh.html"><strong aria-hidden="true">8.</strong> 堆分配</a></li><li class="chapter-item expanded "><a href="type-sizes_zh.html"><strong aria-hidden="true">9.</strong> 类型大小</a></li><li class="chapter-item expanded "><a href="standard-library-types_zh.html"><strong aria-hidden="true">10.</strong> 标准库类型</a></li><li class="chapter-item expanded "><a href="iterators_zh.html"><strong aria-hidden="true">11.</strong> 迭代器</a></li><li class="chapter-item expanded "><a href="io_zh.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging_zh.html"><strong aria-hidden="true">13.</strong> 日志和调试</a></li><li class="chapter-item expanded "><a href="wrapper-types_zh.html"><strong aria-hidden="true">14.</strong> 封装类型</a></li><li class="chapter-item expanded "><a href="machine-code_zh.html"><strong aria-hidden="true">15.</strong> 机器码</a></li><li class="chapter-item expanded "><a href="parallelism_zh.html"><strong aria-hidden="true">16.</strong> 并行</a></li><li class="chapter-item expanded "><a href="general-tips_zh.html"><strong aria-hidden="true">17.</strong> 一般提示</a></li><li class="chapter-item expanded "><a href="compile-times_zh.html"><strong aria-hidden="true">18.</strong> 编译时间</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,227 +169,121 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#the-rust-performance-book" id="the-rust-performance-book">The Rust Performance Book</a></h1>
+                        <h1><a class="header" href="#rust性能手册" id="rust性能手册">RUST性能手册</a></h1>
 <p><strong>First published in November 2020</strong></p>
 <p><strong>Written by Nicholas Nethercote and others</strong></p>
-<h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>Performance is important for many Rust programs. </p>
-<p>This book contains many techniques that can improve the performance—speed and
-memory usage—of Rust programs. The <a href="compile-times.html">Compile Times</a> section also contains some
-techniques that will improve the compile times of Rust programs. Some of the
-book’s techniques only require changing build configurations, but many require
-changing code.</p>
-<p>Some of the techniques within are entirely Rust-specific, and some involve
-ideas that can be applied (often with modifications) to programs written in
-other languages. The <a href="general-tips.html">General Tips</a> section also includes some general
-principles that apply to any programming language. Nonetheless, this book is
-mostly about the performance of Rust programs and is no substitute for a
-general purpose guide to profiling and optimization.</p>
-<p>The book also focuses on techniques that are practical and proven: many are
-accompanied by links to pull requests or other resources that show how the
-technique was used on a real-world Rust program.</p>
-<p>This book is aimed at intermediate and advanced Rust users. Beginner Rust users
-have more than enough to learn and these techniques are likely to be an
-unhelpful distraction to them.</p>
+<p><strong>Chinese translated by Blues-star</strong></p>
+<h1><a class="header" href="#简介" id="简介">简介</a></h1>
+<p>性能对许多Rust程序来说都很重要。</p>
+<p>本书包含了许多可以提高Rust程序的性能-速度和内存使用率的技术，其中<a href="compile-times.html">编译时间</a>部分也包含了一些可以提高Rust程序编译时间的技术。编译时间]部分也包含了一些可以改善Rust程序编译时间的技术。本书的一些技术只需要改变构建配置，但许多技术需要改变代码。</p>
+<p>其中的一些技术完全是 Rust 所特有的，而一些涉及的想法可以应用（通常经过修改）到其他语言编写的程序中。<a href="general-tips.html">General Tips</a>部分还包括一些适用于任何编程语言的一般原则。尽管如此，本书主要是关于Rust程序的性能，并不能替代通用的剖析和优化指南。</p>
+<p>本书还重点介绍了那些实用的、经过验证的技术：许多技术都附有拉请求或其他资源的链接，展示了该技术是如何在真实世界的Rust程序上使用的。</p>
+<p>本书针对的是中级和高级Rust用户。初级Rust用户需要学习的东西已经够多了，这些技术很可能会对他们造成无益的干扰。</p>
 <h1><a class="header" href="#benchmarking" id="benchmarking">Benchmarking</a></h1>
-<p>When optimizing a program, you need a way to reliably answer the question “did
-this change speed things up?” This process is sometimes called benchmarking.
-Benchmarking is a complex topic and a thorough coverage is beyond the scope of
-this book, but here are the basics.</p>
-<p>First, you need workloads to measure. Ideally, you would have a variety of
-workloads that represent realistic usage of your program. Workloads using
-real-world inputs are best, but <a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">microbenchmarks</a> and <a href="https://en.wikipedia.org/wiki/Stress_testing_(software)">stress tests</a> can be
-useful in moderation.</p>
-<p>Second, you need a way to run the workloads, which will also dictate the
-metrics used. Rust’s built-in <a href="https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html">benchmark tests</a> are a simple starting point.
-<a href="https://github.com/bheisler/criterion.rs">Criterion</a> is a more sophisticated alternative. Custom benchmarking harnesses
-are also possible. For example, <a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a> is the harness used to benchmark
-the Rust compiler.</p>
-<p>When it comes to metrics, there are many choices, and the right one(s) will
-depend on the nature of the program being benchmarked. For example, metrics
-that make sense for a batch program might not make sense for an interactive
-program. Wall-time is an obvious choice in many cases because it corresponds to
-what users perceive. However, it can suffer from high variance. In particular,
-tiny changes in memory layout can cause significant but ephemeral performance
-fluctuations. Therefore, other metrics with lower variance (such as cycles or
-instruction counts) may be a reasonable alternative.</p>
-<p>Summarizing measurements from multiple workloads is also a challenge, and there
-are a variety of ways to do it, with no single method being obviously best.</p>
-<p>Good benchmarking is hard. Having said that, do not stress too much about
-having a perfect benchmarking setup, particularly when you start optimizing a
-program. A mediocre setup is far better than no setup. Keep an open mind about
-what you are measuring, and over time you can make benchmarking improvements as
-you learn about the performance characteristics of your program.</p>
-<h1><a class="header" href="#build-configuration" id="build-configuration">Build Configuration</a></h1>
-<p>The right build configuration will maximize the performance of your Rust
-program without any changes to its code.</p>
-<h2><a class="header" href="#release-builds" id="release-builds">Release Builds</a></h2>
-<p>The single most important Rust performance tip is simple but <a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">easy to
-overlook</a>: make sure you are using a release build rather than a debug build
-when you want high performance. This is most often done by specifying the
-<code>--release</code> flag to Cargo.</p>
-<p>A release build typically runs <em>much</em> faster than a debug build. 10-100x
-speedups over debug builds are common!</p>
-<p>Debug builds are the default. They are produced if you run <code>cargo build</code>,
-<code>cargo run</code>, or <code>rustc</code> without any additional options. Debug builds are good
-for debugging, but are not optimized.</p>
-<p>Consider the following final line of output from a <code>cargo build</code> run.</p>
+<p>在优化一个程序时，你需要一种方法来可靠地回答 “这个改变是否加快了程序？”这个问题。这个过程有时被称为基准测试(benchmarking)。基准测试是一个复杂的话题，彻底的覆盖范围超出了本书的范围，但以下是基本的内容。</p>
+<p>首先，你需要工作负载来衡量。理想情况下，你会有各种工作负载，代表你的程序的实际使用情况。使用真实世界输入的工作负载是最好的，但<a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">microbenchmarks</a>和[压力测试(stress tests)]在适度的情况下也是有用的。</p>
+<p>其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的[基准测试(benchmark tests)]是一个简单的起点。<a href="https://github.com/bheisler/criterion.rs">Criterion</a>是一个更复杂的选择。自定义benchmarking harnesses也是可能的。例如，<a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a>就是用来对Rust编译器进行基准测试的harnesses。</p>
+<p>当涉及到度量时，有许多选择，正确的选择将取决于被基准化的程序的性质。例如，对批处理程序有意义的指标可能对交互式程序没有意义。在许多情况下，Wall-time是一个显而易见的选择，因为它与用户的感知相对应。然而，它可能会受到大幅变化的影响。特别是，内存布局的微小变化可能会导致显著但短暂的性能波动。因此，方差较小的其他指标（如周期或指令数）可能是一个合理的选择。</p>
+<p>从多个工作负载中总结测量结果也是一个挑战，尽管有多种方法，但并没有一种方法是最完美的。</p>
+<p>良好好的基准测试是很难实现的。总而言之，不要过于强调拥有一个完美的基准测试设置，特别是当你开始优化一个程序的时候。一个平庸的设置比没有设置要好得多。对你正在测量的东西保持开放的心态，随着时间的推移，你可以在了解你的程序的性能特点后进行基准测试改进。</p>
+<h1><a class="header" href="#构建配置" id="构建配置">构建配置</a></h1>
+<p>正确的构建配置将最大限度地提高Rust程序的性能，而无需对其代码进行任何修改。</p>
+<h2><a class="header" href="#发布构建" id="发布构建">发布构建</a></h2>
+<p>最重要的一个Rust性能提示很简单，但<a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">很容易被忽视</a>：当你想要高性能时，确保你使用的是release构建而不是debug构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
+<p>发行版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
+<p>调试构建是默认的。如果你运行 “cargo build”、”cargo run “或 “rustc “而不需要任何额外的选项，它们就会产生。调试构建对调试很有帮助，但不是优化的。</p>
+<p>考虑以下是运行<code>cargo build</code>的最后一行输出。</p>
 <pre><code class="language-text">Finished dev [unoptimized + debuginfo] target(s) in 29.80s
 </code></pre>
-<p>The <code>[unoptimized + debuginfo]</code> indicates that a debug build has been produced.
-The compiled code will be placed in the <code>target/debug/</code> directory. <code>cargo run</code>
-will run the debug build.</p>
-<p>Release builds are more optimized than debug builds. They also omit some
-checks, such as debug assertions and integer overflow checks. Produce one with
-<code>cargo build --release</code>, <code>cargo run --release</code>, or <code>rustc -O</code>. (Alternatively,
-<code>rustc</code> has multiple other options for optimized builds, such as <code>-C opt-level</code>.) This will typically take longer than a debug build because of the
-additional optimizations.</p>
-<p>Consider the following final line of output from a <code>cargo build --release</code> run.</p>
+<p><code>[unoptimized + debuginfo]</code>表示已经生成了一个<code>debug build</code>，编译后的代码将放置在<code>target/debug/</code>目录下,<code>cargo run</code>将运行调试编译的代码。</p>
+<p><code>Release build</code>比<code>debug build</code>更优化。它们也省略了一些检查，比如调试断言和整数溢出检查。用 <code>cargo build --release</code>, <code>cargo run --release</code>, 或 <code>rustc -O</code>编译。(并且，<code>rustc</code>有多个其他优化构建的选项，比如<code>-C opt-level</code>)。由于额外的优化，这通常会比调试编译花费更多时间。</p>
+<p>请看下面的<code>&quot;cargo build --release&quot;</code>运行的最后一行输出。</p>
 <pre><code class="language-text">Finished release [optimized] target(s) in 1m 01s
 </code></pre>
-<p>The <code>[optimized]</code> indicates that a release build has been produced. The
-compiled code will be placed in the <code>target/release/</code> directory. <code>cargo run --release</code> will run the release build.</p>
-<p>See the <a href="https://doc.rust-lang.org/cargo/reference/profiles.html">Cargo profile documentation</a> for more details about the differences
-between debug builds (which use the <code>dev</code> profile) and release builds (which
-use the <code>release</code> profile).</p>
-<h2><a class="header" href="#link-time-optimization" id="link-time-optimization">Link-time Optimization</a></h2>
-<p>Link-time optimization (LTO) is a whole-program optimization technique that can
-improve runtime performance by 10-20% or more, at the cost of increased build
-times. For any individual Rust program it is easy to see if the runtime versus
-compile-time trade-off is worthwhile.</p>
-<p>The simplest way to try LTO is to add the following lines to the <code>Cargo.toml</code>
-file and do a release build.</p>
+<p><code>[optimed]</code>表示已经生成了一个版本构建。编译后的代码将被放置在<code>target/release/</code>目录下。<code>cargo run --release</code>将运行发行版。</p>
+<p>参见 [Cargo 配置文件]，以了解更多关于调试构建(使用<code>dev</code>配置文件)和发布构建(使用<code>release</code>配置文件)之间的区别。</p>
+<p>[[Cargo 配置文件]: https://doc.rust-lang.org/cargo/reference/profiles.html</p>
+<h2><a class="header" href="#链接时优化" id="链接时优化">链接时优化</a></h2>
+<p>链接时间优化(LTO)是一种整体程序优化技术，可以将运行时性能提高10-20%甚至更多，但代价是增加构建时间。对于任何一个单独的Rust程序，很容易看出运行时间与编译时间的权衡是否值得。</p>
+<p>尝试LTO最简单的方法是在<code>Cargo.toml</code>文件中添加以下几行，然后进行发布构建。</p>
 <pre><code class="language-toml">[profile.release]
 lto = true
 </code></pre>
-<p>This will result in “fat” LTO, which optimizes across all crates in the
-dependency graph.</p>
-<p>Alternatively, use <code>lto = &quot;thin&quot;</code> in <code>Cargo.toml</code> to use “thin” LTO, which is a
-less aggressive form of LTO that often works as well as “fat” LTO without
-increasing build times as much.</p>
-<p>See the <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#lto">Cargo LTO documentation</a> for more details about the <code>lto</code> setting, and
-about enabling specific settings for different profiles.</p>
+<p>这将导致 “fat” LTO，它对依赖图中的所有crate进行优化。</p>
+<p>或者，在<code>Cargo.toml</code>中使用<code>lto = &quot;thin&quot;</code>来使用 “thin”LTO，这是一种不那么激进的LTO形式，通常和 “fat”LTO一样好用，而不会增加那么多的构建时间。</p>
+<p>请参阅<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#lto">Cargo LTO文档</a>了解更多关于<code>lto</code>设置的细节，以及关于为不同配置文件启用特定设置的细节。</p>
 <h2><a class="header" href="#codegen-units" id="codegen-units">Codegen Units</a></h2>
-<p>The Rust compiler splits your crate into multiple <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units">codegen units</a> to
-parallelize (and thus speed up) compilation. However, this might cause it to
-miss some potential optimizations. If you want to potentially improve runtime
-performance at the cost of larger compile time, you can set the number of units
-to one:</p>
+<p>Rust 编译器会将你的 crate 分割成多个 <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units">codegen units</a>，以实现并行化（从而加快）编译。然而，这可能会导致它错过一些潜在的优化。如果你想以更大的编译时间为代价来潜在地提高运行时性能，你可以将单元数设置为一个。</p>
 <pre><code class="language-toml">[profile.release]
 codegen-units = 1
 </code></pre>
 <p><a href="https://likebike.com/posts/How_To_Write_Fast_Rust_Code.html#emit-asm"><strong>Example</strong></a>.</p>
-<p>Be wary that the codegen unit count is a heuristic and thus a smaller count can
-actually result in a slower program.</p>
-<h2><a class="header" href="#using-cpu-specific-instructions" id="using-cpu-specific-instructions">Using CPU Specific Instructions</a></h2>
-<p>If you do not care that much about the compatibility of your binary on older
-(or other types of) processors, you can tell the compiler to generate the
-newest (and potentially fastest) instructions specific to a <a href="https://doc.rust-lang.org/1.41.1/rustc/codegen-options/index.html#target-cpu">certain CPU
-architecture</a>.</p>
-<p>For example, if you pass <code>-C target-cpu=native</code> to rustc, it will use the best
-instructions for your current CPU:</p>
+<p>要注意的是，codegen单位数是一个启发式的，因此较小的单位数实际上会导致程序较慢。</p>
+<h2><a class="header" href="#使用cpu专用指令" id="使用cpu专用指令">使用CPU专用指令</a></h2>
+<p>如果你不太关心你的二进制文件在旧的（或其他类型的）处理器上的兼容性，你可以告诉编译器生成特定于<a href="https://doc.rust-lang.org/1.41.1/rustc/codegen-options/index.html#target-cpu">特定CPU架构</a>的最新（可能是最快的）指令。</p>
+<p>例如，如果你把<code>-C target-cpu=native</code>传给rustc，它将使用当前CPU的最佳指令。</p>
 <pre><code class="language-bash">$ RUSTFLAGS=&quot;-C target-cpu=native&quot; cargo build --release
 </code></pre>
-<p>This can have a large effect, especially if the compiler finds vectorization
-opportunities in your code.</p>
-<h2><a class="header" href="#abort-on-panic" id="abort-on-panic">Abort on <code>panic!</code></a></h2>
-<p>If you do not need to catch or unwind panics, you can tell the compiler to
-simply abort on panics. This might reduce binary size and increase performance
-slightly:</p>
+<p>这可能会产生很大的影响，特别是当编译器在你的代码中发现矢量化的机会时。</p>
+<h2><a class="header" href="#在panic时中止" id="在panic时中止">在<code>panic!</code>时中止</a></h2>
+<p>如果你不需要捕捉或解除恐慌，你可以告诉编译器在恐慌时简单地中止。这可能会减少二进制大小，并略微提高性能。</p>
 <pre><code class="language-toml">[profile.release]
 panic = &quot;abort&quot;
 </code></pre>
 <h2><a class="header" href="#profile-guided-optimization" id="profile-guided-optimization">Profile-guided Optimization</a></h2>
-<p>Profile-guided optimization (PGO) is a compilation model where you compile
-your program, run it on sample data while collecting profiling data, and then
-use that profiling data to guide a second compilation of the program.
+<p>Profile-guided optimization(PGO)是一种编译模式，即编译程序后，在收集样本数据的同时在样本数据上运行，然后用样本数据引导程序的第二次编译。
 <a href="https://blog.rust-lang.org/inside-rust/2020/11/11/exploring-pgo-for-the-rust-compiler.html"><strong>Example</strong></a>.</p>
-<p>It is an advanced technique that takes some effort to set up, but is worthwhile
-in some cases. See the <a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">rustc PGO documentation</a> for details.</p>
+<p>这是一种先进的技术，需要花费一些精力来设置，但在某些情况下是值得的。详情请看<a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">rustc PGO documentation</a>。</p>
 <h1><a class="header" href="#linting" id="linting">Linting</a></h1>
-<p><a href="https://github.com/rust-lang/rust-clippy">Clippy</a> is a collection of lints to catch common mistakes in Rust code. It is
-an excellent tool to run on Rust code in general. It can also help with
-performance, because a number of the lints relate to code patterns that can
-cause sub-optimal performance.</p>
-<p>Once installed, it is easy to run:</p>
+<p>[Clippy]是一个用来捕捉Rust代码中常见错误的lints集合。它是运行在Rust代码上的一个优秀工具。它还可以帮助提高性能，因为许多lints与可能导致次优性能的代码模式有关。
+[Clippy]: https://github.com/rust-lang/rust-clippy</p>
+<p>安装后，很容易运行它</p>
 <pre><code class="language-text">cargo clippy
 </code></pre>
-<p>The full list of performance lints can be seen by visiting the <a href="https://rust-lang.github.io/rust-clippy/master/">lint list</a> and
-deselecting all the lint groups except for “Perf”.</p>
-<p>As well as making the code faster, the performance lint suggestions usually
-result in code that is simpler and more idiomatic, so they are worth following
-even for code that is not hot.</p>
+<p>通过访问<a href="https://rust-lang.github.io/rust-clippy/master/">lint list</a>并取消选择除 “Perf “以外的所有lints组，可以看到完整的性能lints列表。</p>
+<p>除了让代码更快之外，性能上的lint建议通常会让代码更简单、更习惯，所以即使是不热门的代码也值得遵循。</p>
 <h1><a class="header" href="#profiling" id="profiling">Profiling</a></h1>
-<p>When optimizing a program, you also need a way to determine which parts of the
-program are “hot” (executed frequently enough to affect runtime) and worth
-modifying. This is best done via profiling.</p>
+<p>在优化程序时，你还需要一种方法来确定程序的哪些部分是 “热 “的（执行频率足以影响运行时间），值得修改。这一点最好通过Profiling来完成。</p>
 <h2><a class="header" href="#profilers" id="profilers">Profilers</a></h2>
-<p>There are many different profilers available, each with their strengths and
-weaknesses. The following is an incomplete list of profilers that have been
-used successfully on Rust programs.</p>
+<p>有许多不同的Profilers，每个Profilers都有自己的优点和缺点。下面是一个不完整的列表，其中列出了已经成功用于Rust程序的Profilers。</p>
 <ul>
-<li><a href="https://perf.wiki.kernel.org/index.php/Main_Page">perf</a> is a general-purpose profiler that uses hardware performance counters.
-<a href="https://github.com/KDAB/hotspot">Hotspot</a> and <a href="https://profiler.firefox.com/">Firefox Profiler</a> are good for viewing data recorded by perf.</li>
-<li><a href="https://www.valgrind.org/docs/manual/cg-manual.html">Cachegrind</a> &amp; <a href="https://www.valgrind.org/docs/manual/cl-manual.html">Callgrind</a> give global, per-function, and per-source-line
-instruction counts and simulated cache and branch prediction data.</li>
-<li><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a> is good for finding which parts of the code are causing a lot of
-allocations, and for giving insight into peak memory usage. <a href="https://github.com/KDE/heaptrack">heaptrack</a> is
-another heap profiling tool.</li>
-<li><a href="https://github.com/nnethercote/counts/"><code>counts</code></a> supports ad hoc profiling, which combines the use of <code>eprintln!</code>
-statement with frequency-based post-processing, which is good for getting
-domain-specific insights into parts of your code.</li>
-<li><a href="https://github.com/plasma-umass/coz">Coz</a> performs <em>causal profiling</em> to measure optimization potential. It has
-Rust support via <a href="https://github.com/plasma-umass/coz/tree/master/rust">coz-rs</a>.</li>
-<li><a href="https://github.com/flamegraph-rs/flamegraph">flamegraph</a> is a Cargo command that uses <code>perf</code>/<code>DTrace</code> to profile your
-code and then displays the results in a flame graph.</li>
+<li><a href="https://perf.wiki.kernel.org/index.php/Main_Page">perf</a>是一个使用硬件性能计数器的通用剖析器。<a href="https://github.com/KDAB/hotspot">Hotspot</a>和<a href="https://profiler.firefox.com/">Firefox Profiler</a>是查看perf记录的数据的好工具。</li>
+<li><a href="https://www.valgrind.org/docs/manual/cg-manual.html">Cachegrind</a>和<a href="https://www.valgrind.org/docs/manual/cl-manual.html">Callgrind</a>给出了全局的、每个函数的、每个源线的指令数以及模拟的缓存和分支预测数据。</li>
+<li><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a>可以很好的找到代码中哪些部分会造成大量的分配，并对峰值内存使用情况进行深入了解。<a href="https://github.com/KDE/heaptrack">heaptrack</a>是另一个堆分析工具。</li>
+<li><a href="https://github.com/nnethercote/counts/"><code>counts</code></a>支持特别剖析，它将<code>eprintln！</code>语句的使用与基于频率的后处理结合起来，这对于了解代码中特定领域的部分内容很有帮助。</li>
+<li><a href="https://github.com/plasma-umass/coz">Coz</a>执行<em>因果分析</em>以衡量优化潜力。它通过<a href="https://github.com/plasma-umass/coz/tree/master/rust">coz-rs</a>支持Rust。</li>
+<li><a href="https://github.com/flamegraph-rs/flamegraph">flamegraph</a>是一个Cargo命令，它使用<code>perf</code>/<code>DTrace</code>对你的代码进行剖析，然后用火焰图显示结果。</li>
 </ul>
-<h2><a class="header" href="#debug-info" id="debug-info">Debug Info</a></h2>
-<p>To profile a release build effectively you might need to enable source line
-debug info. To do this, add the following lines to your <code>Cargo.toml</code> file:</p>
+<h2><a class="header" href="#调试信息" id="调试信息">调试信息</a></h2>
+<p>为了有效地描述一个发布版本的构建，你可能需要启用源代码行调试信息。要做到这一点，请在你的 <code>Cargo.toml</code>文件中添加以下行。</p>
 <pre><code class="language-toml">[profile.release]
 debug = 1
 </code></pre>
-<p>See the <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#debug">Cargo documentation</a> for more details about the <code>debug</code> setting.</p>
+<p>关于 “debug “设置的更多细节，请参见[Cargo文档]。</p>
 <h2><a class="header" href="#symbol-demangling" id="symbol-demangling">Symbol Demangling</a></h2>
-<p>Rust uses a mangling scheme to encode function names in compiled code. If a
-profiler is unaware of this scheme, its output may contain symbol names like
-<code>_ZN3foo3barE</code> or <code>_ZN28_$u7b$$u7b$closure$u7d$$u7d$E</code> or
-<code>_ZN88_$LT$core..result..Result$LT$$u21$$C$$u20$E$GT$$u20$as$u20$std..process..Termination$GT$6report17hfc41d0da4a40b3e8E</code>.
-Names like these can be manually demangled using <a href="https://crates.io/crates/rustfilt"><code>rustfilt</code></a>.</p>
+<p>Rust在编译代码中使用了一个杂乱的方案来编码函数名。如果一个剖析器不知道这个方案，它的输出可能会包含像这样的符号名
+<code>_ZN3foo3barE</code>或<code>_ZN28_$u7b$$u7b$closure$u7d$$u7d$E</code>或<code>_ZN28_$u7b$$$u7d$E</code>或
+<code>_ZN88_$LT$core.result.Result$LT$$u21$$C$$u20$E$GT$u20$as$u20$std.process.Termination$GT$6report17hfc41d0da4a40b3e8E</code>。
+像这样的名字，可以用<a href="https://crates.io/crates/rustfilt"><code>rustfilt</code></a>手动拆分。</p>
 <h1><a class="header" href="#inlining" id="inlining">Inlining</a></h1>
-<p>Entry to and exit from hot, uninlined functions often accounts for a
-non-trivial fraction of execution time. Inlining these functions can provide
-small but easy speed wins. </p>
-<p>There are four inline attributes that can be used on Rust functions.</p>
+<p>调用和退出热函数、未内联的函数往往占执行时间的一小部分。内联这些函数可以提供小而简单的速度优势。</p>
+<p>有四个内联属性可以用于Rust函数。</p>
 <ul>
-<li><strong>None</strong>. The compiler will decide itself if the function should be inlined.
-This will depend on the optimization level, the size of the function, etc. If
-you are not using link-time optimization, functions will never be inlined
-across crates.</li>
-<li><strong><code>#[inline]</code></strong>. This suggests that the function should be inlined, including
-across crate boundaries.</li>
-<li><strong><code>#[inline(always)]</code></strong>. This strongly suggests that the function should be
-inlined, including across crate boundaries.</li>
-<li><strong><code>#[inline(never)]</code></strong>. This strongly suggests that the function should not
-be inlined.</li>
+<li><strong>None</strong>. 编译器会自己决定是否应该内联函数。这将取决于优化级别、函数的大小等。如果你没有使用链接时间优化，函数永远不会跨箱子内联。</li>
+<li><strong><code>#[inline]</code></strong>. 这表明该函数应该内嵌，包括跨越crate边界。</li>
+<li><strong><code>#[inline(always)]</code></strong>. 这强烈建议该函数应该内嵌，包括跨越箱子边界。</li>
+<li><strong><code>#[inline(never)]</code></strong>. 这强烈表示该函数不应被内联。</li>
 </ul>
-<p>Inline attributes do not guarantee that a function is inlined or not inlined,
-but in practice, <code>#[inline(always)]</code> will cause inlining in all but the most
-exceptional cases.</p>
+<p>内联属性并不能保证一个函数是内联或不内联的，但实际上，<code>#[inline(always)]</code>除了最特殊的情况外，都会导致内联。</p>
 <h2><a class="header" href="#simple-cases" id="simple-cases">Simple Cases</a></h2>
-<p>The best candidates for inlining are (a) functions that are very small, or (b)
-functions that have a single call site. The compiler will often inline these
-functions itself even without an inline attribute. But the compiler cannot
-always make the best choices, so attributes are sometimes needed.
+<p>最适合内联的是(a)非常小的函数，或者(b)只有一个调用点的函数。编译器通常会自己内联这些函数，即使没有内联属性。但是编译器不可能总是做出最好的选择，所以有时需要属性。
 <a href="https://github.com/rust-lang/rust/pull/37083/commits/6a4bb35b70862f33ac2491ffe6c55fb210c8490d"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50407/commits/e740b97be699c9445b8a1a7af6348ca2d4c460ce"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50564/commits/77c40f8c6f8cc472f6438f7724d60bf3b7718a0c"><strong>Example 3</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/57719/commits/92fd6f9d30d0b6b4ecbcf01534809fb66393f139"><strong>Example 4</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/69256/commits/e761f3af904b3c275bdebc73bb29ffc45384945d"><strong>Example 5</strong></a>.</p>
-<p>Cachegrind is a good profiler for determining if a function is inlined. When
-looking at Cachegrind’s output, you can tell that a function has been inlined
-if (and only if) its first and last lines are <em>not</em> marked with event counts.
-For example:</p>
+<p>Cachegrind是一个很好的判断函数是否被内联的剖析器。当查看Cachegrind的输出时，如果（也只有当）函数的第一行和最后一行没有*标记事件数，你就可以判断该函数被内联了。
+例如</p>
 <pre><code class="language-text">      .  #[inline(always)]
       .  fn inlined(x: u32, y: u32) -&gt; u32 {
 700,000      eprintln!(&quot;inlined: {} + {}&quot;, x, y);
@@ -402,18 +296,10 @@ For example:</p>
 200,000      x + y
 200,000  }
 </code></pre>
-<p>You should measure again after adding inline attributes, because the effects
-can be unpredictable. Sometimes it has no effect because a nearby function that
-was previously inlined no longer is. Sometimes it slows the code down. Inlining
-can also affect compile times, especially cross-crate inlining which involves
-duplicating internal representations of the functions.</p>
+<p>添加内联属性后应该再测一次，因为效果可能是不可预知的。有时它没有效果，因为附近一个之前内联的函数不再内联了。有时会拖慢代码的速度。内联也会影响编译时间，特别是交叉速率内联，它涉及到重复函数的内部表示。</p>
 <h2><a class="header" href="#harder-cases" id="harder-cases">Harder Cases</a></h2>
-<p>Sometimes you have a function that is large and has multiple call sites, but
-only one call site is hot. You would like to inline the hot call site for
-speed, but not inline the cold call sites to avoid unnecessary code bloat. The
-way to handle this is to split the function always-inlined and never-inlined
-variants, with the latter calling the former.</p>
-<p>For example, this function:</p>
+<p>有时候，你有一个函数很大，有多个调用站点，但只有一个调用点是热调用点。你希望内联热调用点以提高速度，但不内联冷调用点以避免不必要的代码膨胀。处理的方法是将函数分成总是内联和从不内联的部分，后者调用前者。</p>
+<p>例如，这个函数。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -427,7 +313,7 @@ variants, with the latter calling the former.</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Would become these two functions:</p>
+<p>应该修改为如下函数</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -452,60 +338,28 @@ fn uninlined_my_function() {
 <p><a href="https://github.com/rust-lang/rust/pull/53513/commits/b73843f9422fb487b2d26ac2d65f79f73a4c9ae3"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64420/commits/a2261ad66400c3145f96ebff0d9b75e910fa89dd"><strong>Example 2</strong></a>.</p>
 <h1><a class="header" href="#hashing" id="hashing">Hashing</a></h1>
-<p><code>HashSet</code> and <code>HashMap</code> are two widely-used types. The default hashing
-algorithm is not specified, but at the time of writing the default is an
-algorithm called <a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a>. This algorithm is high quality—it provides high
-protection against collisions—but is relatively slow, particular for short keys
-such as integers.</p>
-<p>If profiling shows that hashing is hot, and <a href="https://en.wikipedia.org/wiki/Collision_attack">HashDoS attacks</a> are not a concern
-for your application, the use of hash tables with faster hash algorithms can
-provide large speed wins.</p>
+<p><code>HashSet</code>和<code>HashMap</code>是两种广泛使用的类型。默认的散列算法没有指定，但在编写本文时，默认的是一种叫做<a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a>的算法。这种算法质量很高--它提供了很高的防碰撞保护--但速度相对较慢，特别是对于短键，如整数。</p>
+<p>如果测试显示hash是关键部分，而<a href="https://en.wikipedia.org/wiki/Collision_attack">HashDoS attacks</a>并不是你的应用所关心的问题，那么使用具有更快的散列算法的散列表可以提供很大的速度优势。</p>
 <ul>
-<li><a href="https://crates.io/crates/fxhash"><code>fxhash</code></a> provides <code>FxHashSet</code> and <code>FxHashMap</code> types that are drop-in
-replacements for <code>HashSet</code> and <code>HashMap</code>. Its hashing algorithm is
-low-quality but very fast, especially for integer keys, and has been found to
-out-perform all other hash algorithms within rustc.</li>
-<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a> provides <code>FnvHashSet</code> and <code>FnvHashMap</code> types. Its hashing algorithm
-is higher quality than <code>fxhash</code>‘s but a little slower.</li>
-<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a> provides <code>AHashSet</code> and <code>AHashMap</code>. Its hashing algorithm can take
-advantage of AES instruction support that is available on some processors.</li>
+<li><a href="https://crates.io/crates/fxhash"><code>fxhash</code></a>提供了 “FxHashSet “和 “FxHashMap “类型，它们是 “HashSet “和 “HashMap “的替代物。它的散列算法质量不高，但速度非常快，特别是对整数键而言，并且发现它的性能优于rustc内的所有其他散列算法。</li>
+<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a>提供了<code>FnvHashSet</code>和<code>FnvHashMap</code>类型。其散列算法比<code>fxhash</code>的质量高，但速度稍慢。</li>
+<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a>提供<code>AHashSet</code>和<code>AHashMap</code>。它的哈希算法可以采取一些处理器上的AES指令支持的优势。</li>
 </ul>
-<p>If hashing performance is important in your program, it is worth trying more
-than one of these alternatives. For example, the following results were seen in
-rustc.</p>
+<p>如果散列性能在你的程序中很重要，那么值得尝试以上几种选择。例如，在rustc中看到以下结果。</p>
 <ul>
-<li>The switch from <code>fnv</code> to <code>fxhash</code> gave <a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">speedups of up to 6%</a>.</li>
-<li>An attempt to switch from <code>fxhash</code> to <code>ahash</code> resulted in <a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">slowdowns of
-1-4%</a>.</li>
-<li>An attempt to switch from <code>fxhash</code> back to the default hasher resulted in
-<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">slowdowns ranging from 4-84%</a>!</li>
+<li>从 “fnv “切换到 “fxhash “的结果是<a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">速度提高了6%</a>。</li>
+<li>试图从<code>fxhash</code>切换到<code>ahash</code>的结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">减速1-4%</a>。</li>
+<li>试图从<code>fxhash</code>切换回默认的哈希，结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">速度减慢了4-84%</a>!</li>
 </ul>
-<p>If you decide to universally use one of the alternatives, such as
-<code>FxHashSet</code>/<code>FxHashMap</code>, it is easy to accidentally use <code>HashSet</code>/<code>HashMap</code> in
-some places. The presence of <code>SipHasher13</code> code in profiles is a tell-tale
-indicator of this.</p>
-<p>Hash function design is a complex topic and is beyond the scope of this book.
-The <a href="https://github.com/tkaitchuck/aHash/blob/master/compare/readme.md"><code>ahash</code> documentation</a> has a good discussion. </p>
-<h1><a class="header" href="#heap-allocations" id="heap-allocations">Heap Allocations</a></h1>
-<p>Heap allocations are moderately expensive. The exact details depend on
-allocator is in use, but each allocation (and deallocation) typically involves
-acquiring a global lock, doing some non-trivial data structure manipulation,
-and possibly executing a system call. Small allocations are not necessarily
-cheaper than large allocations. It is worth understanding which Rust data
-structures and operations cause allocations, because avoiding them can greatly
-improve performance.</p>
-<p>The <a href="https://docs.google.com/presentation/d/1q-c7UAyrUlM-eZyTo1pd8SZ0qwA_wYxmPZVOQkoDmH4/">Rust Container Cheat Sheet</a> has visualizations of common Rust types, and
-is an excellent companion to the following sections.</p>
+<p>如果你决定普遍使用<code>FxHashSet</code>/<code>FxHashMap</code>等备选方案之一，很容易在某些地方意外使用<code>HashSet</code>/<code>HashMap</code>。在配置文件中出现<code>SipHasher13</code>代码就是一个很明显的指标。</p>
+<p>散列函数的设计是一个复杂的话题，不在本书的讨论范围之内，[<code>ahash</code>文档]有很好的讨论。</p>
+<h1><a class="header" href="#堆分配" id="堆分配">堆分配</a></h1>
+<p>堆分配的代价不高。具体细节取决于使用的分配器，但每次分配和deallocation通常都需要获取一个全局锁，做一些非平凡的数据结构操作。并可能执行一个系统调用。小分配不一定比大分配便宜。值得了解哪些Rust数据结构和操作会导致分配，因为避免它们可以大大提高性能。</p>
+<p><a href="https://docs.google.com/presentation/d/1q-c7UAyrUlM-eZyTo1pd8SZ0qwA_wYxmPZVOQkoDmH4/">Rust Container Cheat Sheet</a>有常见的Rust类型的可视化，是下面章节的绝佳配套。</p>
 <h2><a class="header" href="#profiling-1" id="profiling-1">Profiling</a></h2>
-<p>If a general-purpose profiler shows <code>malloc</code>, <code>free</code>, and related functions as
-hot, then it is likely worth trying to reduce the allocation rate and/or using
-an alternative allocator.</p>
-<p><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a> is an excellent profiler to use when reducing allocation rates. It
-precisely identifies hot allocation sites and their allocation rates. Exact
-results will vary, but experience with rustc has shown that reducing allocation
-rates by 10 allocations per million instructions executed can have measurable
-performance improvements (e.g. ~1%).</p>
-<p>Here is some example output from DHAT.</p>
+<p>如果通用profile解析器显示 “malloc”、”free”和相关函数为热函数，那么很可能值得尝试降低分配率或使用其他分配器。</p>
+<p><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a>是降低分配率时可以使用的一个优秀的剖析器。它能精确地识别热分配点及其分配率。确切的结果会有所不同，但使用rustc的经验表明，每执行一百万条指令减少10条分配率可以有可衡量的性能改进（例如~1%）。</p>
+<p>下面是DHAT的一些输出示例。</p>
 <pre><code class="language-text">AP 1.1/25 (2 children) {
   Total:     54,533,440 bytes (4.02%, 2,714.28/Minstr) in 458,839 blocks (7.72%, 22.84/Minstr), avg size 118.85 bytes, avg lifetime 1,127,259,403.64 instrs (5.61% of program duration)
   At t-gmax: 0 bytes (0%) in 0 blocks (0%), avg size 0 bytes
@@ -524,138 +378,57 @@ performance improvements (e.g. ~1%).</p>
   }
 }
 </code></pre>
-<p>It is beyond the scope of this book to describe everything in this example, but
-it should be clear that DHAT gives a wealth of information about allocations,
-such as where and how often they happen, how big they are, how long they live
-for, and how often they are accessed.</p>
+<p>在这个例子中，描述所有的内容已经超出了本书的范围，但应该清楚的是，DHAT给出了大量关于分配的信息，比如它们发生的地点和频率，它们的规模有多大，它们的寿命有多长，以及它们被访问的频率。</p>
 <h2><a class="header" href="#box" id="box"><code>Box</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/boxed/struct.Box.html"><code>Box</code></a> is the simplest heap-allocated type. A <code>Box&lt;T&gt;</code> value is a <code>T</code> value
-that is allocated on the heap. </p>
-<p>It is sometimes worth boxing one or more fields in a struct or enum fields to
-make a type smaller. (See the the <a href="type-sizes.html">Type Sizes</a> chapter for more
-about this.)</p>
-<p>Other than that, <code>Box</code> is straightforward and does not offer much scope for
-optimizations.</p>
+<p><a href="https://doc.rust-lang.org/std/boxed/struct.Box.html"><code>Box</code></a>是最简单的堆分配类型。<code>Box&lt;T&gt;</code>值是一个在堆上分配的<code>T</code>值。</p>
+<p>有时值得将结构体或枚举字段中的一个或多个字段装箱，以使类型更小。(更多信息请参见 <a href="type-sizes.html">Type Sizes</a> 一章)。</p>
+<p>除此之外，<code>Box</code>是直接的，并没有提供太多优化的空间。</p>
 <h2><a class="header" href="#rcarc" id="rcarc"><code>Rc</code>/<code>Arc</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html"><code>Rc</code></a>/<a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc</code></a> are similar to <code>Box</code>, but the value on the heap is accompanied by
-two reference counts. They allow value sharing, which can be an effective way
-to reduce memory usage.</p>
-<p>However, if used for values that are rarely shared, they can increase allocation
-rates by heap allocating values that might otherwise not be heap-allocated.
+<p>[<code>Rc</code>]/[<code>Arc</code>]类似于<code>Box</code>，但堆上的值有两个引用计数。它们允许值共享，这可以是减少内存使用的有效方法。</p>
+<p>[<code>Rc</code>]：https://doc.rust-lang.org/std/rc/struct.Rc.html
+[Arc]：https://doc.rust-lang.org/std/sync/struct.Arc.html</p>
+<p>但是，如果用于很少共享的值，它们可以通过堆分配本来可能不会被堆分配的值来提高分配率。
 <a href="https://github.com/rust-lang/rust/pull/37373/commits/c440a7ae654fb641e68a9ee53b03bf3f7133c2fe"><strong>Example</strong></a>.</p>
-<p>Unlike <code>Box</code>, calling <code>clone</code> on an <code>Rc</code>/<code>Arc</code> value does not involve an
-allocation. Instead, it merely increments a reference count.</p>
+<p>与<code>Box</code>不同的是，在<code>Rc</code>/<code>Arc</code>值上调用<code>clone</code>并不涉及分配。相反，它只是增加一个引用计数。</p>
 <h2><a class="header" href="#vec" id="vec"><code>Vec</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a> is a heap-allocated type with a great deal of scope for optimizing the
-number of allocations, and/or minimizing the amount of wasted space. To do this
-requires understanding how its elements are stored.</p>
-<p>A <code>Vec</code> contains three words: a length, a capacity, and a pointer. The pointer
-will point to heap-allocated memory if the capacity is nonzero and the element
-size is nonzero; otherwise, it will not point to allocated memory.</p>
-<p>Even if the <code>Vec</code> itself is not heap-allocated, the elements (if present and
-nonzero-sized) always will be. If nonzero-sized elements are present, the
-memory holding those elements may be larger than necessary, providing space for
-additional future elements. The number of elements present is the length, and
-the number of elements that could be held without reallocating is the capacity.</p>
-<p>When the vector needs to grow beyond its current capacity, the elements will be
-copied into a larger heap allocation, and the old heap allocation will be
-freed.</p>
+<p>[<code>Vec</code>]是一种堆分配类型，在优化分配数量和/或尽量减少浪费的空间方面有很大的空间。要做到这一点，需要了解其元素的存储方式。</p>
+<p>[<code>Vec</code>]：https://doc.rust-lang.org/std/vec/struct.Vec.html</p>
+<p>一个 “Vec “包含三个词：一个长度、一个容量和一个指针。如果容量是非零，元素大小是非零，指针将指向堆分配的内存；否则，它将不指向分配的内存。</p>
+<p>即使 “Vec “本身不是堆分配的，元素（如果存在且大小非零）也会是堆分配的。如果存在非零大小的元素，那么存放这些元素的内存可能会比必要的大，为未来的元素提供空间。存在的元素数就是长度，不需要重新分配就可以容纳的元素数就是容量。</p>
+<p>当向量需要增长到超过其当前容量时，元素将被复制到一个更大的堆分配中，旧的堆分配将被释放。</p>
 <h3><a class="header" href="#vec-growth" id="vec-growth"><code>Vec</code> growth</a></h3>
-<p>A new, empty <code>Vec</code> created by the common means
-(<a href="https://doc.rust-lang.org/std/macro.vec.html"><code>vec![]</code></a>
-or <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.new"><code>Vec::new</code></a> or <a href="https://doc.rust-lang.org/std/default/trait.Default.html#tymethod.default"><code>Vec::default</code></a>) has a length and capacity of zero, and no
-heap allocation is required. If you repeatedly push individual elements onto
-the end of the <code>Vec</code>, it will periodically reallocate. The growth strategy is
-not specified, but at the time of writing it uses a quasi-doubling stategy
-resulting in the following capacities: 0, 4, 8, 16, 32, 64, and so on. (It
-skips directly from 0 to 4, instead of going via 1 and 2, because this <a href="https://github.com/rust-lang/rust/pull/72227">avoids
-many allocations</a> in practice.) As a vector grows, the frequency of
-reallocations will decrease exponentially, but the amount of possibly-wasted
-excess capacity will increase exponentially.</p>
-<p>This growth strategy is typical for growable data structures and reasonable in
-the general case, but if you know in advance the likely length of a vector you
-can do often do better. If you have a hot vector allocation site (e.g. a hot
-<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.push"><code>Vec::push</code></a> call), it is worth using <a href="https://doc.rust-lang.org/std/macro.eprintln.html"><code>eprintln!</code></a> to print the vector length
-at that site and then doing some post-processing (e.g. with <a href="https://github.com/nnethercote/counts/"><code>counts</code></a>) to
-determine the length distribution. For example, you might have many short
-vectors, or you might have a smaller number of very long vectors, and the best
-way to optimize the allocation site will vary accordingly.</p>
+<p>用普通方法创建一个新的、空的<code>Vec</code>。
+(<a href="https://doc.rust-lang.org/std/macro.vec.html"><code>vec![]</code></a> 或 <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.new"><code>Vec::new</code></a> 或 <a href="https://doc.rust-lang.org/std/default/trait.Default.html#tymethod.default"><code>Vec::default</code></a>）的长度和容量为零，不需要进行堆分配。如果你反复将单个元素推到<code>Vec</code>的末端，它将周期性地重新分配。增长策略没有被指定，但在写这篇文章的时候，它使用了一个准双倍策略，结果是以下容量。0, 4, 8, 16, 32, 64, 等等. (它直接从0跳到4，而不是通过1和2，因为这在实践中<a href="https://github.com/rust-lang/rust/pull/72227">避免了许多分配</a>。) 随着向量的增长，重新分配的频率将以指数形式减少，但可能浪费的多余容量将以指数形式增加。</p>
+<p>这种增长策略对于可增长的数据结构来说是典型的，在一般情况下是合理的，但如果你事先知道一个向量的可能长度，你可以做的往往更好。如果你有一个热向量分配站点（例如一个热的 <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.push"><code>Vec::push</code></a>调用），值得使用<a href="https://doc.rust-lang.org/std/macro.eprintln.html"><code>eprintln!</code></a>来打印该站点的向量长度，然后做一些后处理（例如使用<a href="https://github.com/nnethercote/counts/"><code>counts</code></a>）来确定长度分布。例如，你可能有很多短向量，也可能有较少的超长向量，优化分配站点的最佳方式也会相应变化。</p>
 <h3><a class="header" href="#short-vecs" id="short-vecs">Short <code>Vec</code>s</a></h3>
-<p>If you have many short vectors, you can use the <code>SmallVec</code> type from the
-<a href="https://crates.io/crates/smallvec"><code>smallvec</code></a> crate. <code>SmallVec&lt;[T; N]&gt;</code> is a drop-in replacement for <code>Vec</code> that
-can store <code>N</code> elements within the <code>SmallVec</code> itself, and then switches to a
-heap allocation if the number of elements exceeds that. (Note also that
-<code>vec![]</code> literals must be replaced with <code>smallvec![]</code> literals.)
+<p>如果你有很多短向量，你可以使用<a href="https://crates.io/crates/smallvec"><code>smallvec</code></a>crate中的<code>SmallVec</code>类型。<code>SmallVec&lt;[T;N]&gt;</code>是<code>Vec</code>的替代物，它可以在<code>SmallVec</code>本身中存储<code>N</code>个元素，如果元素数量超过这个数量，就会切换到堆分配。(还需要注意的是，<code>vec![]</code>字元必须用<code>smallvec![]</code>字元代替。)
 <a href="https://github.com/rust-lang/rust/pull/50565/commits/78262e700dc6a7b57e376742f344e80115d2d3f2"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/55383/commits/526dc1421b48e3ee8357d58d997e7a0f4bb26915"><strong>Example 2</strong></a>.</p>
-<p><code>SmallVec</code> reliably reduces the allocation rate when used appropriately, but
-its use does not guarantee improved performance. It is slightly slower than
-<code>Vec</code> for normal operations because it must always check if the elements are
-heap-allocated or not. Also, If <code>N</code> is high or <code>T</code> is large, then the
-<code>SmallVec&lt;[T; N]&gt;</code> itself can be larger than <code>Vec&lt;T&gt;</code>, and copying of
-<code>SmallVec</code> values will be slower. As always, benchmarking is required to
-confirm that an optimization is effective.</p>
-<p>If you have many short vectors <em>and</em> you precisely know their maximum length,
-<code>ArrayVec</code> from the <a href="https://crates.io/crates/arrayvec"><code>arrayvec</code></a> crate is a better choice than <code>SmallVec</code>. It
-does not require the fallback to heap allocation, which makes it a little
-faster.
+<p><code>SmallVec</code>如果使用得当，可以可靠地降低分配率，但使用它并不能保证提高性能。对于正常的操作，它比<code>Vec</code>稍慢，因为它必须总是检查元素是否被堆分配。另外，如果<code>N</code>很高或者<code>T</code>很大，那么<code>SmallVec&lt;[T; N]&gt;</code>本身就会比<code>Vec&lt;T&gt;</code>大，复制<code>SmallVec</code>值的速度会比较慢。和以往一样，需要通过基准测试来确认优化是否有效。</p>
+<p>如果你有很多短向量，并且你精确地知道它们的最大长度，[arrayvec]箱子中的ArrayVec比SmallVec更好。它不需要回落到堆分配，这使得它更快一些。
 <a href="https://github.com/rust-lang/rust/pull/74310/commits/c492ca40a288d8a85353ba112c4d38fe87ef453e"><strong>Example</strong></a>.</p>
 <h3><a class="header" href="#longer-vecs" id="longer-vecs">Longer <code>Vec</code>s</a></h3>
-<p>If you know the minimum or exact size of a vector, you can reserve a specific
-capacity with <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity"><code>Vec::with_capacity</code></a>, <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve"><code>Vec::reserve</code></a>, or
-<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve_exact"><code>Vec::reserve_exact</code></a>. For example, if you know a vector will grow to have at
-least 20 elements, these functions can immediately provide a vector with a
-capacity of at least 20 using a single allocation, whereas pushing the items
-one at a time would result in four allocations (for capacities of 4, 8, 16, and
-32).
+<p>如果你知道一个向量的最小或精确大小，你可以用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity"><code>Vec::with_capacity</code></a>、<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve"><code>Vec::reserve</code></a>或<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve_exact"><code>Vec::reserve_exact</code></a>来保留一个特定的容量。例如，如果你知道一个向量将成长为至少有20个元素，这些函数可以使用一次分配立即提供一个至少有20个容量的向量，而一次推送一个项目将导致四次分配（对于4、8、16和32的容量）。
 <a href="https://github.com/rust-lang/rust/pull/77990/commits/a7f2bb634308a5f05f2af716482b67ba43701681"><strong>Example</strong></a>.</p>
-<p>If you know the maximum length of a vector, the above functions also let you
-not allocate excess space unnecessary. Similarly, <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.shrink_to_fit"><code>Vec::shrink_to_fit</code></a> can be
-used to minimize wasted space, but note that it may cause a reallocation.</p>
+<p>如果你知道一个向量的最大长度，上述函数也可以让你不分配多余的不必要的空间。同样，<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.shrink_to_fit"><code>Vec::shrink_to_fit</code></a>也可以用来尽量减少浪费的空间，但要注意它可能会引起重新分配。</p>
 <h2><a class="header" href="#string" id="string"><code>String</code></a></h2>
-<p>A <a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a> contains heap-allocated bytes. The representation and operation of
-<code>String</code> is very similar to a <code>Vec&lt;u8&gt;</code>. Many <code>Vec</code> methods relating to growth
-and capacity have equivalents for <code>String</code>, such as
-<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.with_capacity"><code>String::with_capacity</code></a>.</p>
-<p>The <code>SmallString</code> type from the <a href="https://crates.io/crates/smallstr"><code>smallstr</code></a> crate is similar to the <code>SmallVec</code>
-type.</p>
-<p>Note that the <code>format!</code> macro produces a <code>String</code>, which means it performs an
-allocation. If you can avoid a <code>format!</code> call by using a string literal, that
-will avoid this allocation.
+<p>一个<a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a>包含堆分配的字节。<code>String</code>的表示和操作与<code>Vec&lt;u8&gt;</code>非常相似。许多与增长和容量有关的<code>Vec</code>方法与<code>String</code>有对应关系，如<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.with_capacity"><code>String::with_capacity</code></a>。</p>
+<p>来自<a href="https://crates.io/crates/smallstr"><code>smallstr</code></a>箱子的<code>SmallString</code>类型与<code>SmallVec</code>类型类似。</p>
+<p>请注意，<code>format!</code>宏产生一个<code>String</code>，这意味着它进行了分配。如果你能通过使用字符串文字来避免<code>format!</code>的调用，就能避免这种分配。
 <a href="https://github.com/rust-lang/rust/pull/55905/commits/c6862992d947331cd6556f765f6efbde0a709cf9"><strong>Example</strong></a>.</p>
 <h2><a class="header" href="#hash-tables" id="hash-tables">Hash tables</a></h2>
-<p><a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html"><code>HashSet</code></a> and <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap</code></a> are hash tables. Their representation and
-operations are similar to those of <code>Vec</code>, in terms of allocations: they have
-a single contiguous heap allocation, holding keys and values, which is
-reallocated as necessary as the table grows. Many <code>Vec</code> methods relating to
-growth and capacity have equivalents for <code>HashSet</code>/<code>HashMap</code>, such as
-<a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.with_capacity"><code>HashSet::with_capacity</code></a>.</p>
+<p><a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html"><code>HashSet</code></a>和<a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap</code></a>是哈希表。在分配方面，它们的表示和操作与<code>Vec</code>的表示和操作相似：它们有一个单一的连续的堆分配，存放键和值，随着表的增长，必要时重新分配。许多与增长和容量有关的<code>Vec</code>方法都有与<code>HashSet</code>/<code>HashMap</code>对应的方法，如<a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.with_capacity"><code>HashSet::with_capacity</code></a>。</p>
 <h2><a class="header" href="#cow" id="cow"><code>Cow</code></a></h2>
-<p>Sometimes you have some borrowed data, such as a <code>&amp;str</code>, that is mostly
-read-only but occasionally needs to be modified. Cloning the data every time
-would be wasteful. Instead you can use “clone-on-write” semantics via the
-<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html"><code>Cow</code></a> type, which can represent both borrowed and owned data.</p>
-<p>Typically, when starting with a borrowed value <code>x</code> you wrap it in a <code>Cow</code> with
-<code>Cow::Borrowed(x)</code>. Because <code>Cow</code> implements <a href="https://doc.rust-lang.org/std/ops/trait.Deref.html"><code>Deref</code></a>, you can call
-non-mutating methods directly on the data it encloses. If mutation is desired,
-<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html#method.to_mut"><code>Cow::to_mut</code></a> will obtain a mutable reference to an owned value, cloning if
-necessary.</p>
-<p><code>Cow</code> can be fiddly to get working, but it is often worth the effort.
+<p>有时候你有一些借来的数据，比如<code>&amp;str</code>，大部分是只读的，但偶尔需要修改。每次都克隆数据会很浪费。相反，你可以通过<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html"><code>Cow</code></a>类型使用 “write-on-clone “语义，它既可以表示借来的数据，也可以表示拥有的数据。</p>
+<p>通常情况下，当从一个借来的值<code>x</code>开始时，你用<code>Cow::Borrowed(x)</code>把它包在一个<code>Cow</code>中。因为<code>Cow</code>实现了<a href="https://doc.rust-lang.org/std/ops/trait.Deref.html"><code>Deref</code></a>，所以你可以直接在它所包含的数据上调用非修改的方法。如果需要修改，<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html#method.to_mut"><code>Cow::to_mut</code></a>将获得一个对所拥有的值的可修改引用，必要时进行克隆。</p>
+<p><code>Cow</code>的工作可能会很麻烦，但它往往是值得的。
 <a href="https://github.com/rust-lang/rust/pull/37064/commits/b043e11de2eb2c60f7bfec5e15960f537b229e20"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50855/commits/ad471452ba6fbbf91ad566dc4bdf1033a7281811"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/56336/commits/787959c20d062d396b97a5566e0a766d963af022"><strong>Example 3</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/68848/commits/67da45f5084f98eeb20cc6022d68788510dc832a"><strong>Example 4</strong></a>.</p>
 <h2><a class="header" href="#clone" id="clone"><code>clone</code></a></h2>
-<p>Calling <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>clone</code></a> on a value that contains heap-allocated memory typically
-involves additional allocations. For example, calling <code>clone</code> on a non-empty
-<code>Vec</code> requires a new allocation for the elements (but note that the capacity of
-the new <code>Vec</code> might not be the same as the capacity of the original <code>Vec</code>). The
-exception is <code>Rc</code>/<code>Arc</code>, where a <code>clone</code> call just increments the reference
-count.</p>
-<p><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#method.clone_from"><code>clone_from</code></a> is an alternative to <code>clone</code>. <code>a.clone_from(&amp;b)</code> is equivalent
-to <code>a = b.clone()</code> but may avoid unnecessary allocations. For example, if you
-want to clone one <code>Vec</code> over the top of an existing <code>Vec</code>, the existing <code>Vec</code>‘s
-heap allocation will be reused if possible, as the following example shows.</p>
+<p>在一个包含堆分配内存的值上调用[clone]通常会涉及额外的分配。例如，在一个非空的<code>Vec</code>上调用<code>clone</code>，需要对元素进行新的分配（但请注意，新<code>Vec</code>的容量可能与原<code>Vec</code>的容量不同）。例外的情况是<code>Rc</code>/<code>Arc</code>，<code>clone</code>的调用只是增加引用数。</p>
+<p><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#method.clone_from"><code>clone_from</code></a>是<code>clone</code>的替代方法。<code>a.clone_from(&amp;b)</code>相当于<code>a = b.clone()</code>，但可以避免不必要的分配。例如，如果你想在一个现有的<code>Vec</code>之上克隆一个<code>Vec</code>，现有<code>Vec</code>的堆分配将尽可能地被重复使用，如下例所示。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -665,31 +438,18 @@ v1.clone_from(&amp;v2); // v1's allocation is reused
 assert_eq!(v1.capacity(), 99);
 <span class="boring">}
 </span></code></pre></pre>
-<p>Although <code>clone</code> usually causes allocations, it is a reasonable thing to use in
-many circumstances and can often make code simpler. Use profiling data to see
-which <code>clone</code> calls are hot and worth taking the effort to avoid.</p>
-<p>Sometimes Rust code ends up containing unnecessary <code>clone</code> calls, due to (a)
-programmer error, or (b) changes in the code that render previously-necessary
-<code>clone</code> calls unnecessary. If you see a hot <code>clone</code> call that does not seem
-necessary, sometimes it can simply be removed.
+<p>虽然<code>clone</code>通常会造成分配，但在很多情况下使用它是一件很合理的事情，往往可以使代码更简单。使用剖析数据来查看哪些<code>clone</code>调用是热门的，值得花力气去避免。</p>
+<p>有时，由于(a)程序员的错误，或(b)代码中的变化，使以前必要的<code>clone</code>调用变得不必要，Rust代码最终会包含不必要的<code>clone</code>调用。如果你看到一个似乎没有必要的热<code>clone</code>调用，有时可以简单地删除它。
 <a href="https://github.com/rust-lang/rust/pull/37318/commits/e382267cfb9133ef12d59b66a2935ee45b546a61"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/37705/commits/11c1126688bab32f76dbe1a973906c7586da143f"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64302/commits/36b37e22de92b584b9cf4464ed1d4ad317b798be"><strong>Example 3</strong></a>.</p>
 <h2><a class="header" href="#to_owned" id="to_owned"><code>to_owned</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/borrow/trait.ToOwned.html#tymethod.to_owned"><code>ToOwned::to_owned</code></a> is implemented for many common types. It creates owned
-data from borrowed data, usually by cloning, and therefore often causes heap
-allocations. For example, it can be used to create a <code>String</code> from a <code>&amp;str</code>.</p>
-<p>Sometimes <code>to_owned</code> calls can be avoided by storing a reference to borrowed
-data in a struct rather than an owned copy. This requires lifetime annotations
-on the struct, complicating the code, and should only be done when profiling
-and benchmarking shows that it is worthwhile.
+<p><code>ToOwned::to_owned</code>]是为许多常见类型实现的。它从借来的数据中创建拥有的数据，通常是通过克隆的方式，因此经常会引起堆分配。例如，它可以用来从一个<code>&amp;str</code>创建一个<code>String</code>。</p>
+<p>有时，可以通过在结构中存储对借入数据的引用而不是自有副本来避免<code>to_owned</code>调用。这需要在结构体上做终身注解，使代码复杂化，只有在分析和基准测试表明值得时才可以这样做。
 <a href="https://github.com/rust-lang/rust/pull/50855/commits/6872377357dbbf373cfd2aae352cb74cfcc66f34"><strong>Example</strong></a>.</p>
 <h2><a class="header" href="#reusing-collections" id="reusing-collections">Reusing Collections</a></h2>
-<p>Sometimes you need to build up a collection such as a <code>Vec</code> in stages. It is
-usually better to do this by modifying a single <code>Vec</code> than by building multiple
-<code>Vec</code>s and then combining them.</p>
-<p>For example, if you have a function <code>do_stuff</code> that produces a <code>Vec</code> that might
-be called multiple times:</p>
+<p>有时你需要分阶段建立一个集合，如<code>Vec</code>。通常情况下，通过修改一个<code>Vec</code>比建立多个<code>Vec</code>然后将它们组合起来更好。</p>
+<p>例如，如果你有一个函数 “do_stuff”，产生一个 “Vec”，可能会被多次调用。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -708,56 +468,33 @@ be called multiple times:</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Sometimes it is worth keeping around a “workhorse” collection that can be
-reused. For example, if a <code>Vec</code> is needed for each iteration of a loop, you
-could declare the <code>Vec</code> outside the loop, use it within the loop body, and then
-call <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.clear"><code>clear</code></a> at the end of the loop body (to empty the <code>Vec</code> without affecting
-its capacity). This avoids allocations at the cost of obscuring the fact that
-each iteration’s usage of the <code>Vec</code> is unrelated to the others.
+<p>有时，值得保留一个可以重复使用的 “主力”集合。例如，如果一个循环的每次迭代都需要一个<code>Vec</code>，你可以在循环外声明<code>Vec</code>，在循环体中使用它，然后在循环体结束时调用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.clear"><code>clear</code></a>（清空<code>Vec</code>而不影响它的容量）。这避免了分配，但代价是掩盖了一个事实，即每次迭代对<code>Vec</code>的使用与其他迭代无关。
 <a href="https://github.com/rust-lang/rust/pull/77990/commits/45faeb43aecdc98c9e3f2b24edf2ecc71f39d323"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/51870/commits/b0c78120e3ecae5f4043781f7a3f79e2277293e7"><strong>Example 2</strong></a>.</p>
-<p>Similarly, it is sometimes worth keeping a “workhorse” collection within a
-struct, to be reused in one or more methods that are called repeatedly.</p>
-<h2><a class="header" href="#using-an-alternative-allocator" id="using-an-alternative-allocator">Using an Alternative Allocator</a></h2>
-<p>Another option for improving the performance of allocation-heavy Rust programs
-is to replace the default (system) allocator with an alternative allocator. The
-exact effect will depend on the individual program and the alternative
-allocator chosen. It will also vary across platforms, because each platform’s
-system allocator has its own strengths and weaknesses. The use of an
-alternative allocator can also affect binary size.</p>
-<p>One popular alternative allocator is <a href="https://github.com/jemalloc/jemalloc">jemalloc</a>, usable via the
-<a href="https://crates.io/crates/jemallocator"><code>jemallocator</code></a> crate. To use it, add a dependency to your <code>Cargo.toml</code> file:</p>
+<p>同样，有时值得在一个结构中保留一个 “主力 “集合，以便在一个或多个被重复调用的方法中重用。</p>
+<h2><a class="header" href="#使用其他分配器" id="使用其他分配器">使用其他分配器</a></h2>
+<p>另一个提高分配量大的Rust程序性能的选择是用一个替代分配器代替默认的（系统）分配器。确切的效果将取决于单个程序和选择的替代分配器。在不同的平台上，它也会有所不同，因为每个平台的系统分配器都有自己的优势和弱点。使用替代分配器也会影响二进制大小。</p>
+<p>一个流行的替代分配器是<a href="https://github.com/jemalloc/jemalloc">jemalloc</a>，可通过 <a href="https://crates.io/crates/jemallocator"><code>jemallocator</code></a>箱子。要使用它，请在你的<code>Cargo.toml</code>文件中添加一个依赖关系。</p>
 <pre><code class="language-toml">[dependencies]
 jemallocator = &quot;0.3.2&quot;
 </code></pre>
-<p>Then add the following somewhere in your Rust code:</p>
+<p>然后在你的Rust代码中添加以下内容。</p>
 <pre><code class="language-rust ignore">#[global_allocator]
 static GLOBAL: jemallocator::Jemalloc = jemallocator::Jemalloc;
 </code></pre>
-<p>Another alternative allocator is <a href="https://github.com/microsoft/mimalloc">mimalloc</a>, usable via the <a href="https://docs.rs/mimalloc/0.1.22/mimalloc/"><code>mimalloc</code></a> crate.</p>
+<p>另一个可供选择的分配器是<a href="https://github.com/microsoft/mimalloc">mimalloc</a>，可通过<a href="https://docs.rs/mimalloc/0.1.22/mimalloc/"><code>mimalloc</code></a>板房使用。</p>
 <h1><a class="header" href="#type-sizes" id="type-sizes">Type Sizes</a></h1>
-<p>Shrinking oft-instantiated types can reduce peak memory usage, and also
-improve performance by reducing memory traffic and cache pressure. (In
-particular, note that types that are larger than 128 bytes are copied with
-<code>memcpy</code> rather than inline code.)</p>
-<p>The Rust compiler automatically sorts the fields in struct and enums to
-minimize their sizes (unless the <code>#[repr(C)]</code> attribute is specified), so you
-do not have to worry about field ordering. But there are still other ways to
-minimize the size of hot types.</p>
+<p>缩小常实例类型可以减少峰值内存使用量，还可以通过减少内存流量和缓存压力来提高性能。(特别要注意的是，大于128字节的类型会用 <code>memcpy</code>而不是内联代码)</p>
+<p>Rust编译器会自动对struct和enums中的字段进行排序，以最小化它们的大小（除非指定了<code>#[repr(C)]</code>属性），所以你不必担心字段的排序。但是仍然有其他方法可以使热类型的大小最小化。</p>
 <h2><a class="header" href="#measuring-type-sizes" id="measuring-type-sizes">Measuring Type Sizes</a></h2>
-<p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html"><code>std::mem::size_of</code></a> gives the size of a type, in bytes, but often you want to
-know the exact layout as well. For example, an enum might be surprisingly big,
-which might be caused by one outsized variant.</p>
-<p>The <code>-Zprint-type-sizes</code> option does exactly this. It isn’t enabled on release
-versions of rustc, so you’ll need to use a nightly version of rustc. Here is
-one possible invocation via Cargo:</p>
+<p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html"><code>std::mem::size_of</code></a>给出了一个类型的大小，以字节为单位，但通常你也想知道确切的布局。例如，一个枚举可能会出乎意料的大，这可能是由一个超大的变体造成的。</p>
+<p>`-Zprint-type-sizes’选项正是这样做的，它在rustc的发行版上没有被启用，所以你需要使用rustc的夜间版本。 下面是一个通过Cargo的可能调用</p>
 <pre><code class="language-text">RUSTFLAGS=-Zprint-type-sizes cargo +nightly build --release
 </code></pre>
-<p>And here is a possible invocation of rustc:</p>
+<p>而这里是一个rustc的可能调用</p>
 <pre><code class="language-text">rustc +nightly -Zprint-type-sizes input.rs
 </code></pre>
-<p>It will print out details of the size, layout, and alignment of all types in
-use. For example, for this type:</p>
+<p>它将打印出所有使用中的类型的尺寸、布局和对齐方式的详细信息。例如，对于这种类型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -769,7 +506,7 @@ use. For example, for this type:</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>it prints the following, plus information about a few built-in types.</p>
+<p>它打印以下信息，以及一些内置类型的信息。</p>
 <pre><code class="language-text">print-type-size type: `E`: 32 bytes, alignment: 8 bytes
 print-type-size     discriminant: 1 bytes
 print-type-size     variant `D`: 31 bytes
@@ -786,19 +523,17 @@ print-type-size         padding: 3 bytes
 print-type-size         field `.0`: 4 bytes, alignment: 4 bytes
 print-type-size     variant `A`: 0 bytes
 </code></pre>
-<p>The output shows the following.</p>
+<p>输出显示以下内容。</p>
 <ul>
-<li>The size and alignment of the type.</li>
-<li>For enums, the size of the discriminant.</li>
-<li>For enums, the size of each variant (sorted from largest to smallest).</li>
-<li>The size, alignment, and ordering of all fields. (Note that the compiler has
-reordered variant <code>C</code>‘s fields to minimize the size of <code>E</code>.)</li>
-<li>The size and location of all padding.</li>
+<li>类型的大小和排列。</li>
+<li>对于enums，判别子的大小。</li>
+<li>对于enums，每个变量的大小（从最大到最小排序）。</li>
+<li>所有字段的大小、对齐和排序。(请注意，编译器对变体<code>C</code>的字段进行了重新排序，以最小化<code>E</code>的大小。)</li>
+<li>所有padding的大小和位置。</li>
 </ul>
-<p>Once you know the layout of a hot type, there are multiple ways to shrink it.</p>
+<p>一旦你知道了热型的布局，就有多种方法来收缩它。</p>
 <h2><a class="header" href="#smaller-enums" id="smaller-enums">Smaller Enums</a></h2>
-<p>If an enum has an outsized variant, consider boxing one or more fields. For
-example, you could change this type:</p>
+<p>如果一个枚举有一个超大的变体，可以考虑将一个或多个字段装箱。例如，你可以改变这个类型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -810,7 +545,7 @@ enum A {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>to this:</p>
+<p>修改为：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -822,10 +557,7 @@ enum A {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>This reduces the type size at the cost of requiring an extra heap allocation
-for the <code>A::Z</code> variant. This is more likely to be a net performance win if the
-<code>A::Z</code> variant is relatively rare. The <code>Box</code> will also make <code>A::Z</code> slightly
-less ergonomic to use, especially in <code>match</code> patterns.
+<p>这减少了类型大小，但代价是需要为<code>A::Z</code>变体分配一个额外的堆。如果<code>A::Z</code>变体比较少见，这更有可能成为提高性能的好方法。<code>Box</code>也会使<code>A::Z</code>的使用略微不符合人的直觉，特别是在<code>匹配</code>模式中。
 <a href="https://github.com/rust-lang/rust/pull/37445/commits/a920e355ea837a950b484b5791051337cd371f5d"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/55346/commits/38d9277a77e982e49df07725b62b21c423b6428e"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64302/commits/b972ac818c98373b6d045956b049dc34932c41be"><strong>Example 3</strong></a>,
@@ -833,18 +565,11 @@ less ergonomic to use, especially in <code>match</code> patterns.
 <a href="https://github.com/rust-lang/rust/pull/64394/commits/7f0637da5144c7435e88ea3805021882f077d50c"><strong>Example 5</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/71942/commits/27ae2f0d60d9201133e1f9ec7a04c05c8e55e665"><strong>Example 6</strong></a>.</p>
 <h2><a class="header" href="#smaller-integers" id="smaller-integers">Smaller Integers</a></h2>
-<p>It is often possible to shrink types by using smaller integer types. For
-example, while it is most natural to use <code>usize</code> for indices, it is often
-reasonable to stores indices as <code>u32</code>, <code>u16</code>, or even <code>u8</code>, and then coerce to
-<code>usize</code> at use points.
+<p>通常可以通过使用较小的整数类型来缩小类型。例如，虽然对索引使用 “usize “是最自然的，但将索引存储为 “u32”、”u16”、甚至 “u8”，然后在使用点强制使用 “usize”，往往是合理的。
 <a href="https://github.com/rust-lang/rust/pull/49993/commits/4d34bfd00a57f8a8bdb60ec3f908c5d4256f8a9a"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50981/commits/8d0fad5d3832c6c1f14542ea0be038274e454524"><strong>Example 2</strong></a>.</p>
 <h2><a class="header" href="#boxed-slices" id="boxed-slices">Boxed Slices</a></h2>
-<p>Rust vectors contain three words: a length, a capacity, and a pointer. If you
-have a vector that is unlikely to be changed in the future, you can convert it
-to a <em>boxed slice</em> with <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice"><code>Vec::into_boxed_slice</code></a>. A boxed slice contains only
-two words, a length and a pointer. Any excess element capacity is dropped,
-which may cause a reallocation.</p>
+<p>Rust向量包含三个词：一个长度、一个容量和一个指针。如果你有一个将来不太可能被改变的向量，你可以用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice"><code>Vec::into_boxed_slice</code></a>把它转换为一个<em>boxed slice</em>。一个boxed slice只包含两个词，一个长度和一个指针。任何多余的元素容量都会被丢弃，这可能会导致重新分配。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -856,41 +581,23 @@ let bs: Box&lt;[u32]&gt; = v.into_boxed_slice();
 assert_eq!(size_of_val(&amp;bs), 2 * size_of::&lt;usize&gt;());
 <span class="boring">}
 </span></code></pre></pre>
-<p>The boxed slice can be converted back to a vector with <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec"><code>slice::into_vec</code></a>
-without any cloning or a reallocation.</p>
+<p>盒状切片可以用<a href="https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec"><code>slice::into_vec</code></a>转换回一个矢量，而无需任何克隆或重新分配。</p>
 <h2><a class="header" href="#avoiding-regressions" id="avoiding-regressions">Avoiding Regressions</a></h2>
-<p>If a type is hot enough that its size can affect performance, it is a good idea
-to use a static assertion to ensure that it does not accidentally regress. The
-following example uses a macro from the <a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a> crate.</p>
+<p>如果一个类型足够热，它的大小会影响性能，那么最好使用静态断言来确保它不会意外地回归。下面的例子使用了<a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a>中的一个宏。</p>
 <pre><code class="language-rust ignore">  // This type is used a lot. Make sure it doesn't unintentionally get bigger.
   #[cfg(target_arch = &quot;x86_64&quot;)]
   static_assertions::assert_eq_size!(HotType, [u8; 64]);
 </code></pre>
-<p>The <code>cfg</code> attribute is important, because type sizes can vary on different
-platforms. Restricting the assertion to <code>x86_64</code> (which is typically the most
-widely-used platform) is likely to be good enough to prevent regressions in
-practice.</p>
+<p><code>cfg</code>属性很重要，因为类型大小在不同的平台上会有所不同。将断言限制在 “x86_64”(通常是最广泛使用的平台)可能足以防止实际中的回落。</p>
 <h1><a class="header" href="#standard-library-types" id="standard-library-types">Standard Library Types</a></h1>
-<p>It is worth reading through the documentation for common standard library
-types—such as <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>, <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>, and <a href="https://doc.rust-lang.org/std/rc/struct.Rc.html"><code>Rc</code></a>—to find interesting
-functions that can sometimes be used to improve performance.</p>
-<p>It is also worth knowing about high-performance alternatives to standard
-library types, such as <a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>, <a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code>RwLock</code></a>, <a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html"><code>Condvar</code></a>, and
-<a href="https://doc.rust-lang.org/std/sync/struct.Once.html"><code>Once</code></a>.</p>
+<p>值得阅读常见标准库类型的文档--如<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>和<a href="https://doc.rust-lang.org/std/rc/struct.Rc.html"><code>Rc</code></a>--以找到有趣的函数，有时可以用来提高性能。</p>
+<p>还值得了解标准库类型的高性能替代品，如<a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code>RwLock</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html"><code>Condvar</code></a>和<a href="https://doc.rust-lang.org/std/sync/struct.Once.html"><code>Once</code></a>。</p>
 <h2><a class="header" href="#vec-1" id="vec-1"><code>Vec</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove"><code>Vec::remove</code></a> removes an element at a particular index and shifts all
-subsequent elements one to the left, which makes it O(n). <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove"><code>Vec::swap_remove</code></a>
-replaces an element at a particular index with the final element, which does
-not preserve ordering, but is O(1).</p>
-<p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.retain"><code>Vec::retain</code></a> efficiently removes multiple items from a <code>Vec</code>. There is an
-equivalent method for other collection types such as <code>String</code>, <code>HashSet</code>, and
-<code>HashMap</code>.</p>
+<p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove"><code>Vec::remove</code></a>删除某一特定索引上的一个元素，并将随后的所有元素向左移动一个，这样做是O(n)。<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove"><code>Vec::swap_remove</code></a> 用最后一个元素替换特定索引上的一个元素，虽然不保留排序，但也是O(1)。</p>
+<p><code>Vec::retain</code>] 有效地从一个<code>Vec</code>中删除多个项目。对于其他集合类型，如<code>String</code>、<code>HashSet</code>和<code>HashMap</code>，也有一个等价的方法。</p>
 <h2><a class="header" href="#option-and-result" id="option-and-result"><code>Option</code> and <code>Result</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or"><code>Option::ok_or</code></a> converts an <code>Option</code> into a <code>Result</code>, and is passed an <code>err</code>
-parameter that is used if the <code>Option</code> value is <code>None</code>. <code>err</code> is computed
-eagerly. If its computation is expensive, you should instead use
-<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or_else"><code>Option::ok_or_else</code></a>, which computes the error value lazily via a closure.
-For example, this:</p>
+<p>[<code>Option::ok_or']将</code>Option’转换为<code>Result'，并传递一个</code>err’参数，如果<code>Option'值为</code>None’，则使用该参数。<code>err</code>是急于计算的。如果它的计算很昂贵，你应该使用<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or_else"><code>Option::ok_or_else</code></a>，它通过一个闭包缓慢地计算错误值。
+例如，这个。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -909,44 +616,27 @@ For example, this:</p>
 <span class="boring">}
 </span></code></pre></pre>
 <p><a href="https://github.com/rust-lang/rust/pull/50051/commits/5070dea2366104fb0b5c344ce7f2a5cf8af176b0"><strong>Example</strong></a>.</p>
-<p>There are similar alternatives for <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or"><code>Option::map_or</code></a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.unwrap_or"><code>Option::unwrap_or</code></a>,
-<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.or"><code>Result::or</code></a>, <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or"><code>Result::map_or</code></a>, and <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or"><code>Result::unwrap_or</code></a>.</p>
+<p><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or"><code>Option::map_or</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.unwrap_or"><code>Option::unwrap_or</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.or"><code>Result::or</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or"><code>Result::map_or</code></a>和<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or"><code>Result::unwrap_or</code></a>有类似的替代方案。</p>
 <h2><a class="header" href="#rc" id="rc"><code>Rc</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.make_mut"><code>Rc::make_mut</code></a> provides clone-on-write semantics for <code>Rc</code>. It makes a mutable
-reference to an <code>Rc</code>. If the refcount is greater than one, it will <code>clone</code> the
-inner value to ensure unique ownership; otherwise, it will modify the original
-value. It is not needed often, but it can be extremely useful on occasion.
+<p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.make_mut"><code>Rc::make_mut</code></a>为<code>Rc</code>提供了write-on-write语义。它对<code>Rc</code>做了一个可改变的引用。如果refcount大于1，它将<code>clone</code>内部值以确保唯一的所有权；否则，它将修改原始值。它不经常需要，但偶尔会非常有用。
 <a href="https://github.com/rust-lang/rust/pull/65198/commits/3832a634d3aa6a7c60448906e6656a22f7e35628"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/65198/commits/75e0078a1703448a19e25eac85daaa5a4e6e68ac"><strong>Example 2</strong></a>.</p>
 <h2><a class="header" href="#mutex-rwlock-condvar-and-once" id="mutex-rwlock-condvar-and-once"><code>Mutex</code>, <code>RwLock</code>, <code>Condvar</code>, and <code>Once</code></a></h2>
-<p>The <a href="https://crates.io/crates/parking_lot"><code>parking_lot</code></a> crate provides alternative implementations of these
-synchronization types that are smaller, faster, and more flexible than those in
-the standard library. The APIs and semantics of the <code>parking_lot</code> types are
-similar but not identical to those of the equivalent types in the standard
-library.</p>
+<p><a href="https://crates.io/crates/parking_lot"><code>parking_lot</code></a>提供了这些同步类型的替代实现，它们比标准库中的同步类型更小、更快、更灵活。<code>parking_lot</code>类型的API和语义与标准库中的等价类型相似，但不完全相同。</p>
 <h1><a class="header" href="#iterators" id="iterators">Iterators</a></h1>
 <h2><a class="header" href="#collect" id="collect"><code>collect</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect"><code>Iterator::collect</code></a> converts an iterator into a collection such as <code>Vec</code>,
-which typically requires an allocation. You should avoid calling <code>collect</code> if
-the collection is then only iterated over again.</p>
-<p>For this reason, it is often better to return an iterator type like <code>impl Iterator&lt;Item=T&gt;</code> from a function than a <code>Vec&lt;T&gt;</code>. Note that sometimes
-additional lifetimes are required on these return types, as <a href="https://blog.katona.me/2019/12/29/Rust-Lifetimes-and-Iterators/">this post</a>
-explains.
+<p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect"><code>Iterator::collect</code></a>将一个迭代器转换为一个集合，如<code>Vec</code>，它通常需要一个分配。如果该集合只是再次迭代，你应该避免调用<code>collect</code>。</p>
+<p>出于这个原因，从函数中返回一个迭代器类型，比如<code>impl Iterator&lt;Item=T&gt;</code>，往往比<code>Vec&lt;T&gt;</code>更好。请注意，有时这些返回类型需要额外的生存期，正如<a href="https://blog.katona.me/2019/12/29/Rust-Lifetimes-and-Iterators/">this post</a>所解释的那样。
 <a href="https://github.com/rust-lang/rust/pull/77990/commits/660d8a6550a126797aa66a417137e39a5639451b"><strong>Example</strong></a>.</p>
-<p>Similarly, you can use <a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>extend</code></a> to extend an existing collection (such as a
-<code>Vec</code>) with an iterator, rather than collecting the iterator into a <code>Vec</code> and
-then using <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.append"><code>append</code></a>.</p>
+<p>同样，你可以使用<a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>extend</code></a>用迭代器扩展一个现有的集合（如<code>Vec</code>），而不是将迭代器收集到<code>Vec</code>中，然后使用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.append"><code>append</code></a>。</p>
 <h2><a class="header" href="#chaining" id="chaining">Chaining</a></h2>
-<p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>chain</code></a> can be very convenient, but it can also be slower than a single
-iterator. It may be worth avoiding for hot iterators, if possible.
+<p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>chain</code></a>可以非常方便，但也可能比单个迭代器慢。如果可能的话，热迭代器可能值得避免。
 <a href="https://github.com/rust-lang/rust/pull/64801/commits/5ca99b750e455e9b5e13e83d0d7886486231e48a"><strong>Example</strong></a>.</p>
-<p>Similarly, <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map"><code>filter_map</code></a> may be faster than using <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter"><code>filter</code></a> followed by
-<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map"><code>map</code></a>.</p>
+<p>类似地，<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map"><code>filter_map</code></a>可能比使用<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter"><code>filter</code></a>和<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map"><code>map</code></a>更快。</p>
 <h1><a class="header" href="#io" id="io">I/O</a></h1>
 <h2><a class="header" href="#locking" id="locking">Locking</a></h2>
-<p>Rust’s <a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a> and <a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a> macros lock stdout on every call. If you
-have repeated calls to these macros it may be better to lock stdout manually.</p>
-<p>For example, change this code:</p>
+<p>Rust的<a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a>和<a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a>宏在每次调用时锁定stdout。如果你需要重复调用这些宏，最好手动锁定stdout。</p>
+<p>例如，修改这段代码。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -973,13 +663,10 @@ for line in lines {
 </span><span class="boring">}
 </span><span class="boring">}
 </span></code></pre></pre>
-<p>stdin and stderr can likewise be locked when doing repeated operations on them.</p>
-<h2><a class="header" href="#buffering" id="buffering">Buffering</a></h2>
-<p>Rust file I/O is unbuffered by default. If you have many small and repeated
-read or write calls to a file or network socket, use <a href="https://doc.rust-lang.org/std/io/struct.BufReader.html"><code>BufReader</code></a> or
-<a href="https://doc.rust-lang.org/std/io/struct.BufWriter.html"><code>BufWriter</code></a>. They maintain an in-memory buffer for input and output,
-minimizing the number of system calls required.</p>
-<p>For example, change this unbuffered output code:</p>
+<p>当对stdin和stderr进行重复操作时，同样可以锁定它们。</p>
+<h2><a class="header" href="#缓冲" id="缓冲">缓冲</a></h2>
+<p>Rust文件I/O默认是无缓冲的。如果你对文件或网络套接字有许多小的和重复的读写调用，使用<a href="https://doc.rust-lang.org/std/io/struct.BufReader.html"><code>BufReader</code></a>或<a href="https://doc.rust-lang.org/std/io/struct.BufWriter.html"><code>BufWriter</code></a>。它们为输入和输出维护了一个内存缓冲区，最大限度地减少了系统调用的次数。</p>
+<p>例如，修改这个无缓冲的输出代码。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -994,7 +681,7 @@ for line in lines {
 </span><span class="boring">}
 </span><span class="boring">}
 </span></code></pre></pre>
-<p>to this:</p>
+<p>修改为：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1011,36 +698,20 @@ buf.flush()?;
 </span><span class="boring">}
 </span><span class="boring">}
 </span></code></pre></pre>
-<p>The explicit call to <a href="https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.flush"><code>flush</code></a> is not strictly necessary, as flushing will
-happen automatically when <code>buf</code> is dropped. However, in that case any error
-that occurs on flushing will be ignored, whereas an explicit flush will make
-that error explicit.</p>
-<p>Note that buffering also works with stdout, so you might want to combine manual
-locking <em>and</em> buffering when making many writes to stdout.</p>
+<p>对<a href="https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.flush"><code>flush</code></a>的显式调用并不是绝对必要的，因为当<code>buf</code>被丢弃时，刷新将自动发生。然而，在这种情况下，刷新时发生的任何错误都将被忽略，而显式刷新将使该错误显式化。</p>
+<p>请注意，缓冲也适用于stdout，所以当你向stdout进行大量写入时，你可能需要结合手动锁定<em>和</em>缓冲。</p>
 <h2><a class="header" href="#reading-input-as-raw-bytes" id="reading-input-as-raw-bytes">Reading Input as Raw Bytes</a></h2>
-<p>The built-in <a href="https://doc.rust-lang.org/std/string/struct.String.html">String</a> type uses UTF-8 internally, which adds a small, but
-nonzero overhead caused by UTF-8 validation when you read input into it. If you
-just want to process input bytes without worrying about UTF-8 (for example if
-you handle ASCII text), you can use <a href="https://doc.rust-lang.org/std/io/trait.BufRead.html#method.read_until"><code>BufRead::read_until</code></a>.</p>
-<p>There are also dedicated crates for reading <a href="https://github.com/Freaky/rust-linereader">byte-oriented lines of data</a>
-and working with <a href="https://github.com/BurntSushi/bstr">byte strings</a>.</p>
+<p>内置的<a href="https://doc.rust-lang.org/std/string/struct.String.html">String</a>类型在内部使用UTF-8，当你读取输入到string类型时，会增加一个由UTF-8验证引起的小但非零的开销。如果你只想处理输入字节而不担心UTF-8（例如，如果你处理ASCII文本），你可以使用<a href="https://doc.rust-lang.org/std/io/trait.BufRead.html#method.read_until"><code>BufRead::read_until</code></a>。</p>
+<p>还有专门的箱子用于读取<a href="https://github.com/Freaky/rust-linereader">面向字节的数据行</a>和处理<a href="https://github.com/BurntSushi/bstr">byte strings</a>。</p>
 <h1><a class="header" href="#logging-and-debugging" id="logging-and-debugging">Logging and Debugging</a></h1>
-<p>Sometimes logging code or debugging code can slow down a program significantly.
-Either the logging/debugging code itself is slow, or data collection code that
-feeds into logging/debugging code is slow. Make sure that no unnecessary work
-is done for logging/debugging purposes when logging/debugging is not enabled.
+<p>有时，日志代码或调试代码会大大降低程序的速度。要么是日志记录/调试代码本身很慢，要么是反馈到日志记录/调试代码的数据收集代码很慢。确保在不启用日志记录/调试时，不为日志记录/调试目的做不必要的工作。
 <a href="https://github.com/rust-lang/rust/pull/50246/commits/2e4f66a86f7baa5644d18bb2adc07a8cd1c7409d"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/75133/commits/eeb4b83289e09956e0dda174047729ca87c709fe"><strong>Example 2</strong></a>.</p>
-<p>Note that <a href="https://doc.rust-lang.org/std/macro.assert.html"><code>assert!</code></a> calls always run, but <a href="https://doc.rust-lang.org/std/macro.debug_assert.html"><code>debug_assert!</code></a> calls only run in
-debug builds. If you have an assertion that is hot but is not necessary for
-safety, consider making it a <code>debug_assert!</code>.
+<p>请注意，<a href="https://doc.rust-lang.org/std/macro.assert.html"><code>assert!</code></a>调用总是运行，但<a href="https://doc.rust-lang.org/std/macro.debug_assert.html"><code>debug_assert!</code></a>调用只在调试构建中运行。如果你有一个热的断言，但对安全来说不是必需的，可以考虑把它变成一个<code>debug_assert!</code>。
 <a href="https://github.com/rust-lang/rust/pull/58210/commits/f7ed6e18160bc8fccf27a73c05f3935c9e8f672e"><strong>Example</strong></a>.</p>
 <h1><a class="header" href="#wrapper-types" id="wrapper-types">Wrapper Types</a></h1>
-<p>Rust has a variety of “wrapper” types, such as <a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html"><code>RefCell</code></a> and <a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>, that
-provide special behavior for values. Accessing these values can take a
-non-trivial amount of time. If multiple such values are typically accessed
-together, it may be better to put them within a single wrapper.</p>
-<p>For example, a struct like this:</p>
+<p>Rust有多种 “封装 “类型，如<a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html"><code>RefCell</code></a>和<a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>，它们为值提供了特殊行为。访问这些值可能会耗费大量的时间。如果多个这样的值通常是一起访问的，那么最好将它们放在一个包装器中。</p>
+<p>例如，这样的结构。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1051,7 +722,7 @@ together, it may be better to put them within a single wrapper.</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>may be better represented like this:</p>
+<p>也许这样更典型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1061,147 +732,87 @@ together, it may be better to put them within a single wrapper.</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Whether or not this helps performance will depend on the exact access patterns
-of the values.
+<p>这是否有助于性能，将取决于值的具体访问模式。
 <a href="https://github.com/rust-lang/rust/pull/68694/commits/7426853ba255940b880f2e7f8026d60b94b42404"><strong>Example</strong></a>.</p>
 <h1><a class="header" href="#machine-code" id="machine-code">Machine Code</a></h1>
-<p>When you have a small piece of very hot code, it may be worth inspecting the
-generated machine code to see if it has any inefficiencies. The <a href="https://godbolt.org/">Compiler
-Explorer</a> website is an excellent resource when doing this.</p>
-<p>Relatedly, the <a href="https://doc.rust-lang.org/core/arch/index.html"><code>core::arch</code></a> module provides access to architecture-specific
-intrinsics, many of which relate to SIMD instructions.</p>
-<p>It is sometimes possible to avoid bounds checking within loops by adding
-assertions on the ranges of the index variables. This is an advanced technique,
-and you should check the generated code to ensure the bounds checks are
-actually removed.
+<p>当你有一小段非常热的代码时，可能值得检查一下生成的机器代码，看看它是否有任何效率低下的地方。在这样做的时候，<a href="https://godbolt.org/">Compiler Explorer</a>网站是一个很好的资源。</p>
+<p>与此相关的是，<a href="https://doc.rust-lang.org/core/arch/index.html"><code>core::arch</code></a>模块提供了对特定架构的固有知识的访问，其中许多与SIMD指令有关。</p>
+<p>有时可以通过在索引变量的范围内添加断言来避免循环内的边界检查。这是一种先进的技术，你应该检查生成的代码以确保边界检查被实际删除。
 <a href="https://github.com/rust-random/rand/pull/960/commits/de9dfdd86851032d942eb583d8d438e06085867b"><strong>Example 1</strong></a>,
 <a href="https://github.com/image-rs/jpeg-decoder/pull/167/files"><strong>Example 2</strong></a>.</p>
 <h1><a class="header" href="#parallelism" id="parallelism">Parallelism</a></h1>
-<p>Rust provides excellent support for safe parallel programming, which can lead
-to large performance improvements. There are a variety of ways to introduce
-parallelism into a program and the best way for any program will depend greatly
-on its design. </p>
-<p>An in-depth treatment of parallelism is beyond the scope of this book. If you
-are interested in this topic, the documentation for the <a href="https://crates.io/crates/rayon"><code>rayon</code></a> and
-<a href="https://crates.io/crates/crossbeam"><code>crossbeam</code></a> crates is a good place to start.</p>
+<p>Rust为安全的并行编程提供了很好的支持，这可以带来很大的性能提升。有多种方法可以将并行性引入到程序中，对于任何程序来说，最好的方式在很大程度上取决于其设计。</p>
+<p>对并行性的深入研究超出了本书的范围。如果你对这一主题感兴趣，[rayon]和[crossbeam]板条箱的文档是一个很好的开始。</p>
 <h1><a class="header" href="#general-tips" id="general-tips">General Tips</a></h1>
-<p>The previous sections of this book have discussed Rust-specific techniques.
-This section gives a brief overview of some general performance principles.</p>
-<p>As long as the obvious pitfalls are avoided (e.g. <a href="build-configuration.html">using non-release builds</a>),
-Rust generally has good performance. Especially if you are used to
-dynamically-typed languages such as Python and Ruby.</p>
-<p>Optimized code is often more complex and takes more effort to write than
-unoptimized code. For this reason, it is only worth optimizing hot code.</p>
-<p>The biggest performance improvement often come from changes to algorithms or
-data structures, rather than low-level optimizations.
+<p>本书的前几节已经讨论了Rust特有的技术。
+本节将简要介绍一些一般的性能原则。</p>
+<p>只要避免了明显的陷阱（例如<a href="build-configuration.html">使用非发布的构建</a>）。
+铁锈一般都有不错的表现。尤其是当你习惯了Python和Ruby等动态类型的语言时。</p>
+<p>优化后的代码往往比未优化的代码更复杂，写起来更费劲。出于这个原因，只有优化热代码才是值得的。</p>
+<p>最大的性能提升往往来自于算法或数据结构的改变，而不是低级别的优化。
 <a href="https://github.com/rust-lang/rust/pull/53383/commits/5745597e6195fe0591737f242d02350001b6c590"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/54318/commits/154be2c98cf348de080ce951df3f73649e8bb1a6"><strong>Example 2</strong></a>.</p>
-<p>Writing code that works well with modern hardware is not always easy, but worth
-striving for. For example, try to minimize cache misses and branch
-mispredictions, where possible.</p>
-<p>Most optimizations result in small speedups. Although no single small speedup
-is noticeable, they really add up if you can do enough of them.</p>
-<p>Different profilers have different strengths. It is good to use more than one.</p>
-<p>When profiling indicates that a function is hot, there are two common ways to
-speed things up: (a) make the function faster, and/or (b) avoid calling it as
-much.</p>
-<p>It is usually easier, and often as effective, to avoid silly slowdowns as it
-is to introduce clever speedups.</p>
-<p>Avoid computing things unless necessary. Lazy/on-demand computations are
-often a win.
+<p>编写与现代硬件良好配合的代码并不总是容易的，但值得努力。例如，在可能的情况下，尽量减少缓存遗漏和分支误判。</p>
+<p>大多数优化都会带来小幅提速。虽然没有一个小的提速是明显的，但如果你能做足够多的提速，它们真的会加起来。</p>
+<p>不同的剖析器有不同的优势。使用多个剖析器是件好事。</p>
+<p>当剖析表明一个函数很热的时候，有两种常见的方法来加速。
+· 让函数更快
+· 避免调用它。</p>
+<p>避免愚蠢的减速通常比引入巧妙的加速更容易，而且通常也同样有效。</p>
+<p>除非必要，否则避免全部计算。懒惰/按需计算往往是一种好办法。
 <a href="https://github.com/rust-lang/rust/pull/36592/commits/80a44779f7a211e075da9ed0ff2763afa00f43dc"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50339/commits/989815d5670826078d9984a3515eeb68235a4687"><strong>Example 2</strong></a>.</p>
-<p>Complex general cases can often be avoided by optimistically checking for
-common special cases that are simpler.
+<p>一般复杂的情况往往可以通过乐观地检查比较简单的常见特殊情况来避免。
 <a href="https://github.com/rust-lang/rust/pull/68790/commits/d62b6f204733d255a3e943388ba99f14b053bf4a"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/53733/commits/130e55665f8c9f078dec67a3e92467853f400250"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/65260/commits/59e41edcc15ed07de604c61876ea091900f73649"><strong>Example 3</strong></a>.
-In particular, specially handling collections with 0, 1, or 2 elements is often
-a win when small sizes dominate.
+尤其是在小尺寸占主导地位的情况下，特别处理0、1或2个元素的集合往往是一种好办法。
 <a href="https://github.com/rust-lang/rust/pull/50932/commits/2ff632484cd8c2e3b123fbf52d9dd39b54a94505"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64627/commits/acf7d4dcdba4046917c61aab141c1dec25669ce9"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64949/commits/14192607d38f5501c75abea7a4a0e46349df5b5f"><strong>Example 3</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64949/commits/d1a7bb36ad0a5932384eac03d3fb834efc0317e5"><strong>Example 4</strong></a>.</p>
-<p>Similarly, when dealing with repetitive data, it is often possible to use a
-simple form of data compression, by using a compact representation for common
-values and then having a fallback to a secondary table for unusual values.
+<p>同样，在处理重复性数据时，通常可以使用一种简单的数据压缩形式，对常见的值使用紧凑的表示方式，然后对不常见的值进行回退到二级表。
 <a href="https://github.com/rust-lang/rust/pull/54420/commits/b2f25e3c38ff29eebe6c8ce69b8c69243faa440d"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/59693/commits/fd7f605365b27bfdd3cd6763124e81bddd61dd28"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/65750/commits/eea6f23a0ed67fd8c6b8e1b02cda3628fee56b2f"><strong>Example 3</strong></a>.</p>
-<p>When code deals with multiple cases, measure case frequencies and handle the
-most common ones first.</p>
-<p>When dealing with lookups that involve high locality, it can be a win to put a
-small cache in front of a data structure.</p>
-<p>Optimized code often has a non-obvious structure, which means that explanatory
-comments are valuable, particularly those that reference profiling
-measurements. A comment like “99% of the time this vector has 0 or 1 elements,
-so handle those cases first” can be illuminating.</p>
-<h1><a class="header" href="#compile-times" id="compile-times">Compile Times</a></h1>
-<p>Although this book is primarily about improving the performance of Rust
-programs, this section is about reducing the compile times of Rust programs,
-because that is a related topic of interest to many people.</p>
+<p>当代码处理多种情况时，要衡量情况频率，先处理最常见的情况。</p>
+<p>当处理涉及高局部性的查找时，在数据结构前面放一个小的缓存是一种胜利。</p>
+<p>优化后的代码往往具有不明显的结构，这意味着解释性注释是有价值的，特别是那些参考剖析测量的注释。像 “99%的时候这个向量都是0或1个元素，所以要先处理这些情况 “这样的评论可以起到启发作用。</p>
+<h1><a class="header" href="#编译时间" id="编译时间">编译时间</a></h1>
+<p>虽然本书的主要内容是提高Rust程序的性能，但本节的内容是关于减少Rust程序的编译时间，因为这是很多人感兴趣的相关话题。</p>
 <h2><a class="header" href="#linking" id="linking">Linking</a></h2>
-<p>A big part of compile time is actually linking time, particularly when
-rebuilding a program after a small change. On Linux and Windows you can select
-lld as the linker, which is much faster than the default linker.</p>
-<p>To specify lld from the command line, precede your build command with <code>RUSTFLAGS=&quot;-C link-arg=-fuse-ld=lld&quot;</code>.</p>
-<p>To specify lld from a <code>Cargo.toml</code> file, add these lines:</p>
+<p>编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序的时候。在Linux和Windows上，你可以选择lld作为链接器，这比默认的链接器快得多。</p>
+<p>要从命令行指定ld，在你的编译命令前加上<code>RUSTFLAGS=&quot;-C link-arg=-fuse-ld=lld&quot;</code>。</p>
+<p>要从<code>Cargo.toml</code>文件中指定lld，请添加这些行。</p>
 <pre><code class="language-text">[build]
 rustflags = [&quot;-C&quot;, &quot;link-arg=-fuse-ld=lld&quot;]
 </code></pre>
-<p>Alternatively, add these lines:</p>
+<p>或者，增加如下配置</p>
 <pre><code class="language-text">[target.x86_64-unknown-linux-gnu]
 linker = &quot;lld&quot;
 </code></pre>
-<p>You can use <a href="https://doc.rust-lang.org/cargo/reference/config.html">Cargo configuration files</a> to apply these configurations to more
-than a single project.</p>
-<p>lld is not fully supported for use with Rust, but it should work for most use
-cases on Linux and Windows. There is a <a href="https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211">GitHub Issue</a> tracking full support for
-lld.</p>
+<p>您可以使用<a href="https://doc.rust-lang.org/cargo/reference/config.html">Cargo配置文件</a>将这些配置应用于多个项目。</p>
+<p>lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows中的大多数情况下使用。有一个<a href="https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211">GitHub Issue</a>跟踪lld的完整支持。</p>
 <h2><a class="header" href="#incremental-compilation" id="incremental-compilation">Incremental Compilation</a></h2>
-<p>The Rust compiler supports <a href="https://blog.rust-lang.org/2016/09/08/incremental.html">incremental compilation</a>, which avoids redoing
-work when you recompile a crate. It can greatly speed up compilation, at the
-cost of sometimes making the produced executable run a little more slowly. For
-this reason, it is only enabled by default for debug builds. If you want to
-enable it for release builds as well, add the following lines to the
-<code>Cargo.toml</code> file.</p>
+<p>Rust编译器支持<a href="https://blog.rust-lang.org/2016/09/08/incremental.html">增量编译</a>，这可以避免在重新编译一个装箱时重做工作。它可以大大加快编译速度，但代价是有时会使生成的可执行文件运行得更慢一些。出于这个原因，它只在调试编译时默认启用。如果你想在发布版本的编译中也启用它，请在<code>Cargo.toml</code>文件中添加以下行。</p>
 <pre><code class="language-toml">[profile.release]
 incremental = true
 </code></pre>
-<p>See the <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#incremental">Cargo documentation</a> for more details about the <code>lto</code> setting, and
-about enabling specific settings for different profiles.</p>
-<h2><a class="header" href="#visualization" id="visualization">Visualization</a></h2>
-<p>The Rust compiler has a feature that lets you visualize compilation of your
-program. Build with this command:</p>
+<p>关于 “lto “设置以及为不同的配置文件启用特定设置的详细信息，请参见<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#incremental">Cargo documentation</a>。</p>
+<h2><a class="header" href="#可视化" id="可视化">可视化</a></h2>
+<p>Rust编译器有一个功能，可以让你可视化编译你的程序。用这个命令进行编译。</p>
 <pre><code class="language-text">cargo +nightly build -Ztimings
 </code></pre>
-<p>On completion it will print the name of an HTML file. Open that file in a web
-browser. It contains a <a href="https://en.wikipedia.org/wiki/Gantt_chart">Gantt chart</a> that shows the dependencies between the
-various crates in your program. This shows how much parallelism there is in
-your crate graph, which can indicate if any large crates that serialize
-compilation should be broken up.</p>
+<p>完成后，它将打印一个HTML文件的名称。在网络浏览器中打开该文件。它包含了一个<a href="https://en.wikipedia.org/wiki/Gantt_chart">Gantt chart</a>，显示了你的程序中各个箱子之间的依赖关系。这显示了你的装箱图中有多少并行性，这可以说明是否应该将任何串行化编译的大装箱打散。</p>
 <h2><a class="header" href="#llvm-ir" id="llvm-ir">LLVM IR</a></h2>
-<p>The Rust compiler uses <a href="https://llvm.org/">LLVM</a> for its back-end. LLVM’s execution can be a large
-part of compile times, especially when the Rust compiler’s front end generates
-a lot of <a href="https://en.wikipedia.org/wiki/Intermediate_representation">IR</a> which takes LLVM a long time to optimize.</p>
-<p>These problems can be diagnosed with <a href="https://github.com/dtolnay/cargo-llvm-lines/"><code>cargo llvm-lines</code></a>, which shows which
-Rust functions cause the most LLVM IR to be generated. Generic functions are
-often the most important ones, because they can be instantiated dozens or even
-hundreds of times in large programs.</p>
-<p>If a generic function causes IR bloat, there are several ways to fix it. The
-simplest is to just make the function smaller.
+<p>Rust编译器的后端使用<a href="https://llvm.org/">LLVM</a>。LLVM的执行会占到编译时间的很大一部分，尤其是当Rust编译器的前端会产生大量的<a href="https://en.wikipedia.org/wiki/Intermediate_representation">IR</a>，这需要LLVM花很长的时间去优化。</p>
+<p>这些问题可以用[<code>cargo llvm-line</code>]来诊断，它显示了哪些Rust函数导致了最多的LLVM IR生成。通用函数通常是最重要的函数，因为它们在大型程序中可以被实例化几十次甚至几百次。</p>
+<p>如果一个通用函数导致IR膨胀，有几种方法可以解决。最简单的方法就是把函数变小。
 <a href="https://github.com/rust-lang/rust/pull/72166/commits/5a0ac0552e05c079f252482cfcdaab3c4b39d614"><strong>Example</strong></a>.</p>
-<p>Another way is to move the non-generic parts of the function into a separate,
-non-generic function, which will only be instantiated once. Whether or not this
-is possible will depend on the details of the generic function. The non-generic
-function can often be written as an inner function within the generic function,
-to minimize its exposure to the rest of the code.
+<p>另一种方法是将函数的非通用部分移到一个单独的非通用函数中，这个函数将只被实例化一次。这是否可能取决于泛型函数的细节。非通用函数通常可以写成通用函数中的一个内部函数，以尽量减少它对代码其余部分的暴露。
 <a href="https://github.com/rust-lang/rust/pull/72013/commits/68b75033ad78d88872450a81745cacfc11e58178"><strong>Example</strong></a>.</p>
-<p>Sometimes common utility functions like <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"><code>Option::map</code></a> and <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err"><code>Result::map_err</code></a>
-are instantiated many times. Replacing them with equivalent <code>match</code> expressions
-can help compile times.</p>
-<p>The effects of these sorts of changes on compile times will usually be small,
-though occasionally they can be large.
+<p>有时，像<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"><code>Option::map</code></a>和<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err"><code>Result::map_err</code></a>这样的常用实用函数会被实例化多次。 用等价的<code>match</code>表达式替换它们可以帮助编译时间。</p>
+<p>这些变化对编译时间的影响通常是很小的，但偶尔也会很大。
 <a href="https://github.com/servo/servo/issues/26585"><strong>Example</strong></a>.</p>
 
                     </main>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Compile Times - The Rust Performance Book</title>
+        <title>机器码 - The Rust Performance Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="benchmarking.html"><strong aria-hidden="true">2.</strong> Benchmarking</a></li><li class="chapter-item expanded "><a href="build-configuration.html"><strong aria-hidden="true">3.</strong> Build Configuration</a></li><li class="chapter-item expanded "><a href="linting.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining.html"><strong aria-hidden="true">6.</strong> Inlining</a></li><li class="chapter-item expanded "><a href="hashing.html"><strong aria-hidden="true">7.</strong> Hashing</a></li><li class="chapter-item expanded "><a href="heap-allocations.html"><strong aria-hidden="true">8.</strong> Heap Allocations</a></li><li class="chapter-item expanded "><a href="type-sizes.html"><strong aria-hidden="true">9.</strong> Type Sizes</a></li><li class="chapter-item expanded "><a href="standard-library-types.html"><strong aria-hidden="true">10.</strong> Standard Library Types</a></li><li class="chapter-item expanded "><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li class="chapter-item expanded "><a href="io.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging.html"><strong aria-hidden="true">13.</strong> Logging and Debugging</a></li><li class="chapter-item expanded "><a href="wrapper-types.html"><strong aria-hidden="true">14.</strong> Wrapper Types</a></li><li class="chapter-item expanded "><a href="machine-code.html"><strong aria-hidden="true">15.</strong> Machine Code</a></li><li class="chapter-item expanded "><a href="parallelism.html"><strong aria-hidden="true">16.</strong> Parallelism</a></li><li class="chapter-item expanded "><a href="general-tips.html"><strong aria-hidden="true">17.</strong> General Tips</a></li><li class="chapter-item expanded "><a href="compile-times.html" class="active"><strong aria-hidden="true">18.</strong> Compile Times</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Title Page</a></li><li class="chapter-item expanded "><a href="introduction_zh.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="benchmarking_zh.html"><strong aria-hidden="true">2.</strong> 基准分析</a></li><li class="chapter-item expanded "><a href="build-configuration_zh.html"><strong aria-hidden="true">3.</strong> 构建配置</a></li><li class="chapter-item expanded "><a href="linting_zh.html"><strong aria-hidden="true">4.</strong> Linting</a></li><li class="chapter-item expanded "><a href="profiling_zh.html"><strong aria-hidden="true">5.</strong> Profiling</a></li><li class="chapter-item expanded "><a href="inlining_zh.html"><strong aria-hidden="true">6.</strong> 初始化</a></li><li class="chapter-item expanded "><a href="hashing_zh.html"><strong aria-hidden="true">7.</strong> 哈希</a></li><li class="chapter-item expanded "><a href="heap-allocations_zh.html"><strong aria-hidden="true">8.</strong> 堆分配</a></li><li class="chapter-item expanded "><a href="type-sizes_zh.html"><strong aria-hidden="true">9.</strong> 类型大小</a></li><li class="chapter-item expanded "><a href="standard-library-types_zh.html"><strong aria-hidden="true">10.</strong> 标准库类型</a></li><li class="chapter-item expanded "><a href="iterators_zh.html"><strong aria-hidden="true">11.</strong> 迭代器</a></li><li class="chapter-item expanded "><a href="io_zh.html"><strong aria-hidden="true">12.</strong> I/O</a></li><li class="chapter-item expanded "><a href="logging-and-debugging_zh.html"><strong aria-hidden="true">13.</strong> 日志和调试</a></li><li class="chapter-item expanded "><a href="wrapper-types_zh.html"><strong aria-hidden="true">14.</strong> 封装类型</a></li><li class="chapter-item expanded "><a href="machine-code_zh.html" class="active"><strong aria-hidden="true">15.</strong> 机器码</a></li><li class="chapter-item expanded "><a href="parallelism_zh.html"><strong aria-hidden="true">16.</strong> 并行</a></li><li class="chapter-item expanded "><a href="general-tips_zh.html"><strong aria-hidden="true">17.</strong> 一般提示</a></li><li class="chapter-item expanded "><a href="compile-times_zh.html"><strong aria-hidden="true">18.</strong> 编译时间</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,84 +167,27 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#compile-times" id="compile-times">Compile Times</a></h1>
-<p>Although this book is primarily about improving the performance of Rust
-programs, this section is about reducing the compile times of Rust programs,
-because that is a related topic of interest to many people.</p>
-<h2><a class="header" href="#linking" id="linking">Linking</a></h2>
-<p>A big part of compile time is actually linking time, particularly when
-rebuilding a program after a small change. On Linux and Windows you can select
-lld as the linker, which is much faster than the default linker.</p>
-<p>To specify lld from the command line, precede your build command with <code>RUSTFLAGS=&quot;-C link-arg=-fuse-ld=lld&quot;</code>.</p>
-<p>To specify lld from a <code>Cargo.toml</code> file, add these lines:</p>
-<pre><code class="language-text">[build]
-rustflags = [&quot;-C&quot;, &quot;link-arg=-fuse-ld=lld&quot;]
-</code></pre>
-<p>Alternatively, add these lines:</p>
-<pre><code class="language-text">[target.x86_64-unknown-linux-gnu]
-linker = &quot;lld&quot;
-</code></pre>
-<p>You can use <a href="https://doc.rust-lang.org/cargo/reference/config.html">Cargo configuration files</a> to apply these configurations to more
-than a single project.</p>
-<p>lld is not fully supported for use with Rust, but it should work for most use
-cases on Linux and Windows. There is a <a href="https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211">GitHub Issue</a> tracking full support for
-lld.</p>
-<h2><a class="header" href="#incremental-compilation" id="incremental-compilation">Incremental Compilation</a></h2>
-<p>The Rust compiler supports <a href="https://blog.rust-lang.org/2016/09/08/incremental.html">incremental compilation</a>, which avoids redoing
-work when you recompile a crate. It can greatly speed up compilation, at the
-cost of sometimes making the produced executable run a little more slowly. For
-this reason, it is only enabled by default for debug builds. If you want to
-enable it for release builds as well, add the following lines to the
-<code>Cargo.toml</code> file.</p>
-<pre><code class="language-toml">[profile.release]
-incremental = true
-</code></pre>
-<p>See the <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#incremental">Cargo documentation</a> for more details about the <code>lto</code> setting, and
-about enabling specific settings for different profiles.</p>
-<h2><a class="header" href="#visualization" id="visualization">Visualization</a></h2>
-<p>The Rust compiler has a feature that lets you visualize compilation of your
-program. Build with this command:</p>
-<pre><code class="language-text">cargo +nightly build -Ztimings
-</code></pre>
-<p>On completion it will print the name of an HTML file. Open that file in a web
-browser. It contains a <a href="https://en.wikipedia.org/wiki/Gantt_chart">Gantt chart</a> that shows the dependencies between the
-various crates in your program. This shows how much parallelism there is in
-your crate graph, which can indicate if any large crates that serialize
-compilation should be broken up.</p>
-<h2><a class="header" href="#llvm-ir" id="llvm-ir">LLVM IR</a></h2>
-<p>The Rust compiler uses <a href="https://llvm.org/">LLVM</a> for its back-end. LLVM’s execution can be a large
-part of compile times, especially when the Rust compiler’s front end generates
-a lot of <a href="https://en.wikipedia.org/wiki/Intermediate_representation">IR</a> which takes LLVM a long time to optimize.</p>
-<p>These problems can be diagnosed with <a href="https://github.com/dtolnay/cargo-llvm-lines/"><code>cargo llvm-lines</code></a>, which shows which
-Rust functions cause the most LLVM IR to be generated. Generic functions are
-often the most important ones, because they can be instantiated dozens or even
-hundreds of times in large programs.</p>
-<p>If a generic function causes IR bloat, there are several ways to fix it. The
-simplest is to just make the function smaller.
-<a href="https://github.com/rust-lang/rust/pull/72166/commits/5a0ac0552e05c079f252482cfcdaab3c4b39d614"><strong>Example</strong></a>.</p>
-<p>Another way is to move the non-generic parts of the function into a separate,
-non-generic function, which will only be instantiated once. Whether or not this
-is possible will depend on the details of the generic function. The non-generic
-function can often be written as an inner function within the generic function,
-to minimize its exposure to the rest of the code.
-<a href="https://github.com/rust-lang/rust/pull/72013/commits/68b75033ad78d88872450a81745cacfc11e58178"><strong>Example</strong></a>.</p>
-<p>Sometimes common utility functions like <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"><code>Option::map</code></a> and <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err"><code>Result::map_err</code></a>
-are instantiated many times. Replacing them with equivalent <code>match</code> expressions
-can help compile times.</p>
-<p>The effects of these sorts of changes on compile times will usually be small,
-though occasionally they can be large.
-<a href="https://github.com/servo/servo/issues/26585"><strong>Example</strong></a>.</p>
+                        <h1><a class="header" href="#machine-code" id="machine-code">Machine Code</a></h1>
+<p>当你有一小段非常热的代码时，可能值得检查一下生成的机器代码，看看它是否有任何效率低下的地方。在这样做的时候，<a href="https://godbolt.org/">Compiler Explorer</a>网站是一个很好的资源。</p>
+<p>与此相关的是，<a href="https://doc.rust-lang.org/core/arch/index.html"><code>core::arch</code></a>模块提供了对特定架构的固有知识的访问，其中许多与SIMD指令有关。</p>
+<p>有时可以通过在索引变量的范围内添加断言来避免循环内的边界检查。这是一种先进的技术，你应该检查生成的代码以确保边界检查被实际删除。
+<a href="https://github.com/rust-random/rand/pull/960/commits/de9dfdd86851032d942eb583d8d438e06085867b"><strong>Example 1</strong></a>,
+<a href="https://github.com/image-rs/jpeg-decoder/pull/167/files"><strong>Example 2</strong></a>.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="general-tips.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="wrapper-types_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
+                        
+                            <a rel="next" href="parallelism_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -254,11 +197,15 @@ though occasionally they can be large.
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="general-tips.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="wrapper-types_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
+                
+                    <a rel="next" href="parallelism_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
