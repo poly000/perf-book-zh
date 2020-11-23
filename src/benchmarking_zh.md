@@ -5,11 +5,11 @@
 首先，你需要工作负载来衡量。理想情况下，你会有各种工作负载，代表你的程序的实际使用情况。使用真实世界输入的工作负载是最好的，但[microbenchmarks]和[压力测试(stress tests)]在适度的情况下也是有用的。
 
 [microbenchmarks]: https://stackoverflow.com/questions/2842695/what-is-microbenchmarking
-[stress tests]: https://en.wikipedia.org/wiki/Stress_testing_(software)
+[压力测试(stress tests)]: https://en.wikipedia.org/wiki/Stress_testing_(software)
 
 其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的[基准测试(benchmark tests)]是一个简单的起点。[Criterion]是一个更复杂的选择。自定义benchmarking harnesses也是可能的。例如，[rustc-perf]就是用来对Rust编译器进行基准测试的harnesses。
 
-[benchmark tests]: https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html
+[基准测试(benchmark tests)]: https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html
 [Criterion]: https://github.com/bheisler/criterion.rs
 [rustc-perf]: https://github.com/rust-lang/rustc-perf/
 
