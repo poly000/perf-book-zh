@@ -4,7 +4,7 @@ RUST性能手册中文版
 
 ## 查看
 
-在线查看 [here](https://nnethercote.github.io/perf-book/).
+英文版在线查看 [here](https://nnethercote.github.io/perf-book/).
 
 ## 构建
 
