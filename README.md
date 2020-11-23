@@ -13,7 +13,7 @@ RUST性能手册中文版
 ```
 cargo install mdbook
 ```
-运行一下命令以编译本书:
+运行以下命令以编译本书:
 ```
 mdbook build
 ```
