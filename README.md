@@ -1,25 +1,24 @@
-# perf-book
+# perf-book—zh
 
-The Rust Performance Book.
+RUST性能手册中文版
 
-## Viewing
+## 查看
 
-The rendered book is [here](https://nnethercote.github.io/perf-book/).
+在线查看 [here](https://nnethercote.github.io/perf-book/).
 
-## Building
+## 构建
 
-The book is built with [`mdbook`](https://github.com/rust-lang/mdBook), which
-can be installed with this command:
+本书使用 [`mdbook`](https://github.com/rust-lang/mdBook) 构建, mdbook可以用以下命令安装:
 ```
 cargo install mdbook
 ```
-To build the book, run this command:
+运行一下命令以编译本书:
 ```
 mdbook build
 ```
-The generated files are put in the `book/` directory.
+生成的文件将被保存在`\book`目录.
 
-## Development
+## 开发
 
 To view the built book, run this command:
 ```
