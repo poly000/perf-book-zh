@@ -5,6 +5,7 @@ RUST性能手册中文版
 ## 查看
 
 英文版在线查看 [here](https://nnethercote.github.io/perf-book/).
+中文版在线查看 [here](https://blues-star.github.io/perf-book-zh/)
 
 ## 构建
 
