@@ -6,7 +6,7 @@
 - [基准分析](benchmarking_zh.md)
 - [构建配置](build-configuration_zh.md)
 - [Linting](linting_zh.md)
-- [Profiling](profiling_zh.md)
+- [性能分析](profiling_zh.md)
 - [初始化](inlining_zh.md)
 - [哈希](hashing_zh.md)
 - [堆分配](heap-allocations_zh.md)
