@@ -189,18 +189,18 @@
 <h1><a class="header" href="#构建配置" id="构建配置">构建配置</a></h1>
 <p>正确的构建配置将最大限度地提高Rust程序的性能，而无需对其代码进行任何修改。</p>
 <h2><a class="header" href="#发布构建" id="发布构建">发布构建</a></h2>
-<p>最重要的一个Rust性能提示很简单，但<a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">很容易被忽视</a>：当你想要高性能时，确保你使用的是release构建而不是debug构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
-<p>发行版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
-<p>调试构建是默认的。如果你运行 “cargo build”、”cargo run “或 “rustc “而不需要任何额外的选项，它们就会产生。调试构建对调试很有帮助，但不是优化的。</p>
-<p>考虑以下是运行<code>cargo build</code>的最后一行输出。</p>
+<p>最重要的一个Rust性能提示很简单，但<a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
+<p>发布版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
+<p>默认为调试构建。如果你运行 “cargo build”、”cargo run “或 “rustc “而不添加任何额外的选项，它们就会被处理。调试构建对调试很有帮助，但不被优化。</p>
+<p>考虑一下<code>cargo build</code>的最后一行输出。</p>
 <pre><code class="language-text">Finished dev [unoptimized + debuginfo] target(s) in 29.80s
 </code></pre>
-<p><code>[unoptimized + debuginfo]</code>表示已经生成了一个<code>debug build</code>，编译后的代码将放置在<code>target/debug/</code>目录下,<code>cargo run</code>将运行调试编译的代码。</p>
-<p><code>Release build</code>比<code>debug build</code>更优化。它们也省略了一些检查，比如调试断言和整数溢出检查。用 <code>cargo build --release</code>, <code>cargo run --release</code>, 或 <code>rustc -O</code>编译。(并且，<code>rustc</code>有多个其他优化构建的选项，比如<code>-C opt-level</code>)。由于额外的优化，这通常会比调试编译花费更多时间。</p>
+<p><code>[unoptimized + debuginfo]</code>表示已经生成了一个调试构建，编译后的代码将放置在<code>target/debug/</code>目录下，<code>cargo run</code>将运行调试编译的代码。</p>
+<p>发布构建比调试构建更多的优化。它们也省略了一些检查，比如调试断言和整数溢出检查。用 <code>cargo build --release</code>, <code>cargo run --release</code>, 或 <code>rustc -O</code>编译。(并且，<code>rustc</code>有多个其他优化构建的选项，比如<code>-C opt-level</code>)。由于额外的优化，这通常会比调试构建花费更多时间。</p>
 <p>请看下面的<code>&quot;cargo build --release&quot;</code>运行的最后一行输出。</p>
 <pre><code class="language-text">Finished release [optimized] target(s) in 1m 01s
 </code></pre>
-<p><code>[optimed]</code>表示已经生成了一个版本构建。编译后的代码将被放置在<code>target/release/</code>目录下。<code>cargo run --release</code>将运行发行版。</p>
+<p><code>[optimed]</code>表示已经生成了一个发布构建。编译后的代码将被放置在<code>target/release/</code>目录下。<code>cargo run --release</code>将运行发布版。</p>
 <p>参见 [Cargo 配置文件]，以了解更多关于调试构建(使用<code>dev</code>配置文件)和发布构建(使用<code>release</code>配置文件)之间的区别。</p>
 <p>[[Cargo 配置文件]: https://doc.rust-lang.org/cargo/reference/profiles.html</p>
 <h2><a class="header" href="#链接时优化" id="链接时优化">链接时优化</a></h2>
