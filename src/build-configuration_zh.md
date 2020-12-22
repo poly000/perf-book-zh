@@ -4,27 +4,27 @@
 
 ## 发布构建
 
-最重要的一个Rust性能提示很简单，但[很容易被忽视]：当你想要高性能时，确保你使用的是release构建而不是debug构建。这通常是通过在Cargo中指定`--release`标志来实现的。
+最重要的一个Rust性能提示很简单，但[很容易被忽视]：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定`--release`标志来实现的。
 
 [很容易被忽视]: https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5
 
-发行版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。
+发布版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。
 
-调试构建是默认的。如果你运行 "cargo build"、"cargo run "或 "rustc "而不需要任何额外的选项，它们就会产生。调试构建对调试很有帮助，但不是优化的。
+默认为调试构建。如果你运行 "cargo build"、"cargo run "或 "rustc "而不添加任何额外的选项，它们就会被处理。调试构建对调试很有帮助，但不被优化。
 
-考虑以下是运行`cargo build`的最后一行输出。
+考虑一下`cargo build`的最后一行输出。
 ```text
 Finished dev [unoptimized + debuginfo] target(s) in 29.80s
 ```
-`[unoptimized + debuginfo]`表示已经生成了一个`debug build`，编译后的代码将放置在`target/debug/`目录下,`cargo run`将运行调试编译的代码。
+`[unoptimized + debuginfo]`表示已经生成了一个调试构建，编译后的代码将放置在`target/debug/`目录下，`cargo run`将运行调试编译的代码。
 
-`Release build`比`debug build`更优化。它们也省略了一些检查，比如调试断言和整数溢出检查。用 `cargo build --release`, `cargo run --release`, 或 `rustc -O`编译。(并且，`rustc`有多个其他优化构建的选项，比如`-C opt-level`)。由于额外的优化，这通常会比调试编译花费更多时间。
+发布构建比调试构建更多的优化。它们也省略了一些检查，比如调试断言和整数溢出检查。用 `cargo build --release`, `cargo run --release`, 或 `rustc -O`编译。(并且，`rustc`有多个其他优化构建的选项，比如`-C opt-level`)。由于额外的优化，这通常会比调试构建花费更多时间。
 
 请看下面的`"cargo build --release"`运行的最后一行输出。
 ```text
 Finished release [optimized] target(s) in 1m 01s
 ```
-`[optimed]`表示已经生成了一个版本构建。编译后的代码将被放置在`target/release/`目录下。`cargo run --release`将运行发行版。
+`[optimed]`表示已经生成了一个发布构建。编译后的代码将被放置在`target/release/`目录下。`cargo run --release`将运行发布版。
 
 参见 [Cargo 配置文件]，以了解更多关于调试构建(使用`dev`配置文件)和发布构建(使用`release`配置文件)之间的区别。
 
