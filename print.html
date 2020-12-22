@@ -212,13 +212,13 @@ lto = true
 <p>这将导致 “fat” LTO，它对依赖图中的所有crate进行优化。</p>
 <p>或者，在<code>Cargo.toml</code>中使用<code>lto = &quot;thin&quot;</code>来使用 “thin”LTO，这是一种不那么激进的LTO形式，通常和 “fat”LTO一样好用，而不会增加那么多的构建时间。</p>
 <p>请参阅<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#lto">Cargo LTO文档</a>了解更多关于<code>lto</code>设置的细节，以及关于为不同配置文件启用特定设置的细节。</p>
-<h2><a class="header" href="#codegen-units" id="codegen-units">Codegen Units</a></h2>
-<p>Rust 编译器会将你的 crate 分割成多个 <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units">codegen units</a>，以实现并行化（从而加快）编译。然而，这可能会导致它错过一些潜在的优化。如果你想以更大的编译时间为代价来潜在地提高运行时性能，你可以将单元数设置为一个。</p>
+<h2><a class="header" href="#代码生成单元" id="代码生成单元">代码生成单元</a></h2>
+<p>Rust 编译器会将你的 crate 分割成多个 <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units">代码生成单元</a>，以实现并行化（从而加快）编译。然而，这可能会导致它错过一些潜在的优化。如果你想以更大的编译时间为代价来潜在地提高运行时性能，你可以将单元数设置为一个。</p>
 <pre><code class="language-toml">[profile.release]
 codegen-units = 1
 </code></pre>
 <p><a href="https://likebike.com/posts/How_To_Write_Fast_Rust_Code.html#emit-asm"><strong>Example</strong></a>.</p>
-<p>要注意的是，codegen单位数是一个启发式的，因此较小的单位数实际上会导致程序较慢。</p>
+<p>要注意的是，代码生成单元数是一个启发式的，因此较小的单位数实际上会导致程序较慢。</p>
 <h2><a class="header" href="#使用cpu专用指令" id="使用cpu专用指令">使用CPU专用指令</a></h2>
 <p>如果你不太关心你的二进制文件在旧的（或其他类型的）处理器上的兼容性，你可以告诉编译器生成特定于<a href="https://doc.rust-lang.org/1.41.1/rustc/codegen-options/index.html#target-cpu">特定CPU架构</a>的最新（可能是最快的）指令。</p>
 <p>例如，如果你把<code>-C target-cpu=native</code>传给rustc，它将使用当前CPU的最佳指令。</p>
