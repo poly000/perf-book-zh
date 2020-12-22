@@ -1,8 +1,8 @@
 [book]
-title = "The Rust Performance Book"
+title = "Rust性能优化"
 authors = ["Nicholas Nethercote"]
 src = "src"
-language = "en"
+language = "zh"
 multilingual = false
 
 [build]
@@ -14,5 +14,5 @@ edition = "2018"
 [output.html]
 curly-quotes = true
 default-theme = "rust"
-git-repository-url = "https://github.com/nnethercote/perf-book"
-site-url = "https://nnethercote.github.io/perf-book/"
+git-repository-url = "https://github.com/poly000/perf-book-zh"
+site-url = "https://poly000.github.io/perf-book-zh/"
