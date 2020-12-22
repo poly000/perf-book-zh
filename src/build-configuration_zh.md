@@ -47,18 +47,18 @@ lto = true
 
 [Cargo LTO文档]: https://doc.rust-lang.org/cargo/reference/profiles.html#lto
 
-## Codegen Units
+## 代码生成单元
 
-Rust 编译器会将你的 crate 分割成多个 [codegen units]，以实现并行化（从而加快）编译。然而，这可能会导致它错过一些潜在的优化。如果你想以更大的编译时间为代价来潜在地提高运行时性能，你可以将单元数设置为一个。
+Rust 编译器会将你的 crate 分割成多个 [代码生成单元]，以实现并行化（从而加快）编译。然而，这可能会导致它错过一些潜在的优化。如果你想以更大的编译时间为代价来潜在地提高运行时性能，你可以将单元数设置为一个。
 ```toml
 [profile.release]
 codegen-units = 1
 ```
 [**Example**](https://likebike.com/posts/How_To_Write_Fast_Rust_Code.html#emit-asm).
 
-[codegen units]: https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units
+[代码生成单元]: https://doc.rust-lang.org/rustc/codegen-options/index.html#codegen-units
 
-要注意的是，codegen单位数是一个启发式的，因此较小的单位数实际上会导致程序较慢。
+要注意的是，代码生成单元数是一个启发式的，因此较小的单位数实际上会导致程序较慢。
 
 ## 使用CPU专用指令
 
