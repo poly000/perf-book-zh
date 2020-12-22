@@ -1,6 +1,6 @@
 # perf-book—zh
 
-RUST性能手册中文版
+Rust性能手册中文版
 
 ## 查看
 
