@@ -4,4 +4,4 @@
 
 **Written by Nicholas Nethercote and others**
 
-**Chinese translated by blues-star,poly000 (and others)**
+**Chinese translation by blues-star, poly000, sinsong, lemon-miranda**
