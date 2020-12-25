@@ -235,13 +235,12 @@ panic = &quot;abort&quot;
 <a href="https://blog.rust-lang.org/inside-rust/2020/11/11/exploring-pgo-for-the-rust-compiler.html"><strong>Example</strong></a>.</p>
 <p>这是一种先进的技术，需要花费一些精力来设置，但在某些情况下是值得的。详情请看<a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">rustc PGO documentation</a>。</p>
 <h1><a class="header" href="#linting" id="linting">Linting</a></h1>
-<p>[Clippy]是一个用来捕捉Rust代码中常见错误的lints集合。它是运行在Rust代码上的一个优秀工具。它还可以帮助提高性能，因为许多lints与可能导致次优性能的代码模式有关。
-[Clippy]: https://github.com/rust-lang/rust-clippy</p>
+<p><a href="https://github.com/rust-lang/rust-clippy">Clippy</a>是一个用来捕获Rust代码中常见错误的lints集合。它是运行在Rust代码上的一个优秀工具。它还可以帮助提高性能，因为许多lints与可能导致次优性能的代码模式有关。</p>
 <p>安装后，很容易运行它</p>
 <pre><code class="language-text">cargo clippy
 </code></pre>
-<p>通过访问<a href="https://rust-lang.github.io/rust-clippy/master/">lint list</a>并取消选择除 “Perf “以外的所有lints组，可以看到完整的性能lints列表。</p>
-<p>除了让代码更快之外，性能上的lint建议通常会让代码更简单、更习惯，所以即使是不热门的代码也值得遵循。</p>
+<p>通过访问<a href="https://rust-lang.github.io/rust-clippy/master/">lint list</a>并取消选择除Perf以外的所有lints组，可以看到完整的性能lints列表。</p>
+<p>除了让代码更快之外，性能上的lint建议通常会让代码更简单、更地道，所以即使是不热门的代码也值得遵循。</p>
 <h1><a class="header" href="#profiling" id="profiling">Profiling</a></h1>
 <p>在优化程序时，你还需要一种方法来确定程序的哪些部分是 “热 “的（执行频率足以影响运行时间），值得修改。这一点最好通过Profiling来完成。</p>
 <h2><a class="header" href="#profilers" id="profilers">Profilers</a></h2>
