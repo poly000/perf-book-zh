@@ -5,7 +5,7 @@
 - [简介](introduction_zh.md)
 - [基准分析](benchmarking_zh.md)
 - [构建配置](build-configuration_zh.md)
-- [Linting](linting_zh.md)
+- [语言分析](linting_zh.md)
 - [性能分析](profiling_zh.md)
 - [初始化](inlining_zh.md)
 - [散列](hashing_zh.md)
