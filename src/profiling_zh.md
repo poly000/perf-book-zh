@@ -35,11 +35,11 @@ debug = 1
 
 [Cargo文档]: https://doc.rust-lang.org/cargo/reference/profiles.html#debug
 
-## 符号反重整
+## 符号反混淆
 
-Rust在编译代码中使用一个重整机制编码函数名。如果一个性能分析器不知道这个方案，它的输出可能会包含像这样的符号名
+Rust在编译代码中使用一个混淆机制编码函数名。如果一个性能分析器不知道这个机制，它的输出可能会包含像这样的符号名
 `_ZN3foo3barE`或`_ZN28_$u7b$$u7b$closure$u7d$$u7d$E`或`_ZN28_$u7b$$$u7d$E`或
 `_ZN88_$LT$core.result.Result$LT$$u21$$C$$u20$E$GT$u20$as$u20$std.process.Termination$GT$6report17hfc41d0da4a40b3e8E`。
-像这样的名字，可以用[`rustfilt`]手动反重整。
+像这样的名字，可以用[`rustfilt`]手动反混淆。
 
 [`rustfilt`]: https://crates.io/crates/rustfilt
