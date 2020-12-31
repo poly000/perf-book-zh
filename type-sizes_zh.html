@@ -241,7 +241,7 @@ enum A {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>这减少了类型大小，但代价是需要为<code>A::Z</code>变体分配一个额外的堆。如果<code>A::Z</code>变体比较少见，这更有可能成为提高性能的好方法。<code>Box</code>也会使<code>A::Z</code>的使用略微不符合人的直觉，特别是在<code>匹配</code>模式中。
+<p>这减少了类型大小，但代价是需要为<code>A::Z</code>变体分配一个额外的堆。如果<code>A::Z</code>变体比较少见，这更有可能成为提高性能的好方法。<code>Box</code>也会使<code>A::Z</code>的使用略微不合人体工程学，特别是在 <code>match</code> 模式中。
 <a href="https://github.com/rust-lang/rust/pull/37445/commits/a920e355ea837a950b484b5791051337cd371f5d"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/55346/commits/38d9277a77e982e49df07725b62b21c423b6428e"><strong>Example 2</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64302/commits/b972ac818c98373b6d045956b049dc34932c41be"><strong>Example 3</strong></a>,
@@ -252,8 +252,8 @@ enum A {
 <p>通常可以通过使用较小的整数类型来缩小类型。例如，虽然对索引使用 “usize “是最自然的，但将索引存储为 “u32”、”u16”、甚至 “u8”，然后在使用点强制使用 “usize”，往往是合理的。
 <a href="https://github.com/rust-lang/rust/pull/49993/commits/4d34bfd00a57f8a8bdb60ec3f908c5d4256f8a9a"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/50981/commits/8d0fad5d3832c6c1f14542ea0be038274e454524"><strong>Example 2</strong></a>.</p>
-<h2><a class="header" href="#boxed-slices" id="boxed-slices">Boxed Slices</a></h2>
-<p>Rust向量包含三个词：一个长度、一个容量和一个指针。如果你有一个将来不太可能被改变的向量，你可以用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice"><code>Vec::into_boxed_slice</code></a>把它转换为一个<em>boxed slice</em>。一个boxed slice只包含两个词，一个长度和一个指针。任何多余的元素容量都会被丢弃，这可能会导致重新分配。</p>
+<h2><a class="header" href="#装箱的切片" id="装箱的切片">装箱的切片</a></h2>
+<p>Rust向量包含三个 “字”：一个长度、一个容量和一个指针。如果你有一个将来不太可能被改变的向量，你可以用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice"><code>Vec::into_boxed_slice</code></a>把它转换为一个<em>boxed slice</em>。一个boxed slice只包含两个词，一个长度和一个指针。任何多余的元素容量都会被丢弃，这可能会导致重新分配。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -266,9 +266,9 @@ assert_eq!(size_of_val(&amp;bs), 2 * size_of::&lt;usize&gt;());
 <span class="boring">}
 </span></code></pre></pre>
 <p>盒状切片可以用<a href="https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec"><code>slice::into_vec</code></a>转换回一个矢量，而无需任何克隆或重新分配。</p>
-<h2><a class="header" href="#avoiding-regressions" id="avoiding-regressions">Avoiding Regressions</a></h2>
+<h2><a class="header" href="#避免退步" id="避免退步">避免退步</a></h2>
 <p>如果一个类型足够热，它的大小会影响性能，那么最好使用静态断言来确保它不会意外地回归。下面的例子使用了<a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a>中的一个宏。</p>
-<pre><code class="language-rust ignore">  // This type is used a lot. Make sure it doesn't unintentionally get bigger.
+<pre><code class="language-rust ignore">  // 这个类型被大量使用。确保它不会无意识地变大。
   #[cfg(target_arch = &quot;x86_64&quot;)]
   static_assertions::assert_eq_size!(HotType, [u8; 64]);
 </code></pre>

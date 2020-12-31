@@ -172,7 +172,7 @@
 <p><a href="https://docs.google.com/presentation/d/1q-c7UAyrUlM-eZyTo1pd8SZ0qwA_wYxmPZVOQkoDmH4/">Rust Container Cheat Sheet</a>有常见的Rust类型的可视化，是下面章节的绝佳配套。</p>
 <h2><a class="header" href="#性能分析" id="性能分析">性能分析</a></h2>
 <p>如果通用性能分析器显示 “malloc”、”free”和相关函数为热函数，那么很可能值得尝试降低分配率或使用其他分配器。</p>
-<p><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a>是降低分配率时可以使用的一个优秀的剖析器。它能精确地识别热分配点及其分配率。确切的结果会有所不同，但使用rustc的经验表明，每执行一百万条指令减少10条分配率可以有可衡量的性能改进（例如~1%）。</p>
+<p><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a>是降低分配率时可以使用的一个优秀的剖析器。它在Linux和一些Unix系统上可用。它能精确地识别热分配点及其分配率。确切的结果会有所不同，但使用rustc的经验表明，每减少10分配每百万指令率可以有可衡量的性能改进（例如，约1%）。</p>
 <p>下面是DHAT的一些输出示例。</p>
 <pre><code class="language-text">AP 1.1/25 (2 children) {
   Total:     54,533,440 bytes (4.02%, 2,714.28/Minstr) in 458,839 blocks (7.72%, 22.84/Minstr), avg size 118.85 bytes, avg lifetime 1,127,259,403.64 instrs (5.61% of program duration)
@@ -214,26 +214,30 @@
 <p>用普通方法创建一个新的、空的<code>Vec</code>。
 (<a href="https://doc.rust-lang.org/std/macro.vec.html"><code>vec![]</code></a> 或 <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.new"><code>Vec::new</code></a> 或 <a href="https://doc.rust-lang.org/std/default/trait.Default.html#tymethod.default"><code>Vec::default</code></a>）的长度和容量为零，不需要进行堆分配。如果你反复将单个元素推到<code>Vec</code>的末端，它将周期性地重新分配。增长策略没有被指定，但在写这篇文章的时候，它使用了一个准双倍策略，结果是以下容量。0, 4, 8, 16, 32, 64, 等等. (它直接从0跳到4，而不是通过1和2，因为这在实践中<a href="https://github.com/rust-lang/rust/pull/72227">避免了许多分配</a>。) 随着向量的增长，重新分配的频率将以指数形式减少，但可能浪费的多余容量将以指数形式增加。</p>
 <p>这种增长策略对于可增长的数据结构来说是典型的，在一般情况下是合理的，但如果你事先知道一个向量的可能长度，你可以做的往往更好。如果你有一个热向量分配站点（例如一个热的 <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.push"><code>Vec::push</code></a>调用），值得使用<a href="https://doc.rust-lang.org/std/macro.eprintln.html"><code>eprintln!</code></a>来打印该站点的向量长度，然后做一些后处理（例如使用<a href="https://github.com/nnethercote/counts/"><code>counts</code></a>）来确定长度分布。例如，你可能有很多短向量，也可能有较少的超长向量，优化分配站点的最佳方式也会相应变化。</p>
-<h3><a class="header" href="#short-vecs" id="short-vecs">Short <code>Vec</code>s</a></h3>
+<h3><a class="header" href="#短-vec" id="短-vec">短 <code>Vec</code></a></h3>
 <p>如果你有很多短向量，你可以使用<a href="https://crates.io/crates/smallvec"><code>smallvec</code></a>crate中的<code>SmallVec</code>类型。<code>SmallVec&lt;[T;N]&gt;</code>是<code>Vec</code>的替代物，它可以在<code>SmallVec</code>本身中存储<code>N</code>个元素，如果元素数量超过这个数量，就会切换到堆分配。(还需要注意的是，<code>vec![]</code>字元必须用<code>smallvec![]</code>字元代替。)
 <a href="https://github.com/rust-lang/rust/pull/50565/commits/78262e700dc6a7b57e376742f344e80115d2d3f2"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/55383/commits/526dc1421b48e3ee8357d58d997e7a0f4bb26915"><strong>Example 2</strong></a>.</p>
 <p><code>SmallVec</code>如果使用得当，可以可靠地降低分配率，但使用它并不能保证提高性能。对于正常的操作，它比<code>Vec</code>稍慢，因为它必须总是检查元素是否被堆分配。另外，如果<code>N</code>很高或者<code>T</code>很大，那么<code>SmallVec&lt;[T; N]&gt;</code>本身就会比<code>Vec&lt;T&gt;</code>大，复制<code>SmallVec</code>值的速度会比较慢。和以往一样，需要通过基准测试来确认优化是否有效。</p>
 <p>如果你有很多短向量，并且你精确地知道它们的最大长度，[arrayvec]箱子中的ArrayVec比SmallVec更好。它不需要回落到堆分配，这使得它更快一些。
 <a href="https://github.com/rust-lang/rust/pull/74310/commits/c492ca40a288d8a85353ba112c4d38fe87ef453e"><strong>Example</strong></a>.</p>
-<h3><a class="header" href="#longer-vecs" id="longer-vecs">Longer <code>Vec</code>s</a></h3>
+<h3><a class="header" href="#更长的-vec" id="更长的-vec">更长的 <code>Vec</code></a></h3>
 <p>如果你知道一个向量的最小或精确大小，你可以用<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity"><code>Vec::with_capacity</code></a>、<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve"><code>Vec::reserve</code></a>或<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve_exact"><code>Vec::reserve_exact</code></a>来保留一个特定的容量。例如，如果你知道一个向量将成长为至少有20个元素，这些函数可以使用一次分配立即提供一个至少有20个容量的向量，而一次推送一个项目将导致四次分配（对于4、8、16和32的容量）。
 <a href="https://github.com/rust-lang/rust/pull/77990/commits/a7f2bb634308a5f05f2af716482b67ba43701681"><strong>Example</strong></a>.</p>
 <p>如果你知道一个向量的最大长度，上述函数也可以让你不分配多余的不必要的空间。同样，<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.shrink_to_fit"><code>Vec::shrink_to_fit</code></a>也可以用来尽量减少浪费的空间，但要注意它可能会引起重新分配。</p>
 <h2><a class="header" href="#string" id="string"><code>String</code></a></h2>
 <p>一个<a href="https://doc.rust-lang.org/std/string/struct.String.html"><code>String</code></a>包含堆分配的字节。<code>String</code>的表示和操作与<code>Vec&lt;u8&gt;</code>非常相似。许多与增长和容量有关的<code>Vec</code>方法与<code>String</code>有对应关系，如<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.with_capacity"><code>String::with_capacity</code></a>。</p>
 <p>来自<a href="https://crates.io/crates/smallstr"><code>smallstr</code></a>箱子的<code>SmallString</code>类型与<code>SmallVec</code>类型类似。</p>
+<p>来自 <a href="https://crates.io/crates/smartstring"><code>smartstring</code></a> crate的 <code>String</code> 类型是<code>String</code>的插入式实现，
+避免了少于三个 “字” 的<code>String</code>进行堆分配。 在64位平台上，这通常是任意少于24字节的字符串，
+包括了所有含有23个或更少ASCII字符的字符串。
+<a href="https://github.com/djc/topfew-rs/commit/803fd566e9b889b7ba452a2a294a3e4df76e6c4c"><strong>Example</strong></a>.</p>
 <p>请注意，<code>format!</code>宏产生一个<code>String</code>，这意味着它进行了分配。如果你能通过使用字符串文字来避免<code>format!</code>的调用，就能避免这种分配。
 <a href="https://github.com/rust-lang/rust/pull/55905/commits/c6862992d947331cd6556f765f6efbde0a709cf9"><strong>Example</strong></a>.</p>
-<h2><a class="header" href="#hash-tables" id="hash-tables">Hash tables</a></h2>
-<p><a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html"><code>HashSet</code></a>和<a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap</code></a>是哈希表。在分配方面，它们的表示和操作与<code>Vec</code>的表示和操作相似：它们有一个单一的连续的堆分配，存放键和值，随着表的增长，必要时重新分配。许多与增长和容量有关的<code>Vec</code>方法都有与<code>HashSet</code>/<code>HashMap</code>对应的方法，如<a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.with_capacity"><code>HashSet::with_capacity</code></a>。</p>
+<h2><a class="header" href="#散列表" id="散列表">散列表</a></h2>
+<p><a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html"><code>HashSet</code></a>和<a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap</code></a>是散列表。在分配方面，它们的表示和操作与<code>Vec</code>的表示和操作相似：它们有一个单一的连续的堆分配，存放键和值，随着表的增长，必要时重新分配。许多与增长和容量有关的<code>Vec</code>方法都有与<code>HashSet</code>/<code>HashMap</code>对应的方法，如<a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.with_capacity"><code>HashSet::with_capacity</code></a>。</p>
 <h2><a class="header" href="#cow" id="cow"><code>Cow</code></a></h2>
-<p>有时候你有一些借来的数据，比如<code>&amp;str</code>，大部分是只读的，但偶尔需要修改。每次都克隆数据会很浪费。相反，你可以通过<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html"><code>Cow</code></a>类型使用 “write-on-clone “语义，它既可以表示借来的数据，也可以表示拥有的数据。</p>
+<p>有时候你有一些借用数据，比如<code>&amp;str</code>，大部分是只读的，但偶尔需要修改。每次都克隆数据会很浪费。相反，你可以通过<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html"><code>Cow</code></a>类型使用 “write-on-clone “语义，它既可以表示借来的数据，也可以表示拥有的数据。</p>
 <p>通常情况下，当从一个借来的值<code>x</code>开始时，你用<code>Cow::Borrowed(x)</code>把它包在一个<code>Cow</code>中。因为<code>Cow</code>实现了<a href="https://doc.rust-lang.org/std/ops/trait.Deref.html"><code>Deref</code></a>，所以你可以直接在它所包含的数据上调用非修改的方法。如果需要修改，<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html#method.to_mut"><code>Cow::to_mut</code></a>将获得一个对所拥有的值的可修改引用，必要时进行克隆。</p>
 <p><code>Cow</code>的工作可能会很麻烦，但它往往是值得的。
 <a href="https://github.com/rust-lang/rust/pull/37064/commits/b043e11de2eb2c60f7bfec5e15960f537b229e20"><strong>Example 1</strong></a>,
@@ -261,7 +265,7 @@ assert_eq!(v1.capacity(), 99);
 <p><code>ToOwned::to_owned</code>]是为许多常见类型实现的。它从借来的数据中创建拥有的数据，通常是通过克隆的方式，因此经常会引起堆分配。例如，它可以用来从一个<code>&amp;str</code>创建一个<code>String</code>。</p>
 <p>有时，可以通过在结构中存储对借入数据的引用而不是自有副本来避免<code>to_owned</code>调用。这需要在结构体上做终身注解，使代码复杂化，只有在分析和基准测试表明值得时才可以这样做。
 <a href="https://github.com/rust-lang/rust/pull/50855/commits/6872377357dbbf373cfd2aae352cb74cfcc66f34"><strong>Example</strong></a>.</p>
-<h2><a class="header" href="#reusing-collections" id="reusing-collections">Reusing Collections</a></h2>
+<h2><a class="header" href="#重用集合" id="重用集合">重用集合</a></h2>
 <p>有时你需要分阶段建立一个集合，如<code>Vec</code>。通常情况下，通过修改一个<code>Vec</code>比建立多个<code>Vec</code>然后将它们组合起来更好。</p>
 <p>例如，如果你有一个函数 “do_stuff”，产生一个 “Vec”，可能会被多次调用。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">

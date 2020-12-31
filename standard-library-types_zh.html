@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#standard-library-types" id="standard-library-types">Standard Library Types</a></h1>
-<p>值得阅读常见标准库类型的文档--如<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>和<a href="https://doc.rust-lang.org/std/rc/struct.Rc.html"><code>Rc</code></a>--以找到有趣的函数，有时可以用来提高性能。</p>
+                        <h1><a class="header" href="#标准库类型" id="标准库类型">标准库类型</a></h1>
+<p>值得阅读常见标准库类型的文档--如<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>和<a href="https://doc.rust-lang.org/std/rc/struct.Rc.html"><code>Rc</code></a>/<a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc</code></a>--以找到有趣的函数，有时可以用来提高性能。</p>
 <p>还值得了解标准库类型的高性能替代品，如<a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code>RwLock</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html"><code>Condvar</code></a>和<a href="https://doc.rust-lang.org/std/sync/struct.Once.html"><code>Once</code></a>。</p>
 <h2><a class="header" href="#vec" id="vec"><code>Vec</code></a></h2>
 <p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove"><code>Vec::remove</code></a>删除某一特定索引上的一个元素，并将随后的所有元素向左移动一个，这样做是O(n)。<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove"><code>Vec::swap_remove</code></a> 用最后一个元素替换特定索引上的一个元素，虽然不保留排序，但也是O(1)。</p>
@@ -195,8 +195,11 @@
 </span></code></pre></pre>
 <p><a href="https://github.com/rust-lang/rust/pull/50051/commits/5070dea2366104fb0b5c344ce7f2a5cf8af176b0"><strong>Example</strong></a>.</p>
 <p><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or"><code>Option::map_or</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.unwrap_or"><code>Option::unwrap_or</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.or"><code>Result::or</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or"><code>Result::map_or</code></a>和<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or"><code>Result::unwrap_or</code></a>有类似的替代方案。</p>
-<h2><a class="header" href="#rc" id="rc"><code>Rc</code></a></h2>
-<p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.make_mut"><code>Rc::make_mut</code></a>为<code>Rc</code>提供了write-on-write语义。它对<code>Rc</code>做了一个可改变的引用。如果refcount大于1，它将<code>clone</code>内部值以确保唯一的所有权；否则，它将修改原始值。它不经常需要，但偶尔会非常有用。
+<h2><a class="header" href="#rcarc" id="rcarc"><code>Rc</code>/<code>Arc</code></a></h2>
+<p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.make_mut"><code>Rc::make_mut</code></a>/<a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.make_mut"><code>Arc::make_mut</code></a> 提供了写时克隆语义。他们创造一个到
+<code>Rc</code>/<code>Arc</code> 的可变借用。如果引用计数比一大，他们
+将克隆内部值以确保独立的所有权；否则，他们将修改源值。
+它们不经常被需要，但他们可能极有用。
 <a href="https://github.com/rust-lang/rust/pull/65198/commits/3832a634d3aa6a7c60448906e6656a22f7e35628"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/65198/commits/75e0078a1703448a19e25eac85daaa5a4e6e68ac"><strong>Example 2</strong></a>.</p>
 <h2><a class="header" href="#mutex-rwlock-condvar-and-once" id="mutex-rwlock-condvar-and-once"><code>Mutex</code>, <code>RwLock</code>, <code>Condvar</code>, and <code>Once</code></a></h2>
