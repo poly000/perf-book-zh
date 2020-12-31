@@ -74,7 +74,7 @@ enum A {
     Z(Box<(i32, LargeType)>),
 }
 ```
-这减少了类型大小，但代价是需要为`A::Z`变体分配一个额外的堆。如果`A::Z`变体比较少见，这更有可能成为提高性能的好方法。`Box`也会使`A::Z`的使用略微不符合人的直觉，特别是在`匹配`模式中。
+这减少了类型大小，但代价是需要为`A::Z`变体分配一个额外的堆。如果`A::Z`变体比较少见，这更有可能成为提高性能的好方法。`Box`也会使`A::Z`的使用略微不合人体工程学，特别是在 `match` 模式中。
 [**Example 1**](https://github.com/rust-lang/rust/pull/37445/commits/a920e355ea837a950b484b5791051337cd371f5d),
 [**Example 2**](https://github.com/rust-lang/rust/pull/55346/commits/38d9277a77e982e49df07725b62b21c423b6428e),
 [**Example 3**](https://github.com/rust-lang/rust/pull/64302/commits/b972ac818c98373b6d045956b049dc34932c41be),
@@ -88,9 +88,9 @@ enum A {
 [**Example 1**](https://github.com/rust-lang/rust/pull/49993/commits/4d34bfd00a57f8a8bdb60ec3f908c5d4256f8a9a),
 [**Example 2**](https://github.com/rust-lang/rust/pull/50981/commits/8d0fad5d3832c6c1f14542ea0be038274e454524).
 
-## Boxed Slices
+## 装箱的切片
 
-Rust向量包含三个词：一个长度、一个容量和一个指针。如果你有一个将来不太可能被改变的向量，你可以用[`Vec::into_boxed_slice`]把它转换为一个*boxed slice*。一个boxed slice只包含两个词，一个长度和一个指针。任何多余的元素容量都会被丢弃，这可能会导致重新分配。
+Rust向量包含三个 “字”：一个长度、一个容量和一个指针。如果你有一个将来不太可能被改变的向量，你可以用[`Vec::into_boxed_slice`]把它转换为一个*boxed slice*。一个boxed slice只包含两个词，一个长度和一个指针。任何多余的元素容量都会被丢弃，这可能会导致重新分配。
 ```rust
 # use std::mem::{size_of, size_of_val};
 let v: Vec<u32> = vec![1, 2, 3];
@@ -104,11 +104,11 @@ assert_eq!(size_of_val(&bs), 2 * size_of::<usize>());
 [`Vec::into_boxed_slice`]: https://doc.rust-lang.org/std/vec/struct.Vec.html#method.into_boxed_slice
 [`slice::into_vec`]: https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec
 
-## Avoiding Regressions
+## 避免退步
 
 如果一个类型足够热，它的大小会影响性能，那么最好使用静态断言来确保它不会意外地回归。下面的例子使用了[`static_assertions`]中的一个宏。
 ```rust,ignore
-  // This type is used a lot. Make sure it doesn't unintentionally get bigger.
+  // 这个类型被大量使用。确保它不会无意识地变大。
   #[cfg(target_arch = "x86_64")]
   static_assertions::assert_eq_size!(HotType, [u8; 64]);
 ```

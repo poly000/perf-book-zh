@@ -2,7 +2,7 @@
 
 虽然本书的主要内容是提高Rust程序的性能，但本节的内容是关于减少Rust程序的编译时间，因为这是很多人感兴趣的相关话题。
 
-## Linking
+## 链接
 
 编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序的时候。在Linux和Windows上，你可以选择lld作为链接器，这比默认的链接器快得多。
 
@@ -26,17 +26,17 @@ lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows�
 
 [GitHub Issue]: https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211
 
-## Incremental Compilation
+## 增量编译
 
-Rust编译器支持[增量编译]，这可以避免在重新编译一个装箱时重做工作。它可以大大加快编译速度，但代价是有时会使生成的可执行文件运行得更慢一些。出于这个原因，它只在调试编译时默认启用。如果你想在发布版本的编译中也启用它，请在`Cargo.toml`文件中添加以下行。
+Rust编译器支持[增量编译]，这可以避免在重新编译一个crate时重做工作。它可以大大加快编译速度，但代价是有时会使生成的可执行文件运行得更慢一些。出于这个原因，它只在调试编译时默认启用。如果你想在发布版本的编译中也启用它，请在`Cargo.toml`文件中添加以下行。
 ```toml
 [profile.release]
 incremental = true
 ```
-关于 "lto "设置以及为不同的配置文件启用特定设置的详细信息，请参见[Cargo documentation]。
+关于`incremental`设置以及为不同的配置文件启用特定设置的详细信息，请参见[Cargo文档]。
 
 [增量编译]: https://blog.rust-lang.org/2016/09/08/incremental.html
-[Cargo documentation]: https://doc.rust-lang.org/cargo/reference/profiles.html#incremental
+[Cargo文档]: https://doc.rust-lang.org/cargo/reference/profiles.html#incremental
 
 ## 可视化
 
@@ -44,13 +44,15 @@ Rust编译器有一个功能，可以让你可视化编译你的程序。用这�
 ```text
 cargo +nightly build -Ztimings
 ```
-完成后，它将打印一个HTML文件的名称。在网络浏览器中打开该文件。它包含了一个[Gantt chart]，显示了你的程序中各个箱子之间的依赖关系。这显示了你的装箱图中有多少并行性，这可以说明是否应该将任何串行化编译的大装箱打散。
+完成后，它将打印一个HTML文件的名称。在网络浏览器中打开该文件。它包含了一个[Gantt chart]，显示了你的程序中各个箱子之间的依赖关系。这显示了你的装箱图中有多少并行性，这可以说明是否应该将任何串行化编译的大crate应被打断。见 [此文档][Z-timings] for more
+details on how to read the graphs.
 
 [Gantt chart]: https://en.wikipedia.org/wiki/Gantt_chart
+[Z-timings]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#timings
 
 ## LLVM IR
 
-Rust编译器的后端使用[LLVM]。LLVM的执行会占到编译时间的很大一部分，尤其是当Rust编译器的前端会产生大量的[IR]，这需要LLVM花很长的时间去优化。
+Rust编译器的后端使用[LLVM]。LLVM的执行会占到编译时间的很大一部分，尤其是当Rust编译器的前端产生大量的[IR]时，这需要LLVM花很长的时间去优化。
 
 [LLVM]: https://llvm.org/
 [IR]: https://en.wikipedia.org/wiki/Intermediate_representation

@@ -12,4 +12,4 @@ cargo clippy
 
 [lint list]: https://rust-lang.github.io/rust-clippy/master/
 
-除了让代码更快之外，性能上的lint建议通常会让代码更简单、更地道，所以即使是不热门的代码也值得遵循。
+除了让代码更快之外，性能上的lint建议通常会让代码更简单、更地道，所以即使是不频繁执行的代码也值得遵循。

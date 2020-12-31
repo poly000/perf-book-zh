@@ -1,11 +1,12 @@
-# Standard Library Types
+# 标准库类型
 
-值得阅读常见标准库类型的文档--如[`Vec`]、[`Option`]、[`Result`]和[`Rc`]--以找到有趣的函数，有时可以用来提高性能。
+值得阅读常见标准库类型的文档--如[`Vec`]、[`Option`]、[`Result`]和[`Rc`]/[`Arc`]--以找到有趣的函数，有时可以用来提高性能。
 
 [`Vec`]: https://doc.rust-lang.org/std/vec/struct.Vec.html
 [`Option`]: https://doc.rust-lang.org/std/option/enum.Option.html
 [`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html
 [`Rc`]: https://doc.rust-lang.org/std/rc/struct.Rc.html
+[`Arc`]: https://doc.rust-lang.org/std/sync/struct.Arc.html
 
 还值得了解标准库类型的高性能替代品，如[`Mutex`]、[`RwLock`]、[`Condvar`]和[`Once`]。
 
@@ -52,13 +53,17 @@ let r = o.ok_or_else(|| expensive()); // evaluates `expensive()` only when neede
 [`Result::map_or`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or
 [`Result::unwrap_or`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or
 
-## `Rc`
+## `Rc`/`Arc`
 
-[`Rc::make_mut`]为`Rc`提供了write-on-write语义。它对`Rc`做了一个可改变的引用。如果refcount大于1，它将`clone`内部值以确保唯一的所有权；否则，它将修改原始值。它不经常需要，但偶尔会非常有用。
+[`Rc::make_mut`]/[`Arc::make_mut`] 提供了写时克隆语义。他们创造一个到
+ `Rc`/`Arc` 的可变借用。如果引用计数比一大，他们
+将克隆内部值以确保独立的所有权；否则，他们将修改源值。
+它们不经常被需要，但他们可能极有用。
 [**Example 1**](https://github.com/rust-lang/rust/pull/65198/commits/3832a634d3aa6a7c60448906e6656a22f7e35628),
 [**Example 2**](https://github.com/rust-lang/rust/pull/65198/commits/75e0078a1703448a19e25eac85daaa5a4e6e68ac).
 
 [`Rc::make_mut`]: https://doc.rust-lang.org/std/rc/struct.Rc.html#method.make_mut
+[`Arc::make_mut`]: https://doc.rust-lang.org/std/sync/struct.Arc.html#method.make_mut
 
 ## `Mutex`, `RwLock`, `Condvar`, and `Once`
 

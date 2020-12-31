@@ -10,7 +10,7 @@
 
 如果通用性能分析器显示 "malloc"、"free"和相关函数为热函数，那么很可能值得尝试降低分配率或使用其他分配器。
 
-[DHAT]是降低分配率时可以使用的一个优秀的剖析器。它能精确地识别热分配点及其分配率。确切的结果会有所不同，但使用rustc的经验表明，每执行一百万条指令减少10条分配率可以有可衡量的性能改进（例如~1%）。
+[DHAT]是降低分配率时可以使用的一个优秀的剖析器。它在Linux和一些Unix系统上可用。它能精确地识别热分配点及其分配率。确切的结果会有所不同，但使用rustc的经验表明，每减少10分配每百万指令率可以有可衡量的性能改进（例如，约1%）。
 
 [DHAT]: https://www.valgrind.org/docs/manual/dh-manual.html
 
@@ -85,7 +85,7 @@ AP 1.1/25 (2 children) {
 [`eprintln!`]: https://doc.rust-lang.org/std/macro.eprintln.html
 [`counts`]: https://github.com/nnethercote/counts/
 
-### Short `Vec`s
+### 短 `Vec`
 
 如果你有很多短向量，你可以使用[`smallvec`]crate中的`SmallVec`类型。`SmallVec<[T;N]>`是`Vec`的替代物，它可以在`SmallVec`本身中存储`N`个元素，如果元素数量超过这个数量，就会切换到堆分配。(还需要注意的是，`vec![]`字元必须用`smallvec![]`字元代替。)
 [**Example 1**](https://github.com/rust-lang/rust/pull/50565/commits/78262e700dc6a7b57e376742f344e80115d2d3f2),
@@ -100,7 +100,7 @@ AP 1.1/25 (2 children) {
 
 [`arrayvec`]: https://crates.io/crates/arrayvec
 
-### Longer `Vec`s
+### 更长的 `Vec`
 
 如果你知道一个向量的最小或精确大小，你可以用[`Vec::with_capacity`]、[`Vec::reserve`]或[`Vec::reserve_exact`]来保留一个特定的容量。例如，如果你知道一个向量将成长为至少有20个元素，这些函数可以使用一次分配立即提供一个至少有20个容量的向量，而一次推送一个项目将导致四次分配（对于4、8、16和32的容量）。
 [**Example**](https://github.com/rust-lang/rust/pull/77990/commits/a7f2bb634308a5f05f2af716482b67ba43701681).
@@ -124,12 +124,19 @@ AP 1.1/25 (2 children) {
 
 [`smallstr`]: https://crates.io/crates/smallstr
 
+来自 [`smartstring`] crate的 `String` 类型是`String`的插入式实现，
+避免了少于三个 “字” 的`String`进行堆分配。 在64位平台上，这通常是任意少于24字节的字符串，
+包括了所有含有23个或更少ASCII字符的字符串。
+[**Example**](https://github.com/djc/topfew-rs/commit/803fd566e9b889b7ba452a2a294a3e4df76e6c4c).
+
+[`smartstring`]: https://crates.io/crates/smartstring
+
 请注意，`format!`宏产生一个`String`，这意味着它进行了分配。如果你能通过使用字符串文字来避免`format!`的调用，就能避免这种分配。
 [**Example**](https://github.com/rust-lang/rust/pull/55905/commits/c6862992d947331cd6556f765f6efbde0a709cf9).
 
-## Hash tables
+## 散列表
 
-[`HashSet`]和[`HashMap`]是哈希表。在分配方面，它们的表示和操作与`Vec`的表示和操作相似：它们有一个单一的连续的堆分配，存放键和值，随着表的增长，必要时重新分配。许多与增长和容量有关的`Vec`方法都有与`HashSet`/`HashMap`对应的方法，如[`HashSet::with_capacity`]。
+[`HashSet`]和[`HashMap`]是散列表。在分配方面，它们的表示和操作与`Vec`的表示和操作相似：它们有一个单一的连续的堆分配，存放键和值，随着表的增长，必要时重新分配。许多与增长和容量有关的`Vec`方法都有与`HashSet`/`HashMap`对应的方法，如[`HashSet::with_capacity`]。
 
 [`HashSet`]: https://doc.rust-lang.org/std/collections/struct.HashSet.html
 [`HashMap`]: https://doc.rust-lang.org/std/collections/struct.HashMap.html
@@ -137,7 +144,7 @@ AP 1.1/25 (2 children) {
 
 ## `Cow`
 
-有时候你有一些借来的数据，比如`&str`，大部分是只读的，但偶尔需要修改。每次都克隆数据会很浪费。相反，你可以通过[`Cow`]类型使用 "write-on-clone "语义，它既可以表示借来的数据，也可以表示拥有的数据。
+有时候你有一些借用数据，比如`&str`，大部分是只读的，但偶尔需要修改。每次都克隆数据会很浪费。相反，你可以通过[`Cow`]类型使用 "write-on-clone "语义，它既可以表示借来的数据，也可以表示拥有的数据。
 
 [`Cow`]: https://doc.rust-lang.org/std/borrow/enum.Cow.html
 
@@ -183,7 +190,7 @@ assert_eq!(v1.capacity(), 99);
 有时，可以通过在结构中存储对借入数据的引用而不是自有副本来避免`to_owned`调用。这需要在结构体上做终身注解，使代码复杂化，只有在分析和基准测试表明值得时才可以这样做。
 [**Example**](https://github.com/rust-lang/rust/pull/50855/commits/6872377357dbbf373cfd2aae352cb74cfcc66f34).
 
-## Reusing Collections
+## 重用集合
 
 有时你需要分阶段建立一个集合，如`Vec`。通常情况下，通过修改一个`Vec`比建立多个`Vec`然后将它们组合起来更好。
 

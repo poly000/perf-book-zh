@@ -1,6 +1,6 @@
 # Iterators
 
-## `collect`
+## `collect` 与 `extend`
 
 [`Iterator::collect`]将一个迭代器转换为一个集合，如`Vec`，它通常需要一个分配。如果该集合只是再次迭代，你应该避免调用`collect`。
 
@@ -16,7 +16,13 @@
 [`extend`]: https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend
 [`append`]: https://doc.rust-lang.org/std/vec/struct.Vec.html#method.append
 
-## Chaining
+最后，当你编写一个迭代器，通常值得实现 [`Iterator::size_hint`] 或 [`ExactSizeIterator::len`] 方法，可能的话。
+使用此迭代器的 `collect` 与 `extend` 调用可能将使用更少的分配，因为他们有此迭代器转出的元素数量的预先信息。
+
+[`Iterator::size_hint`]: https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.size_hint
+[`ExactSizeIterator::len`]: https://doc.rust-lang.org/std/iter/trait.ExactSizeIterator.html#method.len
+
+## 连接
 
 [`chain`]可以非常方便，但也可能比单个迭代器慢。如果可能的话，热迭代器可能值得避免。
 [**Example**](https://github.com/rust-lang/rust/pull/64801/commits/5ca99b750e455e9b5e13e83d0d7886486231e48a).
