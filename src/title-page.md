@@ -1,7 +1,7 @@
-# Rust性能优化
+# <span style="font-size: 150%">The Rust Performance Book</span>
 
-**First published in November 2020**
+**<span style="font-size: 130%">First published in November 2020</span>**
 
-**Written by Nicholas Nethercote and others**
+**Chinese translations by blue-star, poly000, sinsong, lemon-miranda**
 
-**Chinese translation by blues-star, poly000, sinsong, lemon-miranda**
+**<span style="font-size: 130%">Written by Nicholas Nethercote and others</span>**

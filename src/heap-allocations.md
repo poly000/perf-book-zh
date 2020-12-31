@@ -1,6 +1,6 @@
 # Heap Allocations
 
-Heap allocations are moderately expensive. The exact details depend on
+Heap allocations are moderately expensive. The exact details depend on which
 allocator is in use, but each allocation (and deallocation) typically involves
 acquiring a global lock, doing some non-trivial data structure manipulation,
 and possibly executing a system call. Small allocations are not necessarily
@@ -19,11 +19,11 @@ If a general-purpose profiler shows `malloc`, `free`, and related functions as
 hot, then it is likely worth trying to reduce the allocation rate and/or using
 an alternative allocator.
 
-[DHAT] is an excellent profiler to use when reducing allocation rates. It
-precisely identifies hot allocation sites and their allocation rates. Exact
-results will vary, but experience with rustc has shown that reducing allocation
-rates by 10 allocations per million instructions executed can have measurable
-performance improvements (e.g. ~1%).
+[DHAT] is an excellent profiler to use when reducing allocation rates. It works
+on Linux and some other Unixes. It precisely identifies hot allocation
+sites and their allocation rates. Exact results will vary, but experience with
+rustc has shown that reducing allocation rates by 10 allocations per million
+instructions executed can have measurable performance improvements (e.g. ~1%).
 
 [DHAT]: https://www.valgrind.org/docs/manual/dh-manual.html
 
@@ -198,6 +198,14 @@ The `SmallString` type from the [`smallstr`] crate is similar to the `SmallVec`
 type.
 
 [`smallstr`]: https://crates.io/crates/smallstr
+
+The `String` type from the [`smartstring`] crate is a drop-in replacement for
+`String` that avoids heap allocations for strings with less than three words'
+worth of characters. On 64-bit platforms, this is any string that is less than
+24 bytes, which includes all strings containing 23 or fewer ASCII characters.
+[**Example**](https://github.com/djc/topfew-rs/commit/803fd566e9b889b7ba452a2a294a3e4df76e6c4c).
+
+[`smartstring`]: https://crates.io/crates/smartstring
 
 Note that the `format!` macro produces a `String`, which means it performs an
 allocation. If you can avoid a `format!` call by using a string literal, that
