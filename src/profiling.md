@@ -7,34 +7,44 @@ modifying. This is best done via profiling.
 ## Profilers
 
 There are many different profilers available, each with their strengths and
-weaknesses. The following is an incomplete list of profilers that have been
-used successfully on Rust programs.
+weaknesses. The following profilers have been used successfully on Rust
+programs.
 - [perf] is a general-purpose profiler that uses hardware performance counters.
   [Hotspot] and [Firefox Profiler] are good for viewing data recorded by perf.
+  It works on Linux.
+- [AMD μProf] is a general-purpose profiler. It works on Windows and Linux.
+- [flamegraph] is a Cargo command that uses perf/DTrace to profile your
+  code and then displays the results in a flame graph. It works on Linux and
+  all platforms that support DTrace (macOS, FreeBSD, NetBSD, and possibly
+  Windows).
 - [Cachegrind] & [Callgrind] give global, per-function, and per-source-line
-  instruction counts and simulated cache and branch prediction data.
+  instruction counts and simulated cache and branch prediction data. They work
+  on Linux and some other Unixes.
 - [DHAT] is good for finding which parts of the code are causing a lot of
-  allocations, and for giving insight into peak memory usage. [heaptrack] is
-  another heap profiling tool.
+  allocations, and for giving insight into peak memory usage. It works on Linux
+  and some other Unixes. [dhat-rs] is an alternative that is a little less
+  powerful and requires minor changes to your Rust program, but works on all
+  platforms.
+- [heaptrack] is another heap profiling tool. It works on Linux.
 - [`counts`] supports ad hoc profiling, which combines the use of `eprintln!`
   statement with frequency-based post-processing, which is good for getting
-  domain-specific insights into parts of your code.
-- [Coz] performs *causal profiling* to measure optimization potential. It has
-  Rust support via [coz-rs].
-- [flamegraph] is a Cargo command that uses `perf`/`DTrace` to profile your
-  code and then displays the results in a flame graph.
+  domain-specific insights into parts of your code. It works on all platforms.
+- [Coz] performs *causal profiling* to measure optimization potential, and has
+  Rust support via [coz-rs]. It works on Linux. 
 
 [perf]: https://perf.wiki.kernel.org/index.php/Main_Page
 [Hotspot]: https://github.com/KDAB/hotspot
 [Firefox Profiler]: https://profiler.firefox.com/
+[AMD μProf]: https://developer.amd.com/amd-uprof/
+[flamegraph]: https://github.com/flamegraph-rs/flamegraph
 [Cachegrind]: https://www.valgrind.org/docs/manual/cg-manual.html
 [Callgrind]: https://www.valgrind.org/docs/manual/cl-manual.html
 [DHAT]: https://www.valgrind.org/docs/manual/dh-manual.html
+[dhat-rs]: https://github.com/nnethercote/dhat-rs/
 [heaptrack]: https://github.com/KDE/heaptrack
 [`counts`]: https://github.com/nnethercote/counts/
 [Coz]: https://github.com/plasma-umass/coz
 [coz-rs]: https://github.com/plasma-umass/coz/tree/master/rust
-[flamegraph]: https://github.com/flamegraph-rs/flamegraph
 
 ## Debug Info
 
