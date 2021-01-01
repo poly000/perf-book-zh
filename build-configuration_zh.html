@@ -170,7 +170,7 @@
                         <h1><a class="header" href="#构建配置" id="构建配置">构建配置</a></h1>
 <p>正确的构建配置将最大限度地提高Rust程序的性能，而无需对其代码进行任何修改。</p>
 <h2><a class="header" href="#发布构建" id="发布构建">发布构建</a></h2>
-<p>最重要的一个Rust性能提示很简单，但<a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
+<p>最重要的一个Rust性能提示很简单，但<a href="extern/why-my-rust-program-is-so-slow.html">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
 <p>发布版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
 <p>默认为调试构建。如果你运行 “cargo build”、”cargo run “或 “rustc “而不添加任何额外的选项，它们就会被处理。调试构建对调试很有帮助，但不被优化。</p>
 <p>考虑一下<code>cargo build</code>的最后一行输出。</p>

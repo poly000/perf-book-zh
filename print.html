@@ -179,17 +179,20 @@
 <p>其中的一些技术完全是 Rust 所特有的，而一些涉及的想法（通常经过修改）可以应用到其他语言编写的程序中。<a href="general-tips_zh.html">General Tips</a>还包括一些适用于任何编程语言的一般原则。尽管如此，本书主要是关于Rust程序的性能，并不能替代通用的性能分析和优化指南。</p>
 <p>本书还重点介绍了那些实用的、经过验证的技术：许多技巧都附有拉取请求或其他资源的链接，展示了该技巧是如何在真实世界的Rust程序上使用的。</p>
 <p>本书针对的是中级和高级Rust用户。初级Rust用户需要学习的东西已经够多了，这些技术很可能会对他们造成无益的干扰。</p>
-<h1><a class="header" href="#benchmarking" id="benchmarking">Benchmarking</a></h1>
+<h1><a class="header" href="#基准测试" id="基准测试">基准测试</a></h1>
 <p>在优化一个程序时，你需要一种方法来可靠地验证这个改变是否加快了程序。这个过程有时被称为基准测试(benchmarking)。基准测试是一个复杂的话题，彻底的覆盖范围超出了本书的范围，但以下是基本的内容。</p>
-<p>首先，你需要工作负载来衡量。理想情况下，你会有各种工作负载，代表你的程序的实际使用情况。使用真实世界输入的工作负载是最好的，但<a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">microbenchmarks</a>和<a href="https://en.wikipedia.org/wiki/Stress_testing_(software)">压力测试(stress tests)</a>在适度的情况下也是有用的。</p>
-<p>其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的<a href="https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html">基准测试(benchmark tests)</a>是一个简单的起点，但这使用不稳定特性且只在夜版Rust下可用。<a href="https://crates.io/crates/bencher"><code>bencher</code></a>包类似，但对稳定Rust可用。<a href="https://github.com/bheisler/criterion.rs">Criterion</a>是一个更复杂的选择。自定义基准测试框架也是可能的。例如，<a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a>就是用来对Rust编译器进行基准测试的框架。</p>
-<p>当涉及到度量时，有许多选择，正确的选择将取决于被基准化的程序的性质。例如，对批处理程序有意义的指标可能对交互式程序没有意义。在许多情况下，墙面时间是一个显而易见的选择，因为它与用户的感知相对应。然而，它可能会受到大方差的影响。特别是，内存布局的微小变化可能会导致显著但短暂的性能波动。因此，方差较小的其他指标（如周期或指令数）可能是一个合理的选择。</p>
+<p>首先，你需要工作负载来衡量。理想情况下，你会有各种工作负载，代表你的程序的实际使用情况。使用真实世界输入的工作负载是最好的，但适度进行<a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">微基准测试</a>和<a href="https://www.wanweibaike.com/wiki-%E5%A3%93%E5%8A%9B%E6%B8%AC%E8%A9%A6%20(%E8%BB%9F%E9%AB%94)">压力测试(stress tests)</a>也是有用的。</p>
+<p>其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的<a href="https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html">基准测试(benchmark tests)</a>是一个简单的起点，但这使用不稳定特性且只在夜版Rust下可用。
+<a href="https://crates.io/crates/bencher"><code>bencher</code></a>包类似，但对稳定Rust可用。<a href="https://github.com/bheisler/criterion.rs">Criterion</a>是一个更复杂的选择。自定义基准测试框架也是可能的。例如，<a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a>就是用来对Rust编译器进行基准测试的框架。</p>
+<p>当涉及到度量时，有许多选择，正确的选择将取决于被基准化的程序的性质。例如，对批处理程序有意义的指标可能对交互式程序没有意义。在许多情况下，
+墙面时间是一个显而易见的选择，因为它与用户的感知相对应。然而，它可能会受到高变化率的影响。特别是，内存布局的微小变化可能会导致显著但短暂的性能波动。因此，变化率较小的其他指标（如周期或指令数）可能是合理的选择。</p>
 <p>从多个工作负载中总结测量结果也是一个挑战，尽管有多种方法，但并没有一种方法是最完美的。</p>
-<p>良好的基准测试是很难实现的。总而言之，不要过于强调拥有一个完美的基准测试设置，特别是当你开始优化一个程序的时候。一个平庸的设置比没有设置要好得多。对你正在测量的东西保持开放的心态，随着时间的推移，你可以在了解你的程序的性能特点后进行基准测试改进。</p>
+<p>良好的基准测试是很难实现的。总而言之，不要过于强调拥有一个完美的基准测试设置，特别是当你刚开始优化一个程序的时候。
+一个平庸的设置比没有设置要好得多。对你正在测量的东西保持开放的心态，随着时间的推移，你可以在了解你的程序的性能特点后进行基准测试改进。</p>
 <h1><a class="header" href="#构建配置" id="构建配置">构建配置</a></h1>
 <p>正确的构建配置将最大限度地提高Rust程序的性能，而无需对其代码进行任何修改。</p>
 <h2><a class="header" href="#发布构建" id="发布构建">发布构建</a></h2>
-<p>最重要的一个Rust性能提示很简单，但<a href="https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
+<p>最重要的一个Rust性能提示很简单，但<a href="extern/why-my-rust-program-is-so-slow.html">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
 <p>发布版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
 <p>默认为调试构建。如果你运行 “cargo build”、”cargo run “或 “rustc “而不添加任何额外的选项，它们就会被处理。调试构建对调试很有帮助，但不被优化。</p>
 <p>考虑一下<code>cargo build</code>的最后一行输出。</p>
