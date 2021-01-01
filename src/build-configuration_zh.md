@@ -6,7 +6,7 @@
 
 最重要的一个Rust性能提示很简单，但[很容易被忽视]：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定`--release`标志来实现的。
 
-[很容易被忽视]: extern/why-my-rust-program-is-so-slow.md
+[很容易被忽视]: https://github.com/poly000/perf-book-zh/blob/master/extern/why-my-rust-program-is-so-slow.md
 
 发布版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。
 
