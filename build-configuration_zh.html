@@ -170,7 +170,7 @@
                         <h1><a class="header" href="#构建配置" id="构建配置">构建配置</a></h1>
 <p>正确的构建配置将最大限度地提高Rust程序的性能，而无需对其代码进行任何修改。</p>
 <h2><a class="header" href="#发布构建" id="发布构建">发布构建</a></h2>
-<p>最重要的一个Rust性能提示很简单，但<a href="extern/why-my-rust-program-is-so-slow.html">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
+<p>最重要的一个Rust性能提示很简单，但<a href="https://github.com/poly000/perf-book-zh/blob/master/extern/why-my-rust-program-is-so-slow.md">很容易被忽视</a>：当你想要高性能时，确保你使用的是发布构建而不是调试构建。这通常是通过在Cargo中指定<code>--release</code>标志来实现的。</p>
 <p>发布版的运行速度通常比调试版快很多。比调试版本快10-100倍是很常见的。</p>
 <p>默认为调试构建。如果你运行 “cargo build”、”cargo run “或 “rustc “而不添加任何额外的选项，它们就会被处理。调试构建对调试很有帮助，但不被优化。</p>
 <p>考虑一下<code>cargo build</code>的最后一行输出。</p>
@@ -183,7 +183,7 @@
 </code></pre>
 <p><code>[optimed]</code>表示已经生成了一个发布构建。编译后的代码将被放置在<code>target/release/</code>目录下。<code>cargo run --release</code>将运行发布版。</p>
 <p>参见 [Cargo 配置文件]，以了解更多关于调试构建(使用<code>dev</code>配置文件)和发布构建(使用<code>release</code>配置文件)之间的区别。</p>
-<p>[[Cargo 配置文件]: https://doc.rust-lang.org/cargo/reference/profiles.html</p>
+<p>[[Cargo 配置文件]: https://github.com/poly000/perf-book-zh/blob/master/extern/cargo-profiles.md</p>
 <h2><a class="header" href="#链接时优化" id="链接时优化">链接时优化</a></h2>
 <p>链接时间优化(LTO)是一种整体程序优化技术，可以将运行时性能提高10-20%甚至更多，但代价是增加构建时间。对于任何一个单独的Rust程序，很容易看出运行时间与编译时间的权衡是否值得。</p>
 <p>尝试LTO最简单的方法是在<code>Cargo.toml</code>文件中添加以下几行，然后进行发布构建。</p>
