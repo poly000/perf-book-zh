@@ -182,8 +182,7 @@
 <pre><code class="language-text">Finished release [optimized] target(s) in 1m 01s
 </code></pre>
 <p><code>[optimed]</code>表示已经生成了一个发布构建。编译后的代码将被放置在<code>target/release/</code>目录下。<code>cargo run --release</code>将运行发布版。</p>
-<p>参见 [Cargo 配置文件]，以了解更多关于调试构建(使用<code>dev</code>配置文件)和发布构建(使用<code>release</code>配置文件)之间的区别。</p>
-<p>[[Cargo 配置文件]: https://github.com/poly000/perf-book-zh/blob/master/extern/cargo-profiles.md</p>
+<p>参见 <a href="https://github.com/poly000/perf-book-zh/blob/master/extern/cargo-profiles.md">Cargo 配置文件</a>，以了解更多关于调试构建(使用<code>dev</code>配置文件)和发布构建(使用<code>release</code>配置文件)之间的区别。</p>
 <h2><a class="header" href="#链接时优化" id="链接时优化">链接时优化</a></h2>
 <p>链接时间优化(LTO)是一种整体程序优化技术，可以将运行时性能提高10-20%甚至更多，但代价是增加构建时间。对于任何一个单独的Rust程序，很容易看出运行时间与编译时间的权衡是否值得。</p>
 <p>尝试LTO最简单的方法是在<code>Cargo.toml</code>文件中添加以下几行，然后进行发布构建。</p>
