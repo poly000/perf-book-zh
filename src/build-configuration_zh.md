@@ -28,7 +28,7 @@ Finished release [optimized] target(s) in 1m 01s
 
 参见 [Cargo 配置文件]，以了解更多关于调试构建(使用`dev`配置文件)和发布构建(使用`release`配置文件)之间的区别。
 
-[[Cargo 配置文件]: https://doc.rust-lang.org/cargo/reference/profiles.html
+[[Cargo 配置文件]: https://github.com/poly000/perf-book-zh/blob/master/extern/cargo-profiles.md
 
 ## 链接时优化
 
