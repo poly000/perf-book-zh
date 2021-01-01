@@ -1,12 +1,12 @@
-# Type Sizes
+# 类型大小
 
-缩小常实例类型可以减少峰值内存使用量，还可以通过减少内存流量和缓存压力来提高性能。(特别要注意的是，大于128字节的类型会用 `memcpy`而不是内联代码)
+缩小常用类型可以减少峰值内存使用量，还可以通过减少内存流量和缓存压力来提高性能。(特别要注意的是，大于128字节的类型会用 `memcpy`而不是内联代码复制)
 
 Rust编译器会自动对struct和enums中的字段进行排序，以最小化它们的大小（除非指定了`#[repr(C)]`属性），所以你不必担心字段的排序。但是仍然有其他方法可以使热类型的大小最小化。
 
-## Measuring Type Sizes
+## 验证类型大小
 
-[`std::mem::size_of`]给出了一个类型的大小，以字节为单位，但通常你也想知道确切的布局。例如，一个枚举可能会出乎意料的大，这可能是由一个超大的变体造成的。
+[`std::mem::size_of`]给出了一个类型的大小，以字节为单位，但通常你也想知道确切的布局。例如，一个枚举体可能会出乎意料的大，这可能是由一个超大的变体造成的。
 
 [`std::mem::size_of`]: https://doc.rust-lang.org/std/mem/fn.size_of.html
 
@@ -29,32 +29,32 @@ enum E {
 ```
 它打印以下信息，以及一些内置类型的信息。
 ```text
-print-type-size type: `E`: 32 bytes, alignment: 8 bytes
-print-type-size     discriminant: 1 bytes
-print-type-size     variant `D`: 31 bytes
-print-type-size         padding: 7 bytes
-print-type-size         field `.0`: 24 bytes, alignment: 8 bytes
-print-type-size     variant `C`: 23 bytes
-print-type-size         field `.1`: 1 bytes
-print-type-size         field `.3`: 1 bytes
-print-type-size         padding: 5 bytes
-print-type-size         field `.0`: 8 bytes, alignment: 8 bytes
-print-type-size         field `.2`: 8 bytes
-print-type-size     variant `B`: 7 bytes
-print-type-size         padding: 3 bytes
-print-type-size         field `.0`: 4 bytes, alignment: 4 bytes
-print-type-size     variant `A`: 0 bytes
+print-type-size 类型: `E`: 32 字节, 对齐: 8 字节
+print-type-size     判别: 1 字节
+print-type-size     变体 `D`: 31 字节
+print-type-size         填充: 7 字节
+print-type-size         字段 `.0`: 24 字节, 对齐: 8 字节
+print-type-size     变体 `C`: 23 字节
+print-type-size         字段 `.1`: 1 字节
+print-type-size         字段 `.3`: 1 字节
+print-type-size         填充: 5 字节
+print-type-size         字段 `.0`: 8 字节, 对齐: 8 字节
+print-type-size         字段 `.2`: 8 字节
+print-type-size     变体 `B`: 7 字节
+print-type-size         填充: 3 字节
+print-type-size         字段 `.0`: 4 字节, 对齐: 4 字节
+print-type-size     变体 `A`: 0 字节
 ```
 输出显示以下内容。
 - 类型的大小和排列。
 - 对于enums，判别子的大小。
 - 对于enums，每个变量的大小（从最大到最小排序）。
 - 所有字段的大小、对齐和排序。(请注意，编译器对变体`C`的字段进行了重新排序，以最小化`E`的大小。)
-- 所有padding的大小和位置。
+- 所有填充的大小和位置。
 
-一旦你知道了热型的布局，就有多种方法来收缩它。
+一旦你知道了热类型的布局，就有多种方法来收缩它。
 
-## Smaller Enums
+## 更小的枚举体
 
 如果一个枚举有一个超大的变体，可以考虑将一个或多个字段装箱。例如，你可以改变这个类型。
 ```rust
@@ -82,9 +82,9 @@ enum A {
 [**Example 5**](https://github.com/rust-lang/rust/pull/64394/commits/7f0637da5144c7435e88ea3805021882f077d50c),
 [**Example 6**](https://github.com/rust-lang/rust/pull/71942/commits/27ae2f0d60d9201133e1f9ec7a04c05c8e55e665).
 
-## Smaller Integers
+## 更小的整数
 
-通常可以通过使用较小的整数类型来缩小类型。例如，虽然对索引使用 "usize "是最自然的，但将索引存储为 "u32"、"u16"、甚至 "u8"，然后在使用点强制使用 "usize"，往往是合理的。
+通常可以通过使用较小的整数类型来缩小类型。例如，虽然对索引使用 “usize” 是最自然的，但将索引存储为 "u32"、"u16"、甚至 "u8"，然后在使用处强制转换为 "usize"，往往是合理的。
 [**Example 1**](https://github.com/rust-lang/rust/pull/49993/commits/4d34bfd00a57f8a8bdb60ec3f908c5d4256f8a9a),
 [**Example 2**](https://github.com/rust-lang/rust/pull/50981/commits/8d0fad5d3832c6c1f14542ea0be038274e454524).
 

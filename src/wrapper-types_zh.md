@@ -1,6 +1,6 @@
-# Wrapper Types
+# 包装类型
 
-Rust有多种 "封装 "类型，如[`RefCell`]和[`Mutex`]，它们为值提供了特殊行为。访问这些值可能会耗费大量的时间。如果多个这样的值通常是一起访问的，那么最好将它们放在一个包装器中。
+Rust有多种“包装”类型，如[`RefCell`]和[`Mutex`]，它们为值提供了特殊行为。访问这些值可能会耗费大量的时间。如果多个这样的值通常是一起访问的，那么最好将它们放在单独的包装器中。
 
 [`RefCell`]: https://doc.rust-lang.org/std/cell/struct.RefCell.html
 [`Mutex`]: https://doc.rust-lang.org/std/sync/struct.Mutex.html

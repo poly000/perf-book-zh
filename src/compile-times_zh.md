@@ -44,10 +44,10 @@ Rust编译器有一个功能，可以让你可视化编译你的程序。用这�
 ```text
 cargo +nightly build -Ztimings
 ```
-完成后，它将打印一个HTML文件的名称。在网络浏览器中打开该文件。它包含了一个[Gantt chart]，显示了你的程序中各个箱子之间的依赖关系。这显示了你的装箱图中有多少并行性，这可以说明是否应该将任何串行化编译的大crate应被打断。见 [此文档][Z-timings] for more
-details on how to read the graphs.
+完成后，它将打印一个HTML文件的名称。在网络浏览器中打开该文件。它包含了一个[甘特图]，显示了你的程序中各个包之间的依赖关系。这显示了你的装箱图中有多少并行性，
+这可以说明是否应该将任何串行化编译的大crate应被打断。见 [此文档][Z-timings] 获得如何读图的更多细节。
 
-[Gantt chart]: https://en.wikipedia.org/wiki/Gantt_chart
+[甘特图]: https://www.wanweibaike.com/wiki-%E7%94%98%E7%89%B9%E5%9B%BE
 [Z-timings]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#timings
 
 ## LLVM IR

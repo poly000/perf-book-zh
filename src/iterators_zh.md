@@ -6,10 +6,10 @@
 
 [`Iterator::collect`]: https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect
 
-出于这个原因，从函数中返回一个迭代器类型，比如`impl Iterator<Item=T>`，往往比`Vec<T>`更好。请注意，有时这些返回类型需要额外的生存期，正如[this post]所解释的那样。
+出于这个原因，从函数中返回一个迭代器类型，比如`impl Iterator<Item=T>`，往往比`Vec<T>`更好。请注意，有时这些返回类型需要额外的生存期，正如[这篇博文]所释。
 [**Example**](https://github.com/rust-lang/rust/pull/77990/commits/660d8a6550a126797aa66a417137e39a5639451b).
 
-[this post]: https://blog.katona.me/2019/12/29/Rust-Lifetimes-and-Iterators/
+[这篇博文]: https://blog.katona.me/2019/12/29/Rust-Lifetimes-and-Iterators/
 
 同样，你可以使用[`extend`]用迭代器扩展一个现有的集合（如`Vec`），而不是将迭代器收集到`Vec`中，然后使用[`append`]。
 

@@ -54,7 +54,7 @@ AP 1.1/25 (2 children) {
 [Arc]：https://doc.rust-lang.org/std/sync/struct.Arc.html
 
 但是，如果用于很少共享的值，它们可以通过堆分配本来可能不会被堆分配的值来提高分配率。
-[**Example**](https://github.com/rust-lang/rust/pull/37373/commits/c440a7ae654fb641e68a9ee53b03bf3f7133c2fe).
+[**Example**](https://github.com/rust-lang/rust/pull/37373/commits/c440a7ae654fb641e68a9ee53b03bf3f7133c2fe)。
 
 与`Box`不同的是，在`Rc`/`Arc`值上调用`clone`并不涉及分配。相反，它只是增加一个引用计数。
 
@@ -66,7 +66,7 @@ AP 1.1/25 (2 children) {
 
 一个 "Vec "包含三个词：一个长度、一个容量和一个指针。如果容量是非零，元素大小是非零，指针将指向堆分配的内存；否则，它将不指向分配的内存。
 
-即使 "Vec "本身不是堆分配的，元素（如果存在且大小非零）也会是堆分配的。如果存在非零大小的元素，那么存放这些元素的内存可能会比必要的大，为未来的元素提供空间。存在的元素数就是长度，不需要重新分配就可以容纳的元素数就是容量。
+即使 “Vec” 自身不是堆分配的，元素（如果存在且大小非零）也会是堆分配的。如果存在非零大小的元素，那么存放这些元素的内存可能会比必要的大，为未来的元素提供空间。存在的元素数就是长度，不需要重新分配就可以容纳的元素数就是容量。
 
 当向量需要增长到超过其当前容量时，元素将被复制到一个更大的堆分配中，旧的堆分配将被释放。
 
@@ -95,7 +95,7 @@ AP 1.1/25 (2 children) {
 
 `SmallVec`如果使用得当，可以可靠地降低分配率，但使用它并不能保证提高性能。对于正常的操作，它比`Vec`稍慢，因为它必须总是检查元素是否被堆分配。另外，如果`N`很高或者`T`很大，那么`SmallVec<[T; N]>`本身就会比`Vec<T>`大，复制`SmallVec`值的速度会比较慢。和以往一样，需要通过基准测试来确认优化是否有效。
 
-如果你有很多短向量，并且你精确地知道它们的最大长度，[arrayvec]箱子中的ArrayVec比SmallVec更好。它不需要回落到堆分配，这使得它更快一些。
+如果你有很多短向量，并且你精确地知道它们的最大长度，[arrayvec]包中的ArrayVec比SmallVec更好。它不需要回落到堆分配，这使得它更快一些。
 [**Example**](https://github.com/rust-lang/rust/pull/74310/commits/c492ca40a288d8a85353ba112c4d38fe87ef453e).
 
 [`arrayvec`]: https://crates.io/crates/arrayvec
@@ -120,7 +120,7 @@ AP 1.1/25 (2 children) {
 [`String`]: https://doc.rust-lang.org/std/string/struct.String.html
 [`String::with_capacity`]: https://doc.rust-lang.org/std/string/struct.String.html#method.with_capacity
 
-来自[`smallstr`]箱子的`SmallString`类型与`SmallVec`类型类似。
+来自[`smallstr`]包的`SmallString`类型与`SmallVec`类型类似。
 
 [`smallstr`]: https://crates.io/crates/smallstr
 
@@ -219,7 +219,7 @@ fn do_stuff(x: u32, y: u32, vec: &mut Vec<u32>) {
 
 另一个提高分配量大的Rust程序性能的选择是用一个替代分配器代替默认的（系统）分配器。确切的效果将取决于单个程序和选择的替代分配器。在不同的平台上，它也会有所不同，因为每个平台的系统分配器都有自己的优势和弱点。使用替代分配器也会影响二进制大小。
 
-一个流行的替代分配器是[jemalloc]，可通过 [`jemallocator`]箱子。要使用它，请在你的`Cargo.toml`文件中添加一个依赖关系。
+一个流行的替代分配器是[jemalloc]，可通过 [`jemallocator`]包。要使用它，请在你的`Cargo.toml`文件中添加一个依赖关系。
 ```toml
 [dependencies]
 jemallocator = "0.3.2"

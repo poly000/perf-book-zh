@@ -1,4 +1,4 @@
-# Logging and Debugging
+# 日志与调试
 
 有时，日志代码或调试代码会大大降低程序的速度。要么是日志记录/调试代码本身很慢，要么是反馈到日志记录/调试代码的数据收集代码很慢。确保在不启用日志记录/调试时，不为日志记录/调试目的做不必要的工作。
 [**Example 1**](https://github.com/rust-lang/rust/pull/50246/commits/2e4f66a86f7baa5644d18bb2adc07a8cd1c7409d),
