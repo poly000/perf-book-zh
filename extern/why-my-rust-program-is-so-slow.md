@@ -1,3 +1,5 @@
+> https://users.rust-lang.org/t/why-my-rust-program-is-so-slow/47764/5
+
 我最近开始学习Rust。我听说Rust有高性能，所以我编写了一个气泡排序程序看看。
 但是这个程序和C对比运行的很慢。
 
