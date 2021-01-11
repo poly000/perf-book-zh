@@ -1,10 +1,10 @@
 # 机器代码
 
-当你有一小段非常热的代码时，可能值得检查一下生成的机器代码，看看它是否有任何效率低下的地方。在这样做的时候，[Compiler Explorer]网站是一个很好的资源。
+当你有一小段非常热点的代码(hot code)时，可能值得检查一下生成的机器代码，看看它是否有任何效率低下的地方。在这样做的时候，[Compiler Explorer] 网站是一个很好的资源。
 
 [Compiler Explorer]: https://godbolt.org/
 
-与此相关的是，[`core::arch`]模块提供了对特定架构的固有知识的访问，其中许多与SIMD指令有关。
+与此相关的是，[`core::arch`] 模块提供了对特定架构的内置函数的访问，其中许多与SIMD指令有关。
 
 [`core::arch`]: https://doc.rust-lang.org/core/arch/index.html
 
