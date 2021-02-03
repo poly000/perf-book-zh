@@ -168,21 +168,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#散列" id="散列">散列</a></h1>
-<p><code>HashSet</code>和<code>HashMap</code>是两种广泛使用的类型。默认的散列算法没有指定，但在编写本文时，默认的是一种叫做<a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a>的算法。这种算法质量很高--它提供了很高的防碰撞保护--但速度相对较慢，特别是对于短键，如整数。</p>
+<p><code>HashSet</code> 和 <code>HashMap</code> 是两种广泛使用的类型。默认的散列算法没有指定，但在编写本文时，默认的是一种叫做 <a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a> 的算法。这种算法质量很高——它提供了很高的防碰撞保护——但速度相对较慢，特别是对于短键，如整数。</p>
 <p>如果测试显示散列是关键部分，而<a href="https://en.wikipedia.org/wiki/Collision_attack">散列拒绝服务攻击</a>并不是你的应用所关心的问题，那么使用具有更快的散列算法的散列表可以提供很大的速度优势。</p>
 <ul>
-<li><a href="https://crates.io/crates/rustc-hash"><code>rustc-hash</code></a>提供了 “FxHashSet “和 “FxHashMap “类型，它们是 “HashSet “和 “HashMap “的替代物。它的散列算法质量不高，但速度非常快，特别是对整数键而言，并且发现它的性能优于rustc内的所有其他散列算法。</li>
-<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a>提供了<code>FnvHashSet</code>和<code>FnvHashMap</code>类型。其散列算法比<code>fxhash</code>的质量高，但速度稍慢。</li>
-<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a>提供<code>AHashSet</code>和<code>AHashMap</code>。它的哈希算法可以采取一些处理器上的AES指令支持的优势。</li>
+<li><a href="https://crates.io/crates/rustc-hash"><code>rustc-hash</code></a> 提供了 “FxHashSet “和 “FxHashMap “类型，它们是 “HashSet “和 “HashMap “的替代物。它的散列算法质量不高，但速度非常快，特别是对整数键而言，并且发现它的性能优于rustc内的所有其他散列算法。</li>
+<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a> 提供了 <code>FnvHashSet</code> 和 <code>FnvHashMap</code> 类型。其散列算法比 <code>fxhash</code> 的质量高，但速度稍慢。</li>
+<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a> 提供 <code>AHashSet</code> 和 <code>AHashMap</code>。它的哈希算法可以采取一些处理器上的AES指令支持的优势。</li>
 </ul>
 <p>如果散列性能在你的程序中很重要，那么值得尝试以上几种选择。例如，在rustc中看到以下结果。</p>
 <ul>
-<li>从 <code>fnv</code>切换到 <code>rustc-hash</code> 的结果是<a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">速度提高了6%</a>。</li>
-<li>试图从<code>rustc-hash</code>切换到<code>ahash</code>的结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">减速1-4%</a>。</li>
-<li>试图从<code>rustc-hash</code>切换回默认的哈希，结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">速度减慢了4-84%</a>!</li>
+<li>从 <code>fnv</code> 切换到 <code>rustc-hash</code> 的结果是<a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">速度提高了6%</a>。</li>
+<li>试图从 <code>rustc-hash</code> 切换到 <code>ahash</code> 的结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">减速1-4%</a>。</li>
+<li>试图从 <code>rustc-hash</code> 切换回默认的哈希，结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">速度减慢了4-84%</a>!</li>
 </ul>
-<p>如果你决定普遍使用<code>FxHashSet</code>/<code>FxHashMap</code>等备选方案之一，很容易在某些地方偶尔使用<code>HashSet</code>/<code>HashMap</code>。在配置文件中出现<code>SipHasher13</code>代码就是一个很明显的指标。</p>
-<p>散列函数的设计是一个复杂的话题，不在本书的讨论范围之内，[<code>ahash</code>文档]有很好的讨论。</p>
+<p>如果你决定普遍使用 <code>FxHashSet</code>/<code>FxHashMap</code> 等备选方案之一，很容易在某些地方偶尔使用 <code>HashSet</code>/<code>HashMap</code>。在配置文件中出现 <code>SipHasher13</code> 代码就是一个很明显的指标。</p>
+<p>散列函数的设计是一个复杂的话题，不在本书的讨论范围之内，<a href="https://github.com/tkaitchuck/aHash/blob/master/compare/readme.md"><code>ahash</code> 文档</a>有很好的讨论。</p>
 
                     </main>
 

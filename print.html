@@ -175,17 +175,17 @@
 <p><strong><span style="font-size: 130%">Written by Nicholas Nethercote and others</span></strong></p>
 <h1><a class="header" href="#简介" id="简介">简介</a></h1>
 <p>性能对许多Rust程序来说都很重要。</p>
-<p>本书包含了许多可以提高Rust程序的性能——速度和内存使用率的技术，其中<a href="compile-times_zh.html">编译时间</a>部分也包含了一些可以提高Rust程序编译时间的技术。<a href="compile-times_zh.html">编译时间</a>部分也包含了一些可以改善Rust程序编译时间的技术。本书的一些技术只需要改变构建配置，但许多技术需要改变代码。</p>
+<p>本书包含了许多可以提高Rust程序的性能——速度和内存使用率的技术，其中<a href="compile-times_zh.html">编译时间</a>部分也包含了一些可以提高Rust程序编译时间的技术。本书的一些技术只需要改变构建配置，但许多技术需要改变代码。</p>
 <p>其中的一些技术完全是 Rust 所特有的，而一些涉及的想法（通常经过修改）可以应用到其他语言编写的程序中。<a href="general-tips_zh.html">General Tips</a>还包括一些适用于任何编程语言的一般原则。尽管如此，本书主要是关于Rust程序的性能，并不能替代通用的性能分析和优化指南。</p>
-<p>本书还重点介绍了那些实用的、经过验证的技术：许多技巧都附有拉取请求或其他资源的链接，展示了该技巧是如何在真实世界的Rust程序上使用的。</p>
+<p>本书还重点介绍了那些实用的、经过验证的技术：许多技术都附有拉取请求或其他资源的链接，展示了该技术是如何在真实世界的Rust程序上使用的。</p>
 <p>本书针对的是中级和高级Rust用户。初级Rust用户需要学习的东西已经够多了，这些技术很可能会对他们造成无益的干扰。</p>
 <h1><a class="header" href="#基准测试" id="基准测试">基准测试</a></h1>
-<p>在优化一个程序时，你需要一种方法来可靠地验证这个改变是否加快了程序。这个过程有时被称为基准测试(benchmarking)。基准测试是一个复杂的话题，彻底的覆盖范围超出了本书的范围，但以下是基本的内容。</p>
+<p>在优化一个程序时，你需要一种方法来可靠地验证这个改变是否加快了程序。这个过程有时被称为基准测试(benchmarking)。基准测试是一个复杂的话题，全面的介绍超出了本书的范围，但以下是基本的内容。</p>
 <p>首先，你需要工作负载来衡量。理想情况下，你会有各种工作负载，代表你的程序的实际使用情况。使用真实世界输入的工作负载是最好的，但适度进行<a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">微基准测试</a>和<a href="https://www.wanweibaike.com/wiki-%E5%A3%93%E5%8A%9B%E6%B8%AC%E8%A9%A6%20(%E8%BB%9F%E9%AB%94)">压力测试(stress tests)</a>也是有用的。</p>
-<p>其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的<a href="https://doc.rust-lang.org/1.7.0/book/benchmark-tests.html">基准测试(benchmark tests)</a>是一个简单的起点，但这使用不稳定特性且只在夜版Rust下可用。
-<a href="https://crates.io/crates/bencher"><code>bencher</code></a>包类似，但对稳定Rust可用。<a href="https://github.com/bheisler/criterion.rs">Criterion</a>是一个更复杂的选择。自定义基准测试框架也是可能的。例如，<a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a>就是用来对Rust编译器进行基准测试的框架。</p>
-<p>当涉及到度量时，有许多选择，正确的选择将取决于被基准化的程序的性质。例如，对批处理程序有意义的指标可能对交互式程序没有意义。在许多情况下，
-墙面时间是一个显而易见的选择，因为它与用户的感知相对应。然而，它可能会受到高变化率的影响。特别是，内存布局的微小变化可能会导致显著但短暂的性能波动。因此，变化率较小的其他指标（如周期或指令数）可能是合理的选择。</p>
+<p>其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的[基准测试 (benchmark tests)]是一个简单的起点，但它使用不稳定特性且只在夜版 (Nightly) Rust 下可用。
+<a href="https://crates.io/crates/bencher"><code>bencher</code></a> 包类似，但对稳定Rust可用。<a href="https://github.com/bheisler/criterion.rs">Criterion</a> 是一个更复杂的选择。自定义基准测试框架也是可能的。例如，<a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a> 就是用来对Rust编译器进行基准测试的框架。</p>
+<p>当涉及到指标时，有许多选择，正确的选择将取决于被基准化的程序的性质。例如，对批处理程序有意义的指标可能对交互式程序没有意义。在许多情况下，
+挂钟时间 (wall-time) 是一个显而易见的选择，因为它符合用户的感知。然而，它可能会受到高变化率的影响。特别是，内存布局的微小变化可能会导致显著但短暂的性能波动。因此，变化率较小的其他指标，如周期 (cycles) 或指令数 (instruction counts)，可能是合理的选择。</p>
 <p>从多个工作负载中总结测量结果也是一个挑战，尽管有多种方法，但并没有一种方法是最完美的。</p>
 <p>良好的基准测试是很难实现的。总而言之，不要过于强调拥有一个完美的基准测试设置，特别是当你刚开始优化一个程序的时候。
 一个平庸的设置比没有设置要好得多。对你正在测量的东西保持开放的心态，随着时间的推移，你可以在了解你的程序的性能特点后进行基准测试改进。</p>
@@ -342,21 +342,21 @@ fn uninlined_my_function() {
 <p><a href="https://github.com/rust-lang/rust/pull/53513/commits/b73843f9422fb487b2d26ac2d65f79f73a4c9ae3"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/64420/commits/a2261ad66400c3145f96ebff0d9b75e910fa89dd"><strong>Example 2</strong></a>.</p>
 <h1><a class="header" href="#散列" id="散列">散列</a></h1>
-<p><code>HashSet</code>和<code>HashMap</code>是两种广泛使用的类型。默认的散列算法没有指定，但在编写本文时，默认的是一种叫做<a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a>的算法。这种算法质量很高--它提供了很高的防碰撞保护--但速度相对较慢，特别是对于短键，如整数。</p>
+<p><code>HashSet</code> 和 <code>HashMap</code> 是两种广泛使用的类型。默认的散列算法没有指定，但在编写本文时，默认的是一种叫做 <a href="https://en.wikipedia.org/wiki/SipHash">SipHash 1-3</a> 的算法。这种算法质量很高——它提供了很高的防碰撞保护——但速度相对较慢，特别是对于短键，如整数。</p>
 <p>如果测试显示散列是关键部分，而<a href="https://en.wikipedia.org/wiki/Collision_attack">散列拒绝服务攻击</a>并不是你的应用所关心的问题，那么使用具有更快的散列算法的散列表可以提供很大的速度优势。</p>
 <ul>
-<li><a href="https://crates.io/crates/rustc-hash"><code>rustc-hash</code></a>提供了 “FxHashSet “和 “FxHashMap “类型，它们是 “HashSet “和 “HashMap “的替代物。它的散列算法质量不高，但速度非常快，特别是对整数键而言，并且发现它的性能优于rustc内的所有其他散列算法。</li>
-<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a>提供了<code>FnvHashSet</code>和<code>FnvHashMap</code>类型。其散列算法比<code>fxhash</code>的质量高，但速度稍慢。</li>
-<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a>提供<code>AHashSet</code>和<code>AHashMap</code>。它的哈希算法可以采取一些处理器上的AES指令支持的优势。</li>
+<li><a href="https://crates.io/crates/rustc-hash"><code>rustc-hash</code></a> 提供了 “FxHashSet “和 “FxHashMap “类型，它们是 “HashSet “和 “HashMap “的替代物。它的散列算法质量不高，但速度非常快，特别是对整数键而言，并且发现它的性能优于rustc内的所有其他散列算法。</li>
+<li><a href="https://crates.io/crates/fnv"><code>fnv</code></a> 提供了 <code>FnvHashSet</code> 和 <code>FnvHashMap</code> 类型。其散列算法比 <code>fxhash</code> 的质量高，但速度稍慢。</li>
+<li><a href="https://crates.io/crates/ahash"><code>ahash</code></a> 提供 <code>AHashSet</code> 和 <code>AHashMap</code>。它的哈希算法可以采取一些处理器上的AES指令支持的优势。</li>
 </ul>
 <p>如果散列性能在你的程序中很重要，那么值得尝试以上几种选择。例如，在rustc中看到以下结果。</p>
 <ul>
-<li>从 <code>fnv</code>切换到 <code>rustc-hash</code> 的结果是<a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">速度提高了6%</a>。</li>
-<li>试图从<code>rustc-hash</code>切换到<code>ahash</code>的结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">减速1-4%</a>。</li>
-<li>试图从<code>rustc-hash</code>切换回默认的哈希，结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">速度减慢了4-84%</a>!</li>
+<li>从 <code>fnv</code> 切换到 <code>rustc-hash</code> 的结果是<a href="https://github.com/rust-lang/rust/pull/37229/commits/00e48affde2d349e3b3bfbd3d0f6afb5d76282a7">速度提高了6%</a>。</li>
+<li>试图从 <code>rustc-hash</code> 切换到 <code>ahash</code> 的结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589504301">减速1-4%</a>。</li>
+<li>试图从 <code>rustc-hash</code> 切换回默认的哈希，结果是<a href="https://github.com/rust-lang/rust/issues/69153#issuecomment-589338446">速度减慢了4-84%</a>!</li>
 </ul>
-<p>如果你决定普遍使用<code>FxHashSet</code>/<code>FxHashMap</code>等备选方案之一，很容易在某些地方偶尔使用<code>HashSet</code>/<code>HashMap</code>。在配置文件中出现<code>SipHasher13</code>代码就是一个很明显的指标。</p>
-<p>散列函数的设计是一个复杂的话题，不在本书的讨论范围之内，[<code>ahash</code>文档]有很好的讨论。</p>
+<p>如果你决定普遍使用 <code>FxHashSet</code>/<code>FxHashMap</code> 等备选方案之一，很容易在某些地方偶尔使用 <code>HashSet</code>/<code>HashMap</code>。在配置文件中出现 <code>SipHasher13</code> 代码就是一个很明显的指标。</p>
+<p>散列函数的设计是一个复杂的话题，不在本书的讨论范围之内，<a href="https://github.com/tkaitchuck/aHash/blob/master/compare/readme.md"><code>ahash</code> 文档</a>有很好的讨论。</p>
 <h1><a class="header" href="#堆分配" id="堆分配">堆分配</a></h1>
 <p>堆分配的代价不高。具体细节取决于使用的分配器，但每次分配和deallocation通常都需要获取一个全局锁，做一些非平凡的数据结构操作。并可能执行一个系统调用。小分配不一定比大分配便宜。值得了解哪些Rust数据结构和操作会导致分配，因为避免它们可以大大提高性能。</p>
 <p><a href="https://docs.google.com/presentation/d/1q-c7UAyrUlM-eZyTo1pd8SZ0qwA_wYxmPZVOQkoDmH4/">Rust Container Cheat Sheet</a>有常见的Rust类型的可视化，是下面章节的绝佳配套。</p>
@@ -748,8 +748,8 @@ buf.flush()?;
 <p>这是否有助于性能，将取决于值的具体访问模式。
 <a href="https://github.com/rust-lang/rust/pull/68694/commits/7426853ba255940b880f2e7f8026d60b94b42404"><strong>Example</strong></a>.</p>
 <h1><a class="header" href="#机器代码" id="机器代码">机器代码</a></h1>
-<p>当你有一小段非常热的代码时，可能值得检查一下生成的机器代码，看看它是否有任何效率低下的地方。在这样做的时候，<a href="https://godbolt.org/">Compiler Explorer</a>网站是一个很好的资源。</p>
-<p>与此相关的是，<a href="https://doc.rust-lang.org/core/arch/index.html"><code>core::arch</code></a>模块提供了对特定架构的固有知识的访问，其中许多与SIMD指令有关。</p>
+<p>当你有一小段非常热点的代码(hot code)时，可能值得检查一下生成的机器代码，看看它是否有任何效率低下的地方。在这样做的时候，<a href="https://godbolt.org/">Compiler Explorer</a> 网站是一个很好的资源。</p>
+<p>与此相关的是，<a href="https://doc.rust-lang.org/core/arch/index.html"><code>core::arch</code></a> 模块提供了对特定架构的内置函数的访问，其中许多与SIMD指令有关。</p>
 <p>有时可以通过在索引变量的范围内添加断言来避免循环内的边界检查。这是一种先进的技术，你应该检查生成的代码以确保边界检查被实际删除。
 <a href="https://github.com/rust-random/rand/pull/960/commits/de9dfdd86851032d942eb583d8d438e06085867b"><strong>Example 1</strong></a>,
 <a href="https://github.com/image-rs/jpeg-decoder/pull/167/files"><strong>Example 2</strong></a>.</p>
