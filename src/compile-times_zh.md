@@ -6,29 +6,22 @@
 
 编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序的时候。在Linux和Windows上，你可以选择lld作为链接器，这比默认的链接器快得多。
 
-要从命令行指定ld，在你的编译命令前加上`RUSTFLAGS="-C link-arg=-fuse-ld=lld"`。
+要从命令行指定lld，在你的编译命令前加上`RUSTFLAGS="-C link-arg=-fuse-ld=lld"`。
 
-要从`Cargo.toml`文件中指定lld，请添加这些行。
+要从 [config.toml] 文件中指定lld（到一个或更多项目），请添加这些行。
 ```text
 [build]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
-或者，增加如下配置
-```text
-[target.x86_64-unknown-linux-gnu]
-linker = "lld"
-```
-您可以使用[Cargo配置文件]将这些配置应用于多个项目。
+[config.toml]: https://doc.rust-lang.org/cargo/reference/config.html
 
-[Cargo配置文件]: https://doc.rust-lang.org/cargo/reference/config.html
-
-lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows中的大多数情况下使用。有一个[GitHub Issue]跟踪lld的完整支持。
+lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows中的大多数情况下使用。这个[GitHub Issue]追踪lld的完整支持。
 
 [GitHub Issue]: https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211
 
 ## 增量编译
 
-Rust编译器支持[增量编译]，这可以避免在重新编译一个crate时重做工作。它可以大大加快编译速度，但代价是有时会使生成的可执行文件运行得更慢一些。出于这个原因，它只在调试编译时默认启用。如果你想在发布版本的编译中也启用它，请在`Cargo.toml`文件中添加以下行。
+Rust编译器支持[增量编译]，这可以避免在重新编译一个crate时重做工作。它可以大大加快编译速度，但代价是有时会使生成的可执行文件运行得更慢一些。为此，它只在调试构建时默认启用。如果你想在发布构建中也启用它，请在`Cargo.toml`文件中添加以下行。
 ```toml
 [profile.release]
 incremental = true
@@ -45,7 +38,7 @@ Rust编译器有一个功能，可以让你可视化编译你的程序。用这�
 cargo +nightly build -Ztimings
 ```
 完成后，它将打印一个HTML文件的名称。在网络浏览器中打开该文件。它包含了一个[甘特图]，显示了你的程序中各个包之间的依赖关系。这显示了你的装箱图中有多少并行性，
-这可以说明是否应该将任何串行化编译的大crate应被打断。见 [此文档][Z-timings] 获得如何读图的更多细节。
+这可以说明是否应该将任何串行编译的大crate打断。见 [此文档][Z-timings] 获得如何读图的更多细节。
 
 [甘特图]: https://www.wanweibaike.com/wiki-%E7%94%98%E7%89%B9%E5%9B%BE
 [Z-timings]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#timings
