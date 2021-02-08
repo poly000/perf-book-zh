@@ -19,7 +19,7 @@
 
 [`Vec::remove`]删除某一特定索引上的一个元素，并将随后的所有元素向左移动一个，这样做是O(n)。[`Vec::swap_remove`] 用最后一个元素替换特定索引上的一个元素，虽然不保留排序，但也是O(1)。
 
-`Vec::retain`] 有效地从一个`Vec`中删除多个项目。对于其他集合类型，如`String`、`HashSet`和`HashMap`，也有一个等价的方法。
+`Vec::retain`] 有效地从一个`Vec`中删除多个项。其他集合类型如`String`、`HashSet`和`HashMap`也有等价的方法。
 
 [`Vec::remove`]: https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove
 [`Vec::swap_remove`]: https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove
@@ -27,7 +27,7 @@
 
 ## `Option` and `Result`
 
-[`Option::ok_or']将`Option'转换为`Result'，并传递一个`err'参数，如果`Option'值为`None'，则使用该参数。`err`是急于计算的。如果它的计算很昂贵，你应该使用[`Option::ok_or_else`]，它通过一个闭包缓慢地计算错误值。
+[`Option::ok_or']将`Option'转换为`Result'，并传递一个`err'参数，如果`Option'值为`None'，则使用该参数。`err`是及早求值的。如果它的计算很昂贵，你应该使用[`Option::ok_or_else`]，它通过一个闭包缓惰性计算错误值。
 例如，这个。
 ```rust
 # fn expensive() {}
