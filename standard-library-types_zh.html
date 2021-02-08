@@ -172,9 +172,9 @@
 <p>还值得了解标准库类型的高性能替代品，如<a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code>RwLock</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html"><code>Condvar</code></a>和<a href="https://doc.rust-lang.org/std/sync/struct.Once.html"><code>Once</code></a>。</p>
 <h2><a class="header" href="#vec" id="vec"><code>Vec</code></a></h2>
 <p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove"><code>Vec::remove</code></a>删除某一特定索引上的一个元素，并将随后的所有元素向左移动一个，这样做是O(n)。<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove"><code>Vec::swap_remove</code></a> 用最后一个元素替换特定索引上的一个元素，虽然不保留排序，但也是O(1)。</p>
-<p><code>Vec::retain</code>] 有效地从一个<code>Vec</code>中删除多个项目。对于其他集合类型，如<code>String</code>、<code>HashSet</code>和<code>HashMap</code>，也有一个等价的方法。</p>
+<p><code>Vec::retain</code>] 有效地从一个<code>Vec</code>中删除多个项。其他集合类型如<code>String</code>、<code>HashSet</code>和<code>HashMap</code>也有等价的方法。</p>
 <h2><a class="header" href="#option-and-result" id="option-and-result"><code>Option</code> and <code>Result</code></a></h2>
-<p>[<code>Option::ok_or']将</code>Option’转换为<code>Result'，并传递一个</code>err’参数，如果<code>Option'值为</code>None’，则使用该参数。<code>err</code>是急于计算的。如果它的计算很昂贵，你应该使用<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or_else"><code>Option::ok_or_else</code></a>，它通过一个闭包缓慢地计算错误值。
+<p>[<code>Option::ok_or']将</code>Option’转换为<code>Result'，并传递一个</code>err’参数，如果<code>Option'值为</code>None’，则使用该参数。<code>err</code>是及早求值的。如果它的计算很昂贵，你应该使用<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or_else"><code>Option::ok_or_else</code></a>，它通过一个闭包缓惰性计算错误值。
 例如，这个。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
