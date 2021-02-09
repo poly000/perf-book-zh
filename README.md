@@ -2,7 +2,7 @@
 
 Rust性能手册中文版
 
-## 贡献者
+## Contributors
 
 ## 查看
 
