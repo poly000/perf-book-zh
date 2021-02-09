@@ -14,7 +14,7 @@ jobs:
     - uses: BobAnkh/add-contributors@master
       with:
         REPO_NAME: 'poly000/vndb_chinese_translation'
-        CONTRIBUTOR: '## 贡献者'
+        CONTRIBUTOR: '## Contributors'
         COLUMN_PER_ROW: '6'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         IMG_WIDTH: '100'
