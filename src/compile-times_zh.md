@@ -15,13 +15,6 @@ rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
 [config.toml]: https://doc.rust-lang.org/cargo/reference/config.html
 
-亦或者，添加这些行到你的 `Cargo.toml`：
-
-```text
-[target.x86_64-unknown-linux-gnu]
-linker = "lld"
-```
-
 lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows中的大多数情况下使用。这个[GitHub Issue]追踪lld的完整支持。
 
 [GitHub Issue]: https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211
