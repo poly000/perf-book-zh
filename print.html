@@ -180,7 +180,8 @@
 <p>本书还重点介绍了那些实用的、经过验证的技术：许多技术都附有拉取请求或其他资源的链接，展示了该技术是如何在真实世界的Rust程序上使用的。</p>
 <p>本书针对的是中级和高级Rust用户。初级Rust用户需要学习的东西已经够多了，这些技术很可能会对他们造成无益的干扰。</p>
 <h1 id="基准测试"><a class="header" href="#基准测试">基准测试</a></h1>
-<p>在优化一个程序时，你需要一种方法来可靠地验证这个改变是否加快了程序。这个过程有时被称为基准测试(benchmarking)。基准测试是一个复杂的话题，全面的介绍超出了本书的范围，但以下是基本的内容。</p>
+<p>基准测试通常涉及比较两个或多个做同样事情的程序的速度。有时，这可能涉及比较两个或更多不同的程序，例如，Firefox与Safari与Chrome。有时，它涉及比较同一程序的两个不同版本。
+后一种情况下，我们可以可靠地回答 “这种变化是否加快了速度？”。基准测试是一个复杂的话题，全面的介绍超出了本书的范围，以下是基本的内容。</p>
 <p>首先，你需要工作负载来衡量。理想情况下，你会有各种工作负载，代表你的程序的实际使用情况。使用真实世界输入的工作负载是最好的，但适度进行<a href="https://stackoverflow.com/questions/2842695/what-is-microbenchmarking">微基准测试</a>和<a href="https://www.wanweibaike.com/wiki-%E5%A3%93%E5%8A%9B%E6%B8%AC%E8%A9%A6%20(%E8%BB%9F%E9%AB%94)">压力测试(stress tests)</a>也是有用的。</p>
 <p>其次，你需要一种运行工作负载的方法，这也将决定使用的指标。Rust内置的[基准测试 (benchmark tests)]是一个简单的起点，但它使用不稳定特性且只在夜版 (Nightly) Rust 下可用。
 <a href="https://crates.io/crates/bencher"><code>bencher</code></a> 包类似，但对稳定Rust可用。<a href="https://github.com/bheisler/criterion.rs">Criterion</a> 是一个更复杂的选择。自定义基准测试框架也是可能的。例如，<a href="https://github.com/rust-lang/rustc-perf/">rustc-perf</a> 就是用来对Rust编译器进行基准测试的框架。</p>
