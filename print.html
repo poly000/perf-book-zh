@@ -498,8 +498,7 @@ static GLOBAL: jemallocator::Jemalloc = jemallocator::Jemalloc;
 <p>缩小常用类型有助于减少内存使用峰值。</p>
 <p>例如，如果内存占用高，堆性能分析工具如 <a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a> 与 <a href="https://github.com/KDE/heaptrack">heaptrack</a> 可以检验热分配点以及涉及的类型。
 缩小这些类型可以减少内存使用峰值，而且可能会通过减少内存流量以及缓存压力提升性能。</p>
-<p>此外，大于128字节的Rust类型使用 <code>memcpy</code> 复制，而非内联代码。
-如果 <code>memcpy</code> 在性能测试中出现的数量不多，可以使用DHAT的 “复制分析” 模式显示 <code>memcpy</code> 热调用点和涉及的类型。
+<p>如果 <code>memcpy</code> 在性能测试中出现的数量不多，可以使用DHAT的 “复制分析” 模式显示 <code>memcpy</code> 热调用点和涉及的类型。
 将这些类型缩小到128字节或更少，可以通过避免 <code>memcpy</code> 调用和减少内存流量提升性能。</p>
 <h2 id="验证类型大小"><a class="header" href="#验证类型大小">验证类型大小</a></h2>
 <p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html"><code>std::mem::size_of</code></a>给出了一个类型的大小，以字节为单位，但通常你也想知道确切的布局。例如，一个枚举体可能会出乎意料的大，这可能是由一个超大的变体造成的。</p>
@@ -548,8 +547,8 @@ print-type-size     变体 `A`: 0 字节
 </ul>
 <p>一旦你知道了热类型的布局，就有多种方法来收缩它。</p>
 <h2 id="字段顺序"><a class="header" href="#字段顺序">字段顺序</a></h2>
-<p>Rust编译器自动排序结构体与枚举体中的字段以最小化他们的大小（除非指定了 <code>#[repr(C)]</code> 属性）。
-所以你无需担心字段顺序，但是还有其他方法最小化热类型的大小。</p>
+<p>Rust编译器自动排序结构体与枚举体中的字段以最小化它们（除非指定了 <code>#[repr(C)]</code> 属性）。
+所以你无需担心字段顺序，但是还有其他方法最小化热类型。</p>
 <h2 id="更小的枚举体"><a class="header" href="#更小的枚举体">更小的枚举体</a></h2>
 <p>如果一个枚举有一个超大的变体，可以考虑将一个或多个字段装箱。例如，你可以改变这个类型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -601,7 +600,7 @@ assert_eq!(size_of_val(&amp;bs), 2 * size_of::&lt;usize&gt;());
 </span></code></pre></pre>
 <p>盒状切片可以用<a href="https://doc.rust-lang.org/std/primitive.slice.html#method.into_vec"><code>slice::into_vec</code></a>转换回一个矢量，而无需任何克隆或重新分配。</p>
 <h2 id="避免退步"><a class="header" href="#避免退步">避免退步</a></h2>
-<p>如果一个类型足够热，它的大小会影响性能，那么最好使用静态断言来确保它不会意外地回归。下面的例子使用了<a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a>中的一个宏。</p>
+<p>如果一个类型足够常用，它的大小会影响性能，那么最好使用静态断言来确保它不会意外地回归。下面的例子使用了<a href="https://crates.io/crates/static_assertions"><code>static_assertions</code></a>中的一个宏。</p>
 <pre><code class="language-rust ignore">  // 这个类型被大量使用。确保它不会无意识地变大。
   #[cfg(target_arch = &quot;x86_64&quot;)]
   static_assertions::assert_eq_size!(HotType, [u8; 64]);
