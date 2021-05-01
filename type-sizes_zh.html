@@ -220,6 +220,9 @@ print-type-size     变体 `A`: 0 字节
 <li>所有填充的大小和位置。</li>
 </ul>
 <p>一旦你知道了热类型的布局，就有多种方法来收缩它。</p>
+<h2 id="字段顺序"><a class="header" href="#字段顺序">字段顺序</a></h2>
+<p>Rust编译器自动排序结构体与枚举体中的字段以最小化他们的大小（除非指定了 <code>#[repr(C)]</code> 属性）。
+所以你无需担心字段顺序，但是还有其他方法最小化热类型的大小。</p>
 <h2 id="更小的枚举体"><a class="header" href="#更小的枚举体">更小的枚举体</a></h2>
 <p>如果一个枚举有一个超大的变体，可以考虑将一个或多个字段装箱。例如，你可以改变这个类型。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
