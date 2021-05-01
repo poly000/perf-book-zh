@@ -3,8 +3,8 @@
 本书的前几节已经讨论了Rust特有的技术。
 本节将简要介绍一些一般的性能原则。
 
-只要避免了明显的陷阱（例如[使用非发布的构建]）。
-铁锈一般都有不错的表现。尤其是当你习惯了Python和Ruby等动态类型的语言时。
+只要避免了明显的缺陷（例如[使用非发布的构建]）。
+Rust一般都有不错的性能。尤其是你习惯于Python和Ruby等动态类型的语言时。
 
 [使用非发布的构建]: build-configuration.md
 
@@ -24,13 +24,13 @@
 · 让函数更快
 · 避免调用它。
 
-避免愚蠢的减速通常比引入巧妙的加速更容易，而且通常也同样有效。
+通常，相较于聪明的提速，消除愚蠢的减速更容易。
 
-除非必要，否则避免全部计算。懒惰/按需计算往往是一种好办法。
+除非必要，否则避免全部求值。惰性/按需 求值往往是一种好办法。
 [**Example 1**](https://github.com/rust-lang/rust/pull/36592/commits/80a44779f7a211e075da9ed0ff2763afa00f43dc),
 [**Example 2**](https://github.com/rust-lang/rust/pull/50339/commits/989815d5670826078d9984a3515eeb68235a4687).
 
-一般复杂的情况往往可以通过乐观地检查比较简单的常见特殊情况来避免。
+一般复杂的情况，往往可以通过乐观地检查比较简单的常见特殊情况来避免。
 [**Example 1**](https://github.com/rust-lang/rust/pull/68790/commits/d62b6f204733d255a3e943388ba99f14b053bf4a),
 [**Example 2**](https://github.com/rust-lang/rust/pull/53733/commits/130e55665f8c9f078dec67a3e92467853f400250),
 [**Example 3**](https://github.com/rust-lang/rust/pull/65260/commits/59e41edcc15ed07de604c61876ea091900f73649).
