@@ -797,11 +797,15 @@ buf.flush()?;
 <h1 id="编译时间"><a class="header" href="#编译时间">编译时间</a></h1>
 <p>虽然本书的主要内容是提高Rust程序的性能，但本节的内容是关于减少Rust程序的编译时间，因为这是很多人感兴趣的相关话题。</p>
 <h2 id="链接"><a class="header" href="#链接">链接</a></h2>
-<p>编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序的时候。在Linux和Windows上，你可以选择lld作为链接器，这比默认的链接器快得多。</p>
+<p>编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序时。在Linux和Windows上，你可以选择lld作为链接器，它比默认的链接器快得多。</p>
 <p>要从命令行指定lld，在你的编译命令前加上<code>RUSTFLAGS=&quot;-C link-arg=-fuse-ld=lld&quot;</code>。</p>
 <p>要从 <a href="https://doc.rust-lang.org/cargo/reference/config.html">config.toml</a> 文件中指定lld（到一个或更多项目），请添加这些行。</p>
 <pre><code class="language-text">[build]
 rustflags = [&quot;-C&quot;, &quot;link-arg=-fuse-ld=lld&quot;]
+</code></pre>
+<p>亦或者，添加这些行到你的 <code>Cargo.toml</code>：</p>
+<pre><code class="language-text">[target.x86_64-unknown-linux-gnu]
+linker = &quot;lld&quot;
 </code></pre>
 <p>lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows中的大多数情况下使用。这个<a href="https://github.com/rust-lang/rust/issues/39915#issuecomment-618726211">GitHub Issue</a>追踪lld的完整支持。</p>
 <h2 id="增量编译"><a class="header" href="#增量编译">增量编译</a></h2>
