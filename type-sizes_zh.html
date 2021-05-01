@@ -168,8 +168,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="类型大小"><a class="header" href="#类型大小">类型大小</a></h1>
-<p>缩小常用类型可以减少峰值内存使用量，还可以通过减少内存流量和缓存压力来提高性能。(特别要注意的是，大于128字节的类型会用 <code>memcpy</code>而不是内联代码复制)</p>
-<p>Rust编译器会自动对struct和enums中的字段进行排序，以最小化它们的大小（除非指定了<code>#[repr(C)]</code>属性），所以你不必担心字段的排序。但是仍然有其他方法可以使热类型的大小最小化。</p>
+<p>缩小常用类型有助于减少内存使用峰值。</p>
+<p>例如，如果内存占用高，堆性能分析工具如 <a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a> 与 <a href="https://github.com/KDE/heaptrack">heaptrack</a> 可以检验热分配点以及涉及的类型。
+缩小这些类型可以减少内存使用峰值，而且可能会通过减少内存流量以及缓存压力提升性能。</p>
+<p>此外，大于128字节的Rust类型使用 <code>memcpy</code> 复制，而非内联代码。
+如果 <code>memcpy</code> 在性能测试中出现的数量不多，可以使用DHAT的 “复制分析” 模式显示 <code>memcpy</code> 热调用点和涉及的类型。
+将这些类型缩小到128字节或更少，可以通过避免 <code>memcpy</code> 调用和减少内存流量提升性能。</p>
 <h2 id="验证类型大小"><a class="header" href="#验证类型大小">验证类型大小</a></h2>
 <p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html"><code>std::mem::size_of</code></a>给出了一个类型的大小，以字节为单位，但通常你也想知道确切的布局。例如，一个枚举体可能会出乎意料的大，这可能是由一个超大的变体造成的。</p>
 <p>`-Zprint-type-sizes’选项正是这样做的，它在rustc的发行版上没有被启用，所以你需要使用rustc的夜间版本。 下面是一个通过Cargo的可能调用</p>
