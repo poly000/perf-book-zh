@@ -4,7 +4,7 @@
 
 ## 链接
 
-编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序的时候。在Linux和Windows上，你可以选择lld作为链接器，这比默认的链接器快得多。
+编译时间的很大一部分其实是链接时间，尤其是在小改动后重新构建程序时。在Linux和Windows上，你可以选择lld作为链接器，它比默认的链接器快得多。
 
 要从命令行指定lld，在你的编译命令前加上`RUSTFLAGS="-C link-arg=-fuse-ld=lld"`。
 
@@ -14,6 +14,13 @@
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
 [config.toml]: https://doc.rust-lang.org/cargo/reference/config.html
+
+亦或者，添加这些行到你的 `Cargo.toml`：
+
+```text
+[target.x86_64-unknown-linux-gnu]
+linker = "lld"
+```
 
 lld还没有完全支持在Rust中使用，但它应该可以在Linux和Windows中的大多数情况下使用。这个[GitHub Issue]追踪lld的完整支持。
 
