@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#io" id="io">I/O</a></h1>
-<h2><a class="header" href="#locking" id="locking">Locking</a></h2>
+                        <h1 id="io"><a class="header" href="#io">I/O</a></h1>
+<h2 id="locking"><a class="header" href="#locking">Locking</a></h2>
 <p>Rust的<a href="https://doc.rust-lang.org/std/macro.print.html"><code>print!</code></a>和<a href="https://doc.rust-lang.org/std/macro.println.html"><code>println!</code></a>宏在每次调用时锁定stdout。如果你需要重复调用这些宏，最好手动锁定stdout。</p>
 <p>例如，修改这段代码。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -198,7 +198,7 @@ for line in lines {
 </span><span class="boring">}
 </span></code></pre></pre>
 <p>当对stdin和stderr进行重复操作时，同样可以锁定它们。</p>
-<h2><a class="header" href="#缓冲" id="缓冲">缓冲</a></h2>
+<h2 id="缓冲"><a class="header" href="#缓冲">缓冲</a></h2>
 <p>Rust文件I/O默认是无缓冲的。如果你对文件或网络套接字有许多小的和重复的读写调用，使用<a href="https://doc.rust-lang.org/std/io/struct.BufReader.html"><code>BufReader</code></a>或<a href="https://doc.rust-lang.org/std/io/struct.BufWriter.html"><code>BufWriter</code></a>。它们为输入和输出维护了一个内存缓冲区，最大限度地减少了系统调用的次数。</p>
 <p>例如，修改这个无缓冲的输出代码。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -234,7 +234,7 @@ buf.flush()?;
 </span></code></pre></pre>
 <p>对<a href="https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.flush"><code>flush</code></a>的显式调用并不是绝对必要的，因为当<code>buf</code>被丢弃时，刷新将自动发生。然而，在这种情况下，刷新时发生的任何错误都将被忽略，而显式刷新将使该错误显式化。</p>
 <p>请注意，缓冲也适用于stdout，所以当你向stdout进行大量写入时，你可能需要结合手动锁定<em>和</em>缓冲。</p>
-<h2><a class="header" href="#reading-input-as-raw-bytes" id="reading-input-as-raw-bytes">Reading Input as Raw Bytes</a></h2>
+<h2 id="reading-input-as-raw-bytes"><a class="header" href="#reading-input-as-raw-bytes">Reading Input as Raw Bytes</a></h2>
 <p>内置的<a href="https://doc.rust-lang.org/std/string/struct.String.html">String</a>类型在内部使用UTF-8，当你读取输入到string类型时，会增加一个由UTF-8验证引起的小但非零的开销。如果你只想处理输入字节而不担心UTF-8（例如，如果你处理ASCII文本），你可以使用<a href="https://doc.rust-lang.org/std/io/trait.BufRead.html#method.read_until"><code>BufRead::read_until</code></a>。</p>
 <p>还有专门的箱子用于读取<a href="https://github.com/Freaky/rust-linereader">面向字节的数据行</a>和处理<a href="https://github.com/BurntSushi/bstr">byte strings</a>。</p>
 

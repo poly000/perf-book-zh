@@ -167,13 +167,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#标准库类型" id="标准库类型">标准库类型</a></h1>
+                        <h1 id="标准库类型"><a class="header" href="#标准库类型">标准库类型</a></h1>
 <p>值得阅读常见标准库类型的文档--如<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>和<a href="https://doc.rust-lang.org/std/rc/struct.Rc.html"><code>Rc</code></a>/<a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc</code></a>--以找到有趣的函数，有时可以用来提高性能。</p>
 <p>还值得了解标准库类型的高性能替代品，如<a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code>RwLock</code></a>、<a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html"><code>Condvar</code></a>和<a href="https://doc.rust-lang.org/std/sync/struct.Once.html"><code>Once</code></a>。</p>
-<h2><a class="header" href="#vec" id="vec"><code>Vec</code></a></h2>
+<h2 id="vec"><a class="header" href="#vec"><code>Vec</code></a></h2>
 <p><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove"><code>Vec::remove</code></a>删除某一特定索引上的一个元素，并将随后的所有元素向左移动一个，这样做是O(n)。<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove"><code>Vec::swap_remove</code></a> 用最后一个元素替换特定索引上的一个元素，虽然不保留排序，但也是O(1)。</p>
 <p><code>Vec::retain</code>] 有效地从一个<code>Vec</code>中删除多个项。其他集合类型如<code>String</code>、<code>HashSet</code>和<code>HashMap</code>也有等价的方法。</p>
-<h2><a class="header" href="#option-and-result" id="option-and-result"><code>Option</code> and <code>Result</code></a></h2>
+<h2 id="option-and-result"><a class="header" href="#option-and-result"><code>Option</code> and <code>Result</code></a></h2>
 <p>[<code>Option::ok_or']将</code>Option’转换为<code>Result'，并传递一个</code>err’参数，如果<code>Option'值为</code>None’，则使用该参数。<code>err</code>是及早求值的。如果它的计算很昂贵，你应该使用<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or_else"><code>Option::ok_or_else</code></a>，它通过一个闭包缓惰性计算错误值。
 例如，这个。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -195,14 +195,14 @@
 </span></code></pre></pre>
 <p><a href="https://github.com/rust-lang/rust/pull/50051/commits/5070dea2366104fb0b5c344ce7f2a5cf8af176b0"><strong>Example</strong></a>.</p>
 <p><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or"><code>Option::map_or</code></a>、<a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.unwrap_or"><code>Option::unwrap_or</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.or"><code>Result::or</code></a>、<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or"><code>Result::map_or</code></a>和<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or"><code>Result::unwrap_or</code></a>有类似的替代方案。</p>
-<h2><a class="header" href="#rcarc" id="rcarc"><code>Rc</code>/<code>Arc</code></a></h2>
+<h2 id="rcarc"><a class="header" href="#rcarc"><code>Rc</code>/<code>Arc</code></a></h2>
 <p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.make_mut"><code>Rc::make_mut</code></a>/<a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.make_mut"><code>Arc::make_mut</code></a> 提供了写时克隆语义。他们创造一个到
 <code>Rc</code>/<code>Arc</code> 的可变借用。如果引用计数比一大，他们
 将克隆内部值以确保独立的所有权；否则，他们将修改源值。
 它们不经常被需要，但他们可能极有用。
 <a href="https://github.com/rust-lang/rust/pull/65198/commits/3832a634d3aa6a7c60448906e6656a22f7e35628"><strong>Example 1</strong></a>,
 <a href="https://github.com/rust-lang/rust/pull/65198/commits/75e0078a1703448a19e25eac85daaa5a4e6e68ac"><strong>Example 2</strong></a>.</p>
-<h2><a class="header" href="#mutex-rwlock-condvar-and-once" id="mutex-rwlock-condvar-and-once"><code>Mutex</code>, <code>RwLock</code>, <code>Condvar</code>, and <code>Once</code></a></h2>
+<h2 id="mutex-rwlock-condvar-and-once"><a class="header" href="#mutex-rwlock-condvar-and-once"><code>Mutex</code>, <code>RwLock</code>, <code>Condvar</code>, and <code>Once</code></a></h2>
 <p><a href="https://crates.io/crates/parking_lot"><code>parking_lot</code></a>提供了这些同步类型的替代实现，它们比标准库中的同步类型更小、更快、更灵活。<code>parking_lot</code>类型的API和语义与标准库中的等价类型相似，但不完全相同。</p>
 
                     </main>

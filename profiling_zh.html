@@ -167,9 +167,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#性能分析" id="性能分析">性能分析</a></h1>
+                        <h1 id="性能分析"><a class="header" href="#性能分析">性能分析</a></h1>
 <p>在优化程序时，你还需要一种方法来确定程序的哪些部分是 “热” 的（执行频率足以影响运行时间），值得修改。这一点最好通过性能优化来完成。</p>
-<h2><a class="header" href="#性能分析工具" id="性能分析工具">性能分析工具</a></h2>
+<h2 id="性能分析工具"><a class="header" href="#性能分析工具">性能分析工具</a></h2>
 <p>有许多不同的性能分析工具，每个性能分析工具都有自己的优点和缺点。以下是已经成功用于Rust程序的性能分析工具。</p>
 <ul>
 <li><a href="https://perf.wiki.kernel.org/index.php/Main_Page">perf</a>是一个使用硬件性能计数器的通用性能分析工具。<a href="https://github.com/KDAB/hotspot">Hotspot</a>和<a href="https://profiler.firefox.com/">Firefox Profiler</a>是好的perf记录的数据的查看工具。它在Linux上可用。</li>
@@ -182,13 +182,13 @@
 <li><a href="https://github.com/nnethercote/counts/"><code>counts</code></a>支持特别性能分析，它将<code>eprintln！</code>语句的使用与基于频率的后处理结合起来，这对于了解代码中特定领域的部分内容很有帮助。它在全平台可用。</li>
 <li><a href="https://github.com/plasma-umass/coz">Coz</a>执行 <em>因果分析</em> 以衡量优化潜力。它通过<a href="https://github.com/plasma-umass/coz/tree/master/rust">coz-rs</a>支持Rust。</li>
 </ul>
-<h2><a class="header" href="#调试信息" id="调试信息">调试信息</a></h2>
+<h2 id="调试信息"><a class="header" href="#调试信息">调试信息</a></h2>
 <p>为了有效地性能分析一个发布构建，你可能需要启用源代码行调试信息。要做到这一点，请在你的 <code>Cargo.toml</code>文件中添加以下行。</p>
 <pre><code class="language-toml">[profile.release]
 debug = 1
 </code></pre>
 <p>关于<code>debug</code>设置的更多细节，请参见<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#debug">Cargo文档</a>。</p>
-<h2><a class="header" href="#符号反混淆" id="符号反混淆">符号反混淆</a></h2>
+<h2 id="符号反混淆"><a class="header" href="#符号反混淆">符号反混淆</a></h2>
 <p>Rust在编译代码中使用一个混淆机制编码函数名。如果一个性能分析器不知道这个机制，它的输出可能会包含像这样的符号名
 <code>_ZN3foo3barE</code>或<code>_ZN28_$u7b$$u7b$closure$u7d$$u7d$E</code>或<code>_ZN28_$u7b$$$u7d$E</code>或
 <code>_ZN88_$LT$core.result.Result$LT$$u21$$C$$u20$E$GT$u20$as$u20$std.process.Termination$GT$6report17hfc41d0da4a40b3e8E</code>。
