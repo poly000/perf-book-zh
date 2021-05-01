@@ -254,7 +254,9 @@ panic = &quot;abort&quot;
 <li><a href="https://github.com/flamegraph-rs/flamegraph">flamegraph</a>是一个Cargo命令，它使用<code>perf</code>/<code>DTrace</code>对你的代码进行性能分析，然后用火焰图显示结果。
 它在Linux及所有支持Dtrace的平台可用 (macOS, FreeBSD, NetBSD, Windows也有可能)。</li>
 <li><a href="https://www.valgrind.org/docs/manual/cg-manual.html">Cachegrind</a>和<a href="https://www.valgrind.org/docs/manual/cl-manual.html">Callgrind</a>给出了全局的、每个函数的、每个源线的指令数以及模拟的缓存和分支预测数据。他们在Linux及一些Unix系统上可用。</li>
-<li><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a> 可以很好的找到代码中哪些部分会造成大量的分配，并对内存使用峰值进行深入了解。<a href="https://github.com/nnethercote/dhat-rs/">dhat-rs</a> 是一个替代，稍微不那么强大，并需要对你的Rust程序进行小的改动，但在全平台可用。</li>
+<li><a href="https://www.valgrind.org/docs/manual/dh-manual.html">DHAT</a> 可以很好的找到代码中哪些部分会造成大量的分配，并对内存使用峰值进行深入了解。
+它也可被用于验证 <code>memcpy</code> 的调用热点，它在Linux以及一些Unix系统可用。
+<a href="https://github.com/nnethercote/dhat-rs/">dhat-rs</a> 是一个替代，稍微不那么强大，并需要对你的Rust程序进行小的改动，但在全平台可用。</li>
 <li><a href="https://github.com/KDE/heaptrack">heaptrack</a>是另一个堆分析工具。它在linux上可用。</li>
 <li><a href="https://github.com/nnethercote/counts/"><code>counts</code></a>支持特别性能分析，它将<code>eprintln！</code>语句的使用与基于频率的后处理结合起来，这对于了解代码中特定领域的部分内容很有帮助。它在全平台可用。</li>
 <li><a href="https://github.com/plasma-umass/coz">Coz</a>执行 <em>因果分析</em> 以衡量优化潜力。它通过<a href="https://github.com/plasma-umass/coz/tree/master/rust">coz-rs</a>支持Rust。</li>
