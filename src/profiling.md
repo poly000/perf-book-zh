@@ -21,8 +21,9 @@ programs.
   instruction counts and simulated cache and branch prediction data. They work
   on Linux and some other Unixes.
 - [DHAT] is good for finding which parts of the code are causing a lot of
-  allocations, and for giving insight into peak memory usage. It works on Linux
-  and some other Unixes. [dhat-rs] is an alternative that is a little less
+  allocations, and for giving insight into peak memory usage. It can also be
+  used to identify hot calls to `memcpy`. It works on Linux and some other
+  Unixes. [dhat-rs] is an experimental alternative that is a little less
   powerful and requires minor changes to your Rust program, but works on all
   platforms.
 - [heaptrack] is another heap profiling tool. It works on Linux.
@@ -57,6 +58,19 @@ debug = 1
 See the [Cargo documentation] for more details about the `debug` setting.
 
 [Cargo documentation]: https://doc.rust-lang.org/cargo/reference/profiles.html#debug
+
+Unfortunately, even after doing the above step you won't get detailed profiling
+information for standard library code. This is because shipped versions of the
+Rust standard library are not built with debug info. To remedy this, you can
+build your own version of the compiler and standard library, following [these
+instructions], and adding the following lines to the `config.toml` file:
+ ```toml
+[rust]
+debuginfo-level = 1
+```
+This is a hassle, but may be worth the effort in some cases.
+
+[these instructions]: https://github.com/rust-lang/rust
 
 ## Symbol Demangling
 
