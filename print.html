@@ -247,6 +247,13 @@ panic = &quot;abort&quot;
 debug = 1
 </code></pre>
 <p>关于<code>debug</code>设置的更多细节，请参见<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#debug">Cargo文档</a>。</p>
+<p>不幸的是，哪怕做完了以上步骤，你也不会得到标准库代码详细的性能分析信息，这是因为Rust的发布版本并没有携带调试信息编译。</p>
+<p>为了解决这个问题，你可以按照<a href="https://github.com/rust-lang/rust">这些说明</a>建立你自己版本的编译器和标准库。
+并在<code>config.toml</code>文件中加入以下几行：</p>
+<pre><code class="language-toml">[rust]
+debuginfo-level = 1
+</code></pre>
+<p>这很麻烦，但在某些情况下可能值得一试。</p>
 <h2 id="符号反混淆"><a class="header" href="#符号反混淆">符号反混淆</a></h2>
 <p>Rust在编译代码中使用一个混淆机制编码函数名。如果一个性能分析器不知道这个机制，它的输出可能会包含像这样的符号名
 <code>_ZN3foo3barE</code>或<code>_ZN28_$u7b$$u7b$closure$u7d$$u7d$E</code>或<code>_ZN28_$u7b$$$u7d$E</code>或
@@ -525,7 +532,7 @@ print-type-size     变体 `A`: 0 字节
 <li>所有字段的大小、对齐和排序。(请注意，编译器对变体<code>C</code>的字段进行了重新排序，以最小化<code>E</code>的大小。)</li>
 <li>所有填充的大小和位置。</li>
 </ul>
-<p>一旦你知道了热类型的布局，就有多种方法来收缩它。</p>
+<p>一旦你知道了热类型的布局，就有多种方法来缩减它。</p>
 <h2 id="字段顺序"><a class="header" href="#字段顺序">字段顺序</a></h2>
 <p>Rust编译器自动排序结构体与枚举体中的字段以最小化它们（除非指定了 <code>#[repr(C)]</code> 属性）。
 所以你无需担心字段顺序，但是还有其他方法最小化热类型。</p>

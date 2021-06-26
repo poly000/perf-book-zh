@@ -169,6 +169,13 @@
 debug = 1
 </code></pre>
 <p>关于<code>debug</code>设置的更多细节，请参见<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#debug">Cargo文档</a>。</p>
+<p>不幸的是，哪怕做完了以上步骤，你也不会得到标准库代码详细的性能分析信息，这是因为Rust的发布版本并没有携带调试信息编译。</p>
+<p>为了解决这个问题，你可以按照<a href="https://github.com/rust-lang/rust">这些说明</a>建立你自己版本的编译器和标准库。
+并在<code>config.toml</code>文件中加入以下几行：</p>
+<pre><code class="language-toml">[rust]
+debuginfo-level = 1
+</code></pre>
+<p>这很麻烦，但在某些情况下可能值得一试。</p>
 <h2 id="符号反混淆"><a class="header" href="#符号反混淆">符号反混淆</a></h2>
 <p>Rust在编译代码中使用一个混淆机制编码函数名。如果一个性能分析器不知道这个机制，它的输出可能会包含像这样的符号名
 <code>_ZN3foo3barE</code>或<code>_ZN28_$u7b$$u7b$closure$u7d$$u7d$E</code>或<code>_ZN28_$u7b$$$u7d$E</code>或
