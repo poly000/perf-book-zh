@@ -2,6 +2,8 @@
 
 Rust性能手册中文版
 
+## Contributors
+
 ## 查看
 
 英文版在线查看 [here](https://nnethercote.github.io/perf-book/).
