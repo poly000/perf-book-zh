@@ -42,6 +42,20 @@ debug = 1
 
 [Cargo文档]: https://doc.rust-lang.org/cargo/reference/profiles.html#debug
 
+不幸的是，哪怕做完了以上步骤，你也不会得到标准库代码详细的性能分析信息，这是因为Rust的发布版本并没有携带调试信息编译。
+
+为了解决这个问题，你可以按照[这些说明]建立你自己版本的编译器和标准库。
+并在`config.toml`文件中加入以下几行：
+
+ ```toml
+[rust]
+debuginfo-level = 1
+```
+
+这很麻烦，但在某些情况下可能值得一试。
+
+[这些说明]: https://github.com/rust-lang/rust
+
 ## 符号反混淆
 
 Rust在编译代码中使用一个混淆机制编码函数名。如果一个性能分析器不知道这个机制，它的输出可能会包含像这样的符号名
